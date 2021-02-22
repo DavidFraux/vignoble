@@ -1,42 +1,32 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import { Link } from "gatsby"
+import headerStyles from './header.module.css'
+import { MdHome } from 'react-icons/md';
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
+
+const ListLink = props => (
+    <Link className = {headerStyles.linkPage} to={props.to}>{props.children}</Link>
 )
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
+const Arrow = props => (
+  <svg class= {headerStyles.arrow} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 167.68 38.73"><polygon points="0 0 147.98 0 167.68 19.3 148.52 38.73 0 38.73 19.03 19.36 0 0" fill={props.color}/></svg>
+)
 
-Header.defaultProps = {
-  siteTitle: ``,
+function Header(props) {
+  return (
+    <header>
+      <div className = {headerStyles.topBar}>
+        <Link  className = {headerStyles.siteName} to = '/'><MdHome/></Link>
+        <div className = {headerStyles.navigationSide}>
+          <p>{props.headerText}</p>          
+        </div>
+        
+      </div>
+      
+
+    </header>
+  )
 }
 
 export default Header
+

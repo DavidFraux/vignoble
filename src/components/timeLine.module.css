@@ -1,0 +1,40 @@
+.arrow {
+  vertical-align: top;
+  display: inline-block;
+  width : calc(100vh / 15);
+}
+
+.root {
+  width: '100%',
+}
+
+.btn {
+  position: relative;
+  display: inline-block;
+  margin-right: 25px;
+  margin-left: 25px;
+  float: right;
+}
+
+.btnPrev {
+  float: left;
+}
+
+.btnNext {
+  float: right;
+}
+
+.btnBack {
+  float: left;
+}
+
+.stepDescription{
+  position: relative;
+  display: inline-block;
+  margin-right: 20px
+}
+
+.infoBar{
+  margin: 20px auto;
+  text-align: center;
+}

@@ -1,3 +1,7 @@
+#picturesAndVidoes
+src/video/
+src/images/
+
 # Logs
 logs
 *.log

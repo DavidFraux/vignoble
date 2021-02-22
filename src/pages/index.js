@@ -1,22 +1,38 @@
-import React from "react"
+import React from 'react';
+//import Image from "../components/image.js"
 import { Link } from "gatsby"
+import pageStyles from './home.module.css'
+import Img from "gatsby-image"
+import filmPict from '../images/film.png'
+import threePict from '../images/3D.png'
+import longFutPict from '../images/longFut.png'
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
-
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
+const ShapeLink = props => (
+  <div>
+    
+    <div className = {pageStyles.contentLink} id = {props.contentID}>
+      <div className = {pageStyles.retrocentered}>
+        <p style = {{ textAlign: `center` }}>{props.text}</p>
+        <img  src={props.picture} alt="" />
+      </div>
     </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
+    <Link className = {pageStyles.shapeLink} id = {props.shapeID} to={props.to}></Link>
+  </div>
 )
 
-export default IndexPage
+function Home() {
+  const title = 'splited page';
+  return (
+    <div>
+      <title>{title}</title>
+      
+      <div>
+        <ShapeLink to = '/comprendre/' shapeID = {pageStyles.aboutShape} contentID = {pageStyles.aboutContent} text = 'Comprendre le fonctionnement du pressoir' picture = {longFutPict}/>
+        <ShapeLink to = '/film/' shapeID={pageStyles.homeShape} contentID = {pageStyles.homeContent} text = 'Voir le film' picture = {filmPict}/>
+        <ShapeLink to = '/explorer/' shapeID={pageStyles.contactShape} contentID = {pageStyles.contactContent}text = 'Explorer le pressoir' picture = {threePict}/>
+      </div>
+    </div>
+  )
+}
+
+export default Home

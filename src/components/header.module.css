@@ -1,0 +1,45 @@
+.siteName {
+  vertical-align: top;
+  display: inline-block;
+  width: 220px;
+  margin-left: 1rem;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  color: black;
+  font-family: 'Work Sans',sans-serif;
+  font-weight: 600;
+  text-rendering: optimizeLegibility;
+  font-size: 1.31951rem;
+  line-height: 1.1;
+  background-image: none;
+}
+
+.topBar {
+  vertical-align: top;
+  margin-bottom: 0.725rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0;
+  background-color: rgba(83, 83, 83, 0.185);
+}
+
+.linkPage {
+  margin-right: 1rem;
+}
+.linkPage:last-of-type{
+  margin-right: 0;
+}
+
+.navigationSide {
+  vertical-align: top;
+  float: right;
+  text-align: right;
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.arrow {
+  vertical-align: top;
+  display: inline-block;
+  width : calc(100vh / 15);
+}
