@@ -15,68 +15,24 @@ import Stepper from 'react-stepper-horizontal';
 
 
 class TimeLine extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      steps: [{
-        title: 'Fouler',
-        description: 'fouler le raisin dans la maie, basse ou haute',
-        onClick: (e) => {
-          e.preventDefault();
-          this.onClickStep(0);
-        }
-      }, {
-        title: 'Préparation',
-        description: 'installer les moutons',
-        onClick: (e) => {
-          e.preventDefault();
-          this.onClickStep(1);
-        }
-      }, {
-        title: 'Step Three',
-        description: 'a completer par exemple',
-        onClick: (e) => {
-          e.preventDefault();
-          this.onClickStep(2);
-        }
-      }, {
-        title: 'Step Four',
-        description: 'a completer par exemple',
-        onClick: (e) => {
-          e.preventDefault();
-          this.onClickStep(3);
-        }
-      }],
-      activeStepIndex: 0,
-    };
-    this.onClickButton = this.onClickButton.bind(this);
-  }
-
-  onClickStep(i) {
-    //const { steps, activeStepIndex } = this.state;
-    this.setState({
-      activeStepIndex: i,
-    });
+  constructor(props) {
+    super(props);
   }
 
   onClickButton(i) {
-    const { steps, activeStepIndex } = this.state;
-    const targetIndex = activeStepIndex + i;
-    if(targetIndex < 0 || targetIndex  >= steps.length) {
+    const targetIndex = this.props.activeStepIndex + i;
+    if(targetIndex < 0 || targetIndex  >= this.props.steps.length) {
       return false;
     }
-    this.setState({
-      activeStepIndex: targetIndex ,
-    });
+    this.props.onClickButton(i);//hook managed in parent 
   }
 
   render() {
-    const { steps, activeStepIndex } = this.state;
-    const currentStep = steps[activeStepIndex];
-
+    //const activeStepIndex = this.state;
+    const currentStep = this.props.steps[this.props.activeStepIndex];
     return (
       <div>
-        <Stepper steps={ steps } activeStep={ activeStepIndex } />
+        <Stepper activeColor='#3463ca' completeColor = '#3463ca' steps={ this.props.steps } activeStep={ this.props.activeStepIndex } />
         <div class={ timeLineStyles.infoBar }>
           <button class={ [timeLineStyles.btn, timeLineStyles.btnPrev].join(' ')  } onClick={ (e) => this.onClickButton(-1, e) }>Précédent</button>
           <div class={ timeLineStyles.stepDescription }>{currentStep.description}</div>
