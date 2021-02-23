@@ -26,40 +26,48 @@ class Comprendre extends React.Component {
     super(props);
     this.state = {
       activeStepIndex: 0,
-      waitedVideo : videoCount,
+      readyVideo : 0,//managing wait for loaded content OR wait for video ends 
+      endedVideo : 0,
     };
     this.videoL = React.createRef();
     this.videoR = React.createRef();
     this.baseURL = 'https://uncloud.univ-nantes.fr/index.php/s/eL8zoRTzJMB9L53/download?path=/&files=';
   }
 
-  resetWaitedVideos() {
-    this.setState({waitedVideo : videoCount});
+  resetVideoStates() {
+    this.setState({readyVideo : 0, endedVideo: 0});
   }
 
   onClickStep(i) {
     this.setState({activeStepIndex: i,});
-    this.resetWaitedVideos()
+    this.resetVideoStates()
   }
 
   onClickButton(i) {
     this.setState({ activeStepIndex: this.state.activeStepIndex + i })
-    this.resetWaitedVideos()
+    this.resetVideoStates()
   }
 
   playVideos(){
     this.videoL.current.play();
     this.videoR.current.play();
-    this.resetWaitedVideos()
+    this.resetVideoStates()//now waiting it reaches its end
   }
-  
+
+  handleVideoClick() {
+    if (this.state.endedVideo === videoCount) {//if both video ended
+      this.setState({readyVideo : videoCount}) //triggers play videos
+    }
+  }
+
   componentDidUpdate() {
-    if (this.state.waitedVideo === 0) {
+    console.log(`ready:${this.state.readyVideo} / ended:${this.state.endedVideo}` );
+    if (this.state.readyVideo === videoCount) {
       setTimeout(() => this.playVideos(), 500 ); //wait a littleBit the browser and element to really sync
     }
   }
 
-
+  
   render() {
     const title = 'Comprendre le fonctionnement du pressoir long-fut';
     
@@ -115,8 +123,11 @@ class Comprendre extends React.Component {
                 className={[styles.videoLeft, styles.video].join(' ')}
                 ref={this.videoL}
                 //onLoadedData={() => this.setState({isLoadingL: false})}
-                onCanPlayThrough={() => this.setState({waitedVideo : this.state.waitedVideo - 1})}
-                onEnded={() => this.setState({waitedVideo : this.state.waitedVideo - 1})}>
+                onCanPlayThrough={() => this.setState({readyVideo : this.state.readyVideo + 1})}
+                onClick={() => this.handleVideoClick()}
+                onEnded={() => this.setState({endedVideo : this.state.endedVideo + 1})}
+                >
+                <p>Your browser doesn't support HTML5 video</p>
             </video>
             <video
                 muted
@@ -126,8 +137,11 @@ class Comprendre extends React.Component {
                 className={[styles.videoLeft, styles.video].join(' ')}
                 ref={this.videoR}
                 //onLoadedData={() => console.log('rightReady')}
-                onCanPlayThrough={() => this.setState({waitedVideo : this.state.waitedVideo - 1})}
-                onEnded={() => this.setState({waitedVideo : this.state.waitedVideo - 1})}>
+                onCanPlayThrough={() => this.setState({readyVideo : this.state.readyVideo + 1})}
+                onClick={() => this.handleVideoClick()}
+                onEnded={() => this.setState({endedVideo : this.state.endedVideo + 1})}
+                >
+                <p>Your browser doesn't support HTML5 video</p>
             </video>
         </React.Fragment>
 

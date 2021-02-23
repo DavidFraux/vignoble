@@ -18,7 +18,7 @@ function Header(props) {
       <div className = {headerStyles.topBar}>
         <Link  className = {headerStyles.siteName} to = '/'><MdHome/></Link>
         <div className = {headerStyles.navigationSide}>
-          <p>{props.headerText}</p>          
+          {props.headerText}       
         </div>
         
       </div>
