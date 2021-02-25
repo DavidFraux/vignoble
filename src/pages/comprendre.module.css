@@ -1,20 +1,18 @@
 .video {
   position: relative;
   display: inline-block;
-  max-width: 45vw;
+  width: calc(50vw - (25px + (25px / 2)));
   margin: 50px auto;
+  text-align: center;
 }
 
-.videoLeft {
+.video#videoLeft {
   float: left;
-  margin-left: 4vw;
+  margin-left: 25px;
 }
 
-.videoRight {
+.video#videoRight {
   float: right;
-  margin-right: 4vw;
+  margin-right: 25px;
 }
 
-video {
-  max-width:100%;
-}

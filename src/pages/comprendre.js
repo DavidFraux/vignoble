@@ -120,6 +120,7 @@ class Comprendre extends React.Component {
                 src={currentStep.videoLeft}
                 preload={'auto'}
                 type={'video/mp4'}
+                id={styles.videoLeft}
                 className={[styles.videoLeft, styles.video].join(' ')}
                 ref={this.videoL}
                 //onLoadedData={() => this.setState({isLoadingL: false})}
@@ -134,7 +135,8 @@ class Comprendre extends React.Component {
                 src={currentStep.videoRight}
                 preload={'auto'}
                 type={'video/mp4'}
-                className={[styles.videoLeft, styles.video].join(' ')}
+                id={styles.videoRight}
+                className={styles.video}
                 ref={this.videoR}
                 //onLoadedData={() => console.log('rightReady')}
                 onCanPlayThrough={() => this.setState({readyVideo : this.state.readyVideo + 1})}

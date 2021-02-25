@@ -32,11 +32,11 @@ class TimeLine extends React.Component {
     const currentStep = this.props.steps[this.props.activeStepIndex];
     return (
       <div>
-        <Stepper activeColor='#3463ca' completeColor = '#3463ca' steps={ this.props.steps } activeStep={ this.props.activeStepIndex } />
-        <div class={ timeLineStyles.infoBar }>
-          <button class={ [timeLineStyles.btn, timeLineStyles.btnPrev].join(' ')  } onClick={ (e) => this.onClickButton(-1, e) }>Précédent</button>
-          <div class={ timeLineStyles.stepDescription }>{currentStep.description}</div>
-          <button class={ [timeLineStyles.btn, timeLineStyles.btnNext].join(' ')  } onClick={ (e) => this.onClickButton(1, e) }>Suivant</button>
+        <Stepper activeColor='#22262e' completeColor = '#22262e' steps={ this.props.steps } activeStep={ this.props.activeStepIndex } />
+        <div className={ timeLineStyles.infoBar }>
+          <button className={ [timeLineStyles.btn, timeLineStyles.btnPrev].join(' ')  } onClick={ (e) => this.onClickButton(-1, e) }>Précédent</button>
+          <div className={ timeLineStyles.stepDescription }>{currentStep.description}</div>
+          <button className={ [timeLineStyles.btn, timeLineStyles.btnNext].join(' ')  } onClick={ (e) => this.onClickButton(1, e) }>Suivant</button>
         </div>
         
       </div>
