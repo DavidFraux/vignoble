@@ -9,6 +9,10 @@ button {
   /* position: relative;
   display: block;
   margin: 30px auto; */
+  vertical-align: top;
+  display: inline-flex;
+  align-items: center;
+
   overflow: hidden;
   border-width: 0;
   outline: none;

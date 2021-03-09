@@ -32,7 +32,7 @@
 
 .contentLink {
   position: absolute;
-  color: grey;
+  color: rgb(87, 87, 87);
   font-size: large;
   max-width: inherit;
 }

@@ -23,7 +23,7 @@ function rotate(x, y, z, degToRad, isArray) {
 
 function upZtoY(xyz, degToRad=false) {
   let x, y, z;
-  if (typeof xyz === 'array') {
+  if (Array.isArray(xyz)) {
     x= xyz[0];
     y= xyz[1];
     z= xyz[2];

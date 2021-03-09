@@ -2,7 +2,6 @@ import React from 'react';
 //import Image from "../components/image.js"
 import { Link } from "gatsby"
 import styles from './index.module.css'
-import Img from "gatsby-image"
 import filmPict from '../images/film.png'
 import threePict from '../images/3D.png'
 import longFutPict from '../images/longFut.png'
@@ -21,7 +20,6 @@ const ShapeLink = props => (
 )
 
 function Home() {
-  const title = 'splited page';
   return (
     <div className = {styles.container}>
       <ShapeLink to = '/comprendre/' shapeID = {styles.aboutShape} contentID = {styles.aboutContent} text = 'Comprendre le fonctionnement du pressoir' picture = {longFutPict}/>
@@ -32,7 +30,3 @@ function Home() {
 }
 
 export default Home
-
-{/* <ShapeLink to = '/comprendre/' shapeID = {styles.aboutShape} contentID = {styles.aboutContent} text = 'Comprendre le fonctionnement du pressoir' picture = {longFutPict}/>
-<ShapeLink to = '/film/' shapeID={styles.homeShape} contentID = {styles.homeContent} text = 'Voir le film' picture = {filmPict}/>
-<ShapeLink to = '/explorer/' shapeID={styles.contactShape} contentID = {styles.contactContent}text = 'Explorer le pressoir' picture = {threePict}/> */}

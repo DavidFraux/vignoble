@@ -11,12 +11,23 @@
 }
 
 .btn {
-  position: relative;
-  display: inline-block;
   margin-right: 25px;
   margin-left: 25px;
 }
 
 .btn#toggle {
-  width:3rem;
+  width:2rem;
+  border-radius: 2rem;
+  background-color: #385080;
+  font-size: 1.5em;
+}
+
+.infoWrapper {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 20vw;
+  text-align: center;
+  background-color: black;
 }

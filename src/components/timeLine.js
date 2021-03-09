@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "gatsby";
 import timeLineStyles from './timeLine.module.css';
-import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext } from 'react-icons/md';
+
 
 
 
@@ -15,9 +14,6 @@ import Stepper from 'react-stepper-horizontal';
 
 
 class TimeLine extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   onClickButton(i) {
     const targetIndex = this.props.activeStepIndex + i;

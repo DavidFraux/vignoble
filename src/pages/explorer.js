@@ -1,15 +1,16 @@
 import React from 'react';
 import Header from '../components/header.js';
-import Container from "../components/container";
-import { Link } from "gatsby"
 import  World from '../world/world';
 import styles from "./explorer.module.css";
+import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext } from 'react-icons/md';
+
 
 class ThreeScene extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLooping : true,
+      goToButtons: [],
     };
   };
 
@@ -24,12 +25,19 @@ class ThreeScene extends React.Component {
     this.world.resetCam();
   };
 
-  gotTo = () => {
-    this.world.gotTo(this.state.isLooping);
+  gotTo = (i) => {
+    this.world.gotTo(this.state.isLooping, i);
   };
 
-  printCamPos = () => {
-    this.world.printCamPos();
+  renderGoToButtons() {
+    let buttons = []
+    for (const poi of this.world.pois) {
+      buttons.push(<button key={poi.uuid} id={poi.name} className = {styles.btn}  onClick={() => this.gotTo(poi)}>{poi.buttonName}</button>);
+      // this.setState(prevState => ({
+      //   goToButton: [...prevState.goToButton, <button key={poi.uuid} id={poi.name} className = {styles.btn}  onClick={() => this.gotTo(0)}>{poi.name}</button>]
+      // }))
+    };
+    this.setState({ goToButtons: buttons });
   }
 
   async componentDidMount() {
@@ -37,15 +45,15 @@ class ThreeScene extends React.Component {
     this.world = new World(sceneContainer);
     await this.world.init();//#TODO error handling with async react app
     this.world.start();
+    this.renderGoToButtons();
   };
 
   render() {
     return (
         <div className={styles.controlsWrapper}>
-          <button id={styles.toggle} className = {styles.btn} onClick={this.toogleLoop}>{this.state.isLooping ? 'stop' : ' run  '}</button>
-          <button id="resetCam" className = {styles.btn}  onClick={this.resetCam}>reset camera</button>
-          <button id="gotTo" className = {styles.btn}  onClick={this.gotTo}>go to</button>
-          
+          <button id={styles.toggle} className = {styles.btn} onClick={this.toogleLoop}>{this.state.isLooping ? <MdPause/> : <MdPlayArrow/>}</button>
+          <button id="resetCam" className = {styles.btn}  onClick={this.resetCam}>vue d'ensemble</button>
+          {this.state.goToButtons}
         </div>
     );
   }
@@ -60,6 +68,9 @@ function Explorer() {
       <Header headerText = {title}/>
       <div className={styles.sceneContainer} id='scene-container'></div>
       <ThreeScene/>
+      <div className={styles.infoWrapper}>
+        null
+      </div>
 
     </div>
   )

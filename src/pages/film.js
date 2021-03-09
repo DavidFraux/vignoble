@@ -1,11 +1,8 @@
 import React from "react"
-import { graphql, navigate } from 'gatsby'
+import { navigate } from 'gatsby'
 import Header from '../components/header.js';
-import Container from "../components/container";
 import styles from "./film.module.css";
-import ReactPlayer from 'react-player'
-import posterImg from "../images/presentation.png"
-
+import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext } from 'react-icons/md';
 
 function Marker(props) {
   return (
@@ -33,7 +30,6 @@ class Film extends React.Component {
   }
 
   handleVideoClick() {
-    console.log('click');
     this.setState(prevState => ({
       playing: !prevState.playing
     }));
@@ -42,7 +38,6 @@ class Film extends React.Component {
 
   renderMarkers(markerList) {
     let markersRendered = [];
-    console.log(markerList);
     for (const marker of markerList) {
       markersRendered.push(<Marker label= {marker.label} target = {marker.target} onClickMarker = {(i) => this.handleMarkerClick(i)} />)
     };
@@ -54,12 +49,10 @@ class Film extends React.Component {
   }
 
   handleMarkerClick(i) {
-    console.log(i);
     this.videoRef.current.currentTime = i;
   }
 
   componentDidUpdate() {
-    console.log('update');
     this.state.playing? this.videoRef.current.play() : this.videoRef.current.pause()
   }
   

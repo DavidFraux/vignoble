@@ -1,23 +1,7 @@
 import React from 'react';
 import Header from '../components/header.js';
 import styles from './comprendre.module.css'
-import Container from "../components/container";
 import TimeLine from "../components/timeLine";
-import filmPict from '../images/film.png'
-import threePict from '../images/3D.png'
-
-//Generally, if you use a component in multiple places on a site,
-//it should be in its own module file in the components directory.
-//But, if it’s used only in one file, create it inline.
-const User = (props) => (
-  <div className = {styles.user}>
-    <img alt='avatar' src={props.avatar} className = {styles.avatar}/>
-    <div className = {styles.description}>
-      <h2 className = {styles.username}>{props.username}</h2>
-      <p className = {styles.excerpt}>{props.excerpt}</p>
-    </div>
-  </div>
-)
 
 const videoCount = 2;
 
