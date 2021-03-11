@@ -3,7 +3,8 @@ import {
   Mesh,
   ShaderMaterial,
   FrontSide,
-  AdditiveBlending
+  AdditiveBlending,
+  MeshBasicMaterial
 } from 'three'
 
 // ======== MOVES ===========
@@ -42,11 +43,11 @@ function createPoi(poi) {
       blending: AdditiveBlending,
       transparent: true
     }   );
-
-  const geometry = new SphereBufferGeometry(0.02, 32, 32);
+  const simpleMaterial = new MeshBasicMaterial({color: 0x00ff00});
+  const geometry = new SphereBufferGeometry(0.1, 32, 32);
   const meshObj = new Mesh(geometry);
   //createMaterial(meshObj);
-  meshObj.material = customMaterial;
+  meshObj.material = simpleMaterial;
   meshObj.position.set(...poi.position);
   meshObj.name = poi.name;
   meshObj.buttonName = (poi.buttonName ? poi.buttonName : poi.name);

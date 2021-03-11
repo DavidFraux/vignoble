@@ -6,6 +6,7 @@ import { loadPress } from './objects/loadPress.js'
 import { createRenderer } from './systems/renderer.js';
 import { Resizer } from './systems/Resizer.js';
 import { Loop } from './systems/Loop.js';
+import { createRaycast } from './systems/raycaster.js';
 import { createControls, fitCameraToSelection  } from './systems/controls.js';
 
 
@@ -28,6 +29,7 @@ class World {
     // not declared as this.camera (etc) in order to avoid access to that variables from out of world module 
     this.models = [];//meshes objects will be pushed here for convenience purpose
     this.pois = [];
+    //const targets = new Group;
     //setOrientation([0, 0, 1]);//z up
     renderer = createRenderer();
     camera = createCamera();
@@ -49,6 +51,7 @@ class World {
     resizer.onResize = () => {
       this.render();
     };
+    createRaycast(renderer, scene.children, camera);
   }
 
   async init() {
@@ -59,6 +62,7 @@ class World {
     scene.add(press, grape);
     this.resetCam();
   }
+
 
   createPois () {
     const poisToCreate = [
@@ -84,6 +88,7 @@ class World {
   start() {
     // produces a steam of frames
     loop.start();
+    
   }
   
   stop() {
