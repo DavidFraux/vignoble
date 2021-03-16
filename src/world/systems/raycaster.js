@@ -15,21 +15,24 @@ function getMouseCoord( event ) {
   //41 is for header height, I cant get the 
 	mouse.y = - ( (event.clientY-41) / (window.innerHeight) ) * 2 + 1;
   raycaster.cast();
-  console.log('click)');
 }
 
-function createRaycast(renderer, objects, camera) {
+function createRaycast(renderer, objects, camera, callback) {
   renderer.domElement.addEventListener( 'click', getMouseCoord, false );
   raycaster.cast = () => {
     raycaster.setFromCamera( mouse, camera );
     var intersects = raycaster.intersectObjects( objects, false);
-    console.log(intersects);
-    for ( var i = 0; i < intersects.length; i++ ) {
-      console.log( intersects[ i ] ); 
-      intersects[ i ].object.material.color.set( 0xff0000 );
-    };
-  };
+    if (intersects[ 0 ]) {
+      const clicked = intersects[ 0 ];
+      callback(clicked.object.keyname);
+    }
 
+    // for ( var i = 0; i < intersects.length; i++ ) {
+    //   console.log( intersects[ i ] );
+    //   const poi = intersects[ i ]
+    //   callback(intersects[ i ]);
+    // };
+  };
 }
 
 export { createRaycast};

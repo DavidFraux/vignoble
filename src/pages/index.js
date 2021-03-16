@@ -1,31 +1,32 @@
 import React from 'react';
 //import Image from "../components/image.js"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import styles from './index.module.css'
 import filmPict from '../images/film.png'
-import threePict from '../images/3D.png'
-import longFutPict from '../images/longFut.png'
+import explorerPict from '../images/explorer.png'
+import comprendrePict from '../images/comprendre.png'
+import logo from '../images/LOGO-MUSEE.png'
 
 const ShapeLink = props => (
-  <div>
-    
-    <div className = {styles.contentLink} id = {props.contentID}>
-      <div className = {styles.retrocentered}>
-        <p style = {{ textAlign: `center` }}>{props.text}</p>
-        <img  src={props.picture} alt="" />
-      </div>
-    </div>
-    <Link className = {styles.shapeLink} id = {props.shapeID} to={props.to}></Link>
+    <div className = {`${props.classe} ${styles.link}`} onClick={() => navigate(props.to)} >
+        <img  className = {styles.pictlink} src={props.picture} alt={props.text} />
   </div>
 )
 
 function Home() {
   return (
+    <React.Fragment>
+    <div className = {styles.overlay}/>
+    <div className = {styles.background}/>
+    <img  className = {styles.logo} src={logo} alt='logo musée' />
+    <p className = {styles.pub}>Le pressoir long-fut <br/> 1848</p>
     <div className = {styles.container}>
-      <ShapeLink to = '/comprendre/' shapeID = {styles.aboutShape} contentID = {styles.aboutContent} text = 'Comprendre le fonctionnement du pressoir' picture = {longFutPict}/>
-      <ShapeLink to = '/film/' shapeID={styles.homeShape} contentID = {styles.homeContent} text = 'Voir le film' picture = {filmPict}/>
-      <ShapeLink to = '/explorer/' shapeID={styles.contactShape} contentID = {styles.contactContent}text = 'Explorer le pressoir' picture = {threePict}/>
+      <ShapeLink to = '/comprendre/' classe = {styles.comprendre}  text = "comprendre" picture = {comprendrePict}/>
+      <ShapeLink to = '/film/' classe = {styles.film} text = "film"  picture = {filmPict}/>
+      <ShapeLink to = '/explorer/' classe ={styles.explorer} text = "explorer"  picture = {explorerPict}/>
     </div>
+    
+    </React.Fragment>
   )
 }
 

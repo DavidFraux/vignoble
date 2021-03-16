@@ -19,16 +19,17 @@ let scene;
 let loop;
 let controls;
 
+
 // function getRandomNumber(min, max) {
 //   const randomNumber =  Math.floor(Math.random() * (max - min)) + min;
 //   return randomNumber;
 // }
 
 class World {
-  constructor(container) {
+  constructor(container, poisData, callback) {
     // not declared as this.camera (etc) in order to avoid access to that variables from out of world module 
     this.models = [];//meshes objects will be pushed here for convenience purpose
-    this.pois = [];
+    this.pois = {};// {id: poi3DObject}
     //const targets = new Group;
     //setOrientation([0, 0, 1]);//z up
     renderer = createRenderer();
@@ -40,7 +41,7 @@ class World {
     controls.addEventListener('change', () => {
       this.render();
     });
-    this.createPois();
+    this.createPois(poisData);
     loop.updatables.push(camera);
     loop.updatables.push(controls);
     const lights = createLights()
@@ -51,7 +52,7 @@ class World {
     resizer.onResize = () => {
       this.render();
     };
-    createRaycast(renderer, scene.children, camera);
+    createRaycast(renderer, scene.children, camera, callback);
   }
 
   async init() {
@@ -64,16 +65,13 @@ class World {
   }
 
 
-  createPois () {
-    const poisToCreate = [
-      {name: 'tonneau',   position: [1.16, 0.5, -3.2]   },
-      {name: 'mouton',    position: [3.55, 1.43, -1.54], buttonName: 'couchages' },
-      {name: 'vis',       position: [4.1, 1, -4.76]     },
-      {name: 'aiguilles', position: [3.64, 2, -0.31]    },
-    ];
-    for (const poi of poisToCreate) {
-      const threeObject = createPoi(poi);
-      this.pois.push(threeObject);
+
+  createPois (poisData) {
+    //creates pois from high level defined pois data
+    //creates {id1:poi3Dobject1; id2:poi3Dobject2}  from {id1:poiData1; id2:poiData2}
+    for ( const id in poisData ) {
+      const threeObject = createPoi(id, poisData[id]);
+      this.pois[id] = threeObject;
       this.models.push(threeObject);
       loop.updatables.push(threeObject);
     };
@@ -105,8 +103,8 @@ class World {
     fitCameraToSelection( camera, controls, this.models);
   }
 
-  gotTo(isLooping, target) {
-    controls.goTo(isLooping, target);
+  goTo(isLooping, poiId) {
+    controls.goTo(isLooping, this.pois[poiId]);
     //camera.goTo(isLooping, targetPosition);
     controls.update();//only in case loop is Off, actually it is included in loop
   }

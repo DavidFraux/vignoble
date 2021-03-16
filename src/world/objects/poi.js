@@ -8,8 +8,8 @@ import {
 } from 'three'
 
 // ======== MOVES ===========
-const sizePerSecond = 1.3;
-const cycleDuration = 5; //in seconds
+const sizePerSecond = 0.5;
+const cycleDuration = 3; //in seconds
 const cycleFrames = 60 * cycleDuration;
 let isGrowing = true;
 let frame = 1; //initialized
@@ -29,7 +29,7 @@ function dynascale(delta, meshObj) {
 
 
 
-function createPoi(poi) {
+function createPoi(id, poiData) {
   const customMaterial = new ShaderMaterial( 
     {
         uniforms: 
@@ -44,14 +44,13 @@ function createPoi(poi) {
       transparent: true
     }   );
   const simpleMaterial = new MeshBasicMaterial({color: 0x00ff00});
-  const geometry = new SphereBufferGeometry(0.1, 32, 32);
+  const geometry = new SphereBufferGeometry(0.12, 32, 32);
   const meshObj = new Mesh(geometry);
   //createMaterial(meshObj);
-  meshObj.material = simpleMaterial;
-  meshObj.position.set(...poi.position);
-  meshObj.name = poi.name;
-  meshObj.buttonName = (poi.buttonName ? poi.buttonName : poi.name);
-
+  meshObj.material = customMaterial;
+  meshObj.position.set(...poiData.position);
+  meshObj.name = poiData.name;
+  meshObj.keyname = id;
   meshObj.tick = (deltaT, elapsedT) => {//delta is time elapsed since last frame in seconds
     dynascale(deltaT, meshObj);
   };

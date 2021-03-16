@@ -54,44 +54,74 @@ class Comprendre extends React.Component {
   
   render() {
     const title = 'Comprendre le fonctionnement du pressoir long-fut';
-    
     const steps = [{
       title: 'Fouler',
       description: 'fouler le raisin dans la maie, basse ou haute',
       videoRight:this.baseURL+"foot.mp4",
       videoLeft:this.baseURL+"footZoom.mp4",
-      onClick: (e) => {
-        e.preventDefault();
-        this.onClickStep(0);
-      }
     }, {
       title: 'Préparation',
       description: 'installer les moutons',
       videoRight:this.baseURL+"pyramid.mp4",
       videoLeft:this.baseURL+"tikal.mp4",
-      onClick: (e) => {
-        e.preventDefault();
-        this.onClickStep(1);
-      }
     }, {
-      title: 'Step Three',
+      title: 'étape 3',
       description: 'a completer par exemple',
       videoRight:this.baseURL+"lake.mp4",
       videoLeft:this.baseURL+"lakeView.mp4",
-      onClick: (e) => {
-        e.preventDefault();
-        this.onClickStep(2);
-      }
     }, {
-      title: 'Step Four',
+      title: 'étape 4',
       description: 'a completer par exemple',
       videoRight:this.baseURL+"gate.mp4",
       videoLeft:this.baseURL+"foret.mp4",
-      onClick: (e) => {
-        e.preventDefault();
-        this.onClickStep(3);
-      }
+    }, {
+      title: 'étape 5',
+      description: 'a completer par exemple',
+      videoRight:this.baseURL+"gate.mp4",
+      videoLeft:this.baseURL+"foret.mp4",
+    }, {
+      title: 'étape 6',
+      description: 'a completer par exemple',
+      videoRight:this.baseURL+"gate.mp4",
+      videoLeft:this.baseURL+"foret.mp4",
+    }, {
+      title: 'étape 7',
+      description: 'a completer par exemple',
+      videoRight:this.baseURL+"gate.mp4",
+      videoLeft:this.baseURL+"foret.mp4",
+    }, {
+      title: 'étape 8',
+      description: 'a completer par exemple',
+      videoRight:this.baseURL+"gate.mp4",
+      videoLeft:this.baseURL+"foret.mp4",
+    }, {
+      title: 'étape 9',
+      description: 'a completer par exemple',
+      videoRight:this.baseURL+"gate.mp4",
+      videoLeft:this.baseURL+"foret.mp4",
+    }, {
+      title: 'étape 10',
+      description: 'a completer par exemple',
+      videoRight:this.baseURL+"gate.mp4",
+      videoLeft:this.baseURL+"foret.mp4",
+    }, {
+      title: 'étape 11',
+      description: 'a completer par exemple',
+      videoRight:this.baseURL+"gate.mp4",
+      videoLeft:this.baseURL+"foret.mp4",
+    }, {
+      title: 'étape 12',
+      description: 'a completer par exemple',
+      videoRight:this.baseURL+"gate.mp4",
+      videoLeft:this.baseURL+"foret.mp4",
     }];
+    //the followin manage the onClick behavious for each step of the timeLine
+    for (const [index, step] of steps.entries()) {
+      step.onClick = (e) => {
+        e.preventDefault();
+        this.onClickStep(index);
+      };
+    };
     const currentStep = steps[this.state.activeStepIndex];
     return (
       <div>

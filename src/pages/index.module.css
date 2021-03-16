@@ -1,67 +1,94 @@
-.shapeLink { 
+.link {
+  margin: 25px;
+  z-index: 3;
+}
+@import "../styles/typography.css";
+
+.pub {
+  font-family: "Hello";
+  font-size: 2em;
+  transform: rotate(45deg);
+  text-align: center;
+  color: black;
   position: absolute;
-  top: 0;
+  right: 0.5em;
+  top: 2em;
+  font-weight: normal;
+  word-wrap: break-word;
+  font-kerning: normal;
+  z-index: 3;
+}
+
+
+.pictlink {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+}
+
+.comprendre{
+  grid-area: b;
+  align-self: center;
+  /* max-width: 55vw; */
+  height: 100%;
+  max-height: 50vh;
+  text-align: center;
+}
+
+.film {
+  grid-area: c;
+  align-self: center;
+}
+
+.explorer {
+  grid-area: d;
+  align-self: center;
+
+}
+
+.logo {
+  position: absolute;
   left: 0;
-  height: 100vh;
-  width: 100%;
-  display: block;
-}
-
-.shapeLink#aboutShape {
-  -webkit-clip-path: polygon(0 0, 0 100%, 50% 100%);
-  clip-path: polygon(0 0, 50% 100%, 100% 0);
-  background: #bb1b1b0a;
-}
-
-.shapeLink#homeShape {
-  -webkit-clip-path: polygon(0 0, 0 100%, 50% 100%);
-  clip-path: polygon(0 0, 0 100%, 50% 100%);
-  background: #2121210a;
-}
-
-.shapeLink#contactShape {
-  -webkit-clip-path: polygon(0 0, 0 100%, 50% 100%);
-  clip-path: polygon(100% 0, 100% 100%, 50% 100%);
-  background: #fcff380a;
-}
-
-.retrocentered {
-  position: relative;
-  right: -50%;/*if left then an overflow to the right side of the screen appears*/
-}
-
-.contentLink {
-  position: absolute;
-  color: rgb(87, 87, 87);
-  font-size: large;
-  max-width: inherit;
-}
-
-.contentLink#aboutContent {
-  top : 5vh;
-  right : 50vw;
-  max-width: 45vw;
-}
-
-.contentLink#homeContent {
-  bottom : 5vh;
-  right : 85vw;
-  max-width: 25vw;
-}
-
-.contentLink#contactContent {
-  bottom : 5vh;
-  right : 15vw;
-  max-width: 25vw;
-}
-
-img {
-  max-width:100%;
+  top: 0;
+  width: 4vw;
+  z-index: 3;
+  margin: 10px;
+  filter: saturate(0.5);
 }
 
 .container {
-  background-image: url("../images//grape.svg");
-  background-repeat: repeat;
-  background-size: 20%;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 2fr 1fr;
+  grid-gap: 5px;
+  grid-template-areas:
+    ". b ."
+    "c . d";
+  z-index: 3;
   height: 100vh;
+}
+
+.background {
+  background-size: cover;
+  background-image: url("../images//background.jpg");
+  filter: saturate(0.1) brightness(1.2);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  z-index: 1;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.4);
+  background-image: radial-gradient(rgb(150, 150, 150) 33%, transparent 33%);
+  background-size: 2px 2px;
+  z-index: 2;
 }
