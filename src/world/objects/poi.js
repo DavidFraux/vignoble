@@ -36,14 +36,13 @@ function createPoi(id, poiData) {
       { 
         "c":   { type: "f", value: 1.0 },
         "p":   { type: "f", value: 1.4 },
-        glowColor: { type: "c", value: '0xffff00' },
+        glowColor: { type: "c", value: '#ffff00' },
         //viewVector: { type: "v3", value: camera.position }
       },
       side: FrontSide,
       blending: AdditiveBlending,
       transparent: true
     }   );
-  const simpleMaterial = new MeshBasicMaterial({color: 0x00ff00});
   const geometry = new SphereBufferGeometry(0.12, 32, 32);
   const meshObj = new Mesh(geometry);
   //createMaterial(meshObj);
