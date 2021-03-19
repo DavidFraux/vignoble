@@ -15,12 +15,9 @@ import Stepper from 'react-stepper-horizontal';
 
 class TimeLine extends React.Component {
 
-  onClickButton(i) {
-    const targetIndex = this.props.activeStepIndex + i;
-    if(targetIndex < 0 || targetIndex  >= this.props.steps.length) {
-      return false;
-    }
-    this.props.onClickButton(i);//hook managed in parent 
+  handleClickPrevNext(i) {
+
+    this.props.navigateSteps(i);//hook managed in parent 
   }
 
   render() {
@@ -30,9 +27,9 @@ class TimeLine extends React.Component {
       <React.Fragment>
         <Stepper activeColor='#22262e' completeColor = '#22262e' steps={ this.props.steps } activeStep={ this.props.activeStepIndex } />
         <div className={ timeLineStyles.infoBar }>
-          <button className={ [timeLineStyles.btn, timeLineStyles.btnPrev].join(' ')  } onClick={ (e) => this.onClickButton(-1, e) }>Précédent</button>
+          {/* <button className={ [timeLineStyles.btn, timeLineStyles.btnPrev].join(' ')  } onClick={ (e) => this.handleClickPrevNext(-1, e) }>Précédent</button> */}
           <div className={ timeLineStyles.stepDescription }>{currentStep.description}</div>
-          <button className={ [timeLineStyles.btn, timeLineStyles.btnNext].join(' ')  } onClick={ (e) => this.onClickButton(1, e) }>Suivant</button>
+          {/* <button className={ [timeLineStyles.btn, timeLineStyles.btnNext].join(' ')  } onClick={ (e) => this.handleClickPrevNext(1, e) }>Suivant</button> */}
         </div>
         
         </React.Fragment>

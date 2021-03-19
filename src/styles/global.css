@@ -4,6 +4,25 @@ html {
   overflow: hidden;
 }
 
+@media only screen and (max-width: 480px) {
+  html {
+    font-size: 50%; 
+  }
+}
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 70%; 
+  }
+}
+@media only screen and (max-width: 800px) {
+  html {
+    font-size: 80%; 
+  }
+}
+
+
+
+
 
 button {
   /* position: relative;

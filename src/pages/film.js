@@ -7,7 +7,7 @@ import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext } from 'react-icons/md
 function Marker(props) {
   return (
     <button 
-      className={styles.btn} onClick={ (e) => props.onClickMarker(props.target, e) }>{props.label}</button>
+      className={styles.markers} onClick={ (e) => props.onClickMarker(props.target, e) }>{props.label}</button>
   )
 }
 
@@ -29,10 +29,12 @@ class Film extends React.Component {
     setTimeout(() => navigate('/'), 1500 );
   }
 
+  togglePlay() {
+    this.setState(prevState => ({ playing: !prevState.playing }));
+  }
+
   handleVideoClick() {
-    this.setState(prevState => ({
-      playing: !prevState.playing
-    }));
+    this.togglePlay();
     
   }
 
@@ -41,11 +43,7 @@ class Film extends React.Component {
     for (const marker of markerList) {
       markersRendered.push(<Marker label= {marker.label} target = {marker.target} onClickMarker = {(i) => this.handleMarkerClick(i)} />)
     };
-    return (
-      <div className= {styles.controlsWrapper }>
-        {markersRendered}
-      </div>
-    )
+    return ( markersRendered )
   }
 
   handleMarkerClick(i) {
@@ -88,7 +86,11 @@ class Film extends React.Component {
             />
           {this.state.playing? <div/> : <div className={styles.playPause} onClick={() => this.handleVideoClick()}/>}
         </div>
-        {this.state.playing? <div/> : markers}
+        <div className={styles.controlsWrapper}>
+          <button id={styles.toggle} className = {`${styles.navigate} ${styles.btn}`} onClick={() => this.togglePlay()}>{this.state.playing ? <MdPause/> : <MdPlayArrow/> }</button>
+          {this.state.playing? <div/> : markers}
+        </div>
+        
     </div>
     )
   };
