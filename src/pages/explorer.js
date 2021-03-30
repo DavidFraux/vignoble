@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/header.js';
 import  World from '../world/world';
 import styles from "./explorer.module.css";
-import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext } from 'react-icons/md';
+import { MdPause, MdPlayArrow, } from 'react-icons/md';
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import couchagePict from '../images/couchage.jpg';
@@ -155,7 +155,7 @@ class Explorer extends React.Component {
           }}
           >
           <div>{currentPoi.content}</div>
-          <img src = {currentPoi.image}/>
+          <img alt = {currentPoi.name} src = {currentPoi.image}/>
         </SlidingPane>
       </React.Fragment>
     )

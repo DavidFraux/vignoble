@@ -4,7 +4,6 @@ import {
   ShaderMaterial,
   FrontSide,
   AdditiveBlending,
-  MeshBasicMaterial
 } from 'three'
 
 // ======== MOVES ===========

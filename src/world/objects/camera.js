@@ -1,5 +1,5 @@
 import { PerspectiveCamera, Vector3 } from 'three';
-import { upZtoY } from '../systems/orientation';
+//import { upZtoY } from '../systems/orientation';
 
 function createCamera() {
   const fov = 45;

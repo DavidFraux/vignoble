@@ -1,4 +1,4 @@
-import { Raycaster, Vector2, Group } from 'three';
+import { Raycaster, Vector2 } from 'three';
 
 const mouse = new Vector2();
 const raycaster = new Raycaster();
