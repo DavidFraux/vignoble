@@ -1,6 +1,5 @@
-#picturesAndVidoes
-src/video/
-src/images/
+#picturesPhotoshopSources
+*.psd
 
 # Logs
 logs
