@@ -149,6 +149,8 @@ class Comprendre extends React.Component {
         return false;
       }
       this.setState((prevState) => ({activeStepIndex: prevState.activeStepIndex + i}))
+      this.videoL.current.load();
+      this.videoR.current.load();
   //    this.setState({ activeStepIndex: this.state.activeStepIndex + i })
       this.resetVideoStates()
     }
@@ -249,8 +251,9 @@ class Comprendre extends React.Component {
         
         <TimeLine steps={steps} activeStepIndex={this.state.activeStepIndex} navigateSteps = {(i) => this.navigateSteps(i)}/>
           <React.Fragment>
-            <video
+            <video 
                 muted
+                key={currentStep.title+'L'}
                 src={currentStep.videoLeft}
                 poster={currentStep.posterLeft}
                 preload={'auto'}
@@ -266,6 +269,7 @@ class Comprendre extends React.Component {
             </video>
             <video
                 muted
+                key={currentStep.title+'R'}
                 src={currentStep.videoRight}
                 poster={currentStep.posterRight}
                 preload={'auto'}
