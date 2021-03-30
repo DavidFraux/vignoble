@@ -13,5 +13,3 @@ Replace src content by the vignoble repository content
 
 # other 
 Some few changes may have been made inside the packages directly (i.e. color of the react-slide-pane) when no option was provided to overwrite it. 
-
-

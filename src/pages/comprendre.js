@@ -4,68 +4,101 @@ import styles from './comprendre.module.css'
 import TimeLine from "../components/timeLine";
 import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext } from 'react-icons/md';
 
+import footPoster from '../images/videoPosters/footPoster.jpg';
+import footZoomPoster from '../images/videoPosters/footZoomPoster.jpg';
+import pyramidPoster from '../images/videoPosters/pyramidPoster.jpg';
+import tikalPoster from '../images/videoPosters/tikalPoster.jpg';
+import lakePoster from '../images/videoPosters/lakePoster.jpg';
+import lakeViewPoster from '../images/videoPosters/lakeViewPoster.jpg';
+import gatePoster from '../images/videoPosters/gatePoster.jpg';
+import foretPoster from '../images/videoPosters/foretPoster.jpg';
+
 const title = 'Comprendre le fonctionnement du pressoir long-fut';
 const baseURL = 'https://uncloud.univ-nantes.fr/index.php/s/eL8zoRTzJMB9L53/download?path=/&files=';
 const steps = [{
     title: 'Fouler',
     description: 'fouler le raisin dans la maie, basse ou haute',
-    videoRight:baseURL+"foot.mp4",
-    videoLeft:baseURL+"footZoom.mp4",
+    videoRight: baseURL+"foot.mp4",
+    posterRight: footPoster,
+    videoLeft: baseURL+"footZoom.mp4",
+    posterLeft: footZoomPoster,
   }, {
     title: 'Préparation',
     description: 'installer les moutons',
     videoRight:baseURL+"pyramid.mp4",
+    posterRight: pyramidPoster,
     videoLeft:baseURL+"tikal.mp4",
+    posterLeft: tikalPoster,
   }, {
     title: 'étape 3',
     description: 'a completer par exemple',
     videoRight:baseURL+"lake.mp4",
+    posterRight: lakePoster,
     videoLeft:baseURL+"lakeView.mp4",
+    posterLeft: lakeViewPoster,
   }, {
     title: 'étape 4',
     description: 'a completer par exemple',
     videoRight:baseURL+"gate.mp4",
+    posterRight: gatePoster,
     videoLeft:baseURL+"foret.mp4",
+    posterLeft: foretPoster,
   }, {
     title: 'étape 5',
     description: 'a completer par exemple',
-    videoRight:baseURL+"foot.mp4",
-    videoLeft:baseURL+"footZoom.mp4",
+    videoRight: baseURL+"foot.mp4",
+    posterRight: footPoster,
+    videoLeft: baseURL+"footZoom.mp4",
+    posterLeft: footZoomPoster,
   }, {
     title: 'étape 6',
     description: 'a completer par exemple',
     videoRight:baseURL+"lake.mp4",
+    posterRight: lakePoster,
     videoLeft:baseURL+"lakeView.mp4",
+    posterLeft: lakeViewPoster,
   }, {
     title: 'étape 7',
     description: 'a completer par exemple',
     videoRight:baseURL+"pyramid.mp4",
+    posterRight: pyramidPoster,
     videoLeft:baseURL+"tikal.mp4",
+    posterLeft: tikalPoster,
   }, {
     title: 'étape 8',
     description: 'a completer par exemple',
     videoRight:baseURL+"lake.mp4",
+    posterRight: lakePoster,
     videoLeft:baseURL+"lakeView.mp4",
+    posterLeft: lakeViewPoster,
   }, {
     title: 'étape 9',
     description: 'a completer par exemple',
-    videoRight:baseURL+"foot.mp4",
-    videoLeft:baseURL+"footZoom.mp4",
+    videoRight: baseURL+"foot.mp4",
+    posterRight: footPoster,
+    videoLeft: baseURL+"footZoom.mp4",
+    posterLeft: footZoomPoster,
   }, {
     title: 'étape 10',
     description: 'a completer par exemple',
     videoRight:baseURL+"pyramid.mp4",
+    posterRight: pyramidPoster,
     videoLeft:baseURL+"tikal.mp4",
+    posterLeft: tikalPoster,
   }, {
     title: 'étape 11',
     description: 'a completer par exemple',
     videoRight:baseURL+"lake.mp4",
+    posterRight: lakePoster,
     videoLeft:baseURL+"lakeView.mp4",
+    posterLeft: lakeViewPoster,
   }, {
     title: 'étape 12',
     description: 'a completer par exemple',
     videoRight:baseURL+"gate.mp4",
+    posterRight: gatePoster,
     videoLeft:baseURL+"foret.mp4",
+    posterLeft: foretPoster,
   }];
 
 
@@ -219,6 +252,7 @@ class Comprendre extends React.Component {
             <video
                 muted
                 src={currentStep.videoLeft}
+                poster={currentStep.posterLeft}
                 preload={'auto'}
                 type={'video/mp4'}
                 id={styles.videoLeft}
@@ -233,6 +267,7 @@ class Comprendre extends React.Component {
             <video
                 muted
                 src={currentStep.videoRight}
+                poster={currentStep.posterRight}
                 preload={'auto'}
                 type={'video/mp4'}
                 id={styles.videoRight}
