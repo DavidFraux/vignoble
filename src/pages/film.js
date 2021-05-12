@@ -63,14 +63,21 @@ class Film extends React.Component {
   
   render() {
     const title = 'Le film';
-    const sample = 'https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_1280_10MG.mp4';
+    const sample = this.baseURL + "pressageH264_24FPS.mp4";
     const markerList = [
-      {id: 'start',  target: 0,  label: 'début'},
-      {id: 'first',  target: 3,  label: 'inde'},
-      {id: 'secons', target: 7,  label: 'afrique'},
-      {id: 'third',  target: 15, label: 'amérique'},
-      {id: 'forth',  target: 23, label: 'pacifique'},
-      {id: 'fifth',  target: 28, label: 'japon'},
+      {id: 'debut',      target: 0,    label: 'début'},
+      {id: 'fouler',     target: 34,   label: 'fouler'},
+      {id: 'jus',        target: 46,   label: 'premier jus'},
+      {id: 'former',     target: 69,   label: 'former'},
+      {id: 'habiller',   target: 126,  label: 'habiller'},
+      {id: 'manoeuvre1', target: 192,  label: 'manoeuvrer'},
+      {id: 'presser',    target: 220,  label: 'presser'},
+      {id: 'mout',       target: 251.5,label: 'moût'},
+      {id: 'manoeuvre2', target: 274,  label: 'lever'},
+      {id: 'retirer',    target: 303,  label: 'retirer'},
+      {id: 'tailler',    target: 346,  label: 'tailler'},
+      {id: 'reformer',   target: 388,  label: 'reformer'},
+      {id: 'rhabiller',  target: 410,  label: 'rhabiller'},
     ];
     const markers = this.renderMarkers(markerList);
 

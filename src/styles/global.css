@@ -54,8 +54,9 @@ button > * {
 
 button span {
   display: block;
-  padding: 12px 24px;
+  padding: 12px 12px;
 }
+
 
 button:before {
   content: "";
