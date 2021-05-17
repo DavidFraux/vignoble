@@ -6,12 +6,12 @@
   text-align: center;
 }
 
-.video#videoLeft {
+.videoLeft {
   float: left;
   margin-left: 25px;
 }
 
-.video#videoRight {
+.videoRight {
   float: right;
   margin-right: 25px;
 }

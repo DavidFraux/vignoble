@@ -1,9 +1,9 @@
 import React from "react"
-import containerStyles from "./container.module.css"
+import { container } from "./container.module.css"
 
 function Container({ children }) {
   return (
-    <div className={containerStyles.container}>
+    <div className={container}>
       {children}
     </div>
   )

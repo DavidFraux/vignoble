@@ -1,13 +1,16 @@
 import Typography from "typography"
-import fairyGateTheme from "typography-theme-fairy-gates"
-
-const typography = new Typography(fairyGateTheme);
-
-//customizing
-fairyGateTheme.headerFontFamily = ["Avenir Next", "sans-serif"];
-fairyGateTheme.bodyFontFamily= ["Avenir Next", "sans-serif"];
 
 
-
-export const { scale, rhythm, options } = typography
+const typography = new Typography({
+  baseFontSize: "18px",
+  baseLineHeight: 1.666,
+  headerFontFamily: [
+    "Avenir Next",
+    "sans-serif",
+  ],
+  bodyFontFamily: [
+    "Avenir Next",
+    "sans-serif",
+  ],
+})
 export default typography

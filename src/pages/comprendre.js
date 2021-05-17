@@ -1,6 +1,13 @@
 import React from 'react';
 import Header from '../components/header.js';
-import styles from './comprendre.module.css'
+import {
+  controlsWrapper,
+  navigate,
+  btn,
+  toggle,
+  videoLeft,
+  video,
+  videoRight,} from './comprendre.module.css'
 import TimeLine from "../components/timeLine";
 import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext } from 'react-icons/md';
 
@@ -243,10 +250,10 @@ class Comprendre extends React.Component {
       <React.Fragment>
         <title>{title}</title>
         <Header headerText = {title}/>
-        <div className={styles.controlsWrapper}>
-          <button className = {`${styles.navigate} ${styles.btn}`} onClick={() => this.handlePrev()}>{<MdSkipPrevious/>}</button>
-          <button id={styles.toggle} className = {`${styles.navigate} ${styles.btn}`} onClick={() => this.togglePlay()}>{this.state.paused ? <MdPlayArrow/> : <MdPause/> }</button>
-          <button className = {`${styles.navigate} ${styles.btn}`} onClick={() => this.handleNext()}>{<MdSkipNext/>}</button>
+        <div className={controlsWrapper}>
+          <button className = {`${navigate} ${btn}`} onClick={() => this.handlePrev()}>{<MdSkipPrevious/>}</button>
+          <button id={toggle} className = {`${navigate} ${btn}`} onClick={() => this.togglePlay()}>{this.state.paused ? <MdPlayArrow/> : <MdPause/> }</button>
+          <button className = {`${navigate} ${btn}`} onClick={() => this.handleNext()}>{<MdSkipNext/>}</button>
         </div>
         
         <TimeLine steps={steps} activeStepIndex={this.state.activeStepIndex} navigateSteps = {(i) => this.navigateSteps(i)}/>
@@ -258,8 +265,8 @@ class Comprendre extends React.Component {
                 poster={currentStep.posterLeft}
                 preload={'auto'}
                 type={'video/mp4'}
-                id={styles.videoLeft}
-                className={[styles.videoLeft, styles.video].join(' ')}
+                id={videoLeft}
+                className={`${videoLeft} ${video}`}
                 ref={this.videoL}
                 onCanPlayThrough={() => this.handleVideoReady('L')}
                 onClick={() => this.handleVideoClick()}
@@ -274,8 +281,8 @@ class Comprendre extends React.Component {
                 poster={currentStep.posterRight}
                 preload={'auto'}
                 type={'video/mp4'}
-                id={styles.videoRight}
-                className={`${styles.video} ${styles.videoRight}`}
+                id={videoRight}
+                className={`${video} ${videoRight}`}
                 ref={this.videoR}
                 onCanPlayThrough={() => this.handleVideoReady('R')}
                 onClick={() => this.handleVideoClick()}

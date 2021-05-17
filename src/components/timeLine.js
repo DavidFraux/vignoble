@@ -1,5 +1,5 @@
 import React from "react";
-import timeLineStyles from './timeLine.module.css';
+import { infoBar, stepDescription } from './timeLine.module.css';
 
 
 
@@ -26,9 +26,9 @@ class TimeLine extends React.Component {
     return (
       <React.Fragment>
         <Stepper activeColor='#22262e' completeColor = '#22262e' steps={ this.props.steps } activeStep={ this.props.activeStepIndex } />
-        <div className={ timeLineStyles.infoBar }>
+        <div className={ infoBar }>
           {/* <button className={ [timeLineStyles.btn, timeLineStyles.btnPrev].join(' ')  } onClick={ (e) => this.handleClickPrevNext(-1, e) }>Précédent</button> */}
-          <div className={ timeLineStyles.stepDescription }>{currentStep.description}</div>
+          <div className={ stepDescription }>{currentStep.description}</div>
           {/* <button className={ [timeLineStyles.btn, timeLineStyles.btnNext].join(' ')  } onClick={ (e) => this.handleClickPrevNext(1, e) }>Suivant</button> */}
         </div>
         

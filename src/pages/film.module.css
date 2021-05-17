@@ -43,14 +43,11 @@
   padding: 2rem;
 }
 
-.navigate {
+.toggle {
   margin-right: 25px;
   margin-left: 25px;
   width:2rem;
   border-radius: 2rem;
   font-size: 1.5em;
-}
-
-.navigate#toggle {
   background-color: #385080;
 }

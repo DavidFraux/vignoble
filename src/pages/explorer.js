@@ -1,7 +1,12 @@
 import React from 'react';
 import Header from '../components/header.js';
 import  World from '../world/world';
-import styles from "./explorer.module.css";
+import {
+  btn,
+  controlsWrapper,
+  toggle,
+  sceneContainer,
+  slidePane, } from "./explorer.module.css";
 import { MdPause, MdPlayArrow, } from 'react-icons/md';
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
@@ -43,7 +48,7 @@ class ThreeScene extends React.Component {
         <button 
           key={id} 
           id={poiData.name} 
-          className = {styles.btn}  
+          className = {btn}  
           onClick={() => this.goTo(id)}>
           {poiData.buttonName ? poiData.buttonName : poiData.name}
         </button>
@@ -69,9 +74,9 @@ class ThreeScene extends React.Component {
 
   render() {
     return (
-      <div className={styles.controlsWrapper}>
-        <button id={styles.toggle} className = {styles.btn} onClick={this.toogleLoop}>{this.state.isLooping ? <MdPause/> : <MdPlayArrow/>}</button>
-        <button id="resetCam" className = {styles.btn}  onClick={this.resetCam}>vue d'ensemble</button>
+      <div className={controlsWrapper}>
+        <button id={toggle} className = {btn} onClick={this.toogleLoop}>{this.state.isLooping ? <MdPause/> : <MdPlayArrow/>}</button>
+        <button id="resetCam" className = {btn}  onClick={this.resetCam}>vue d'ensemble</button>
         {this.renderGoToButtons()}
       </div>
     );
@@ -137,14 +142,14 @@ class Explorer extends React.Component {
       <React.Fragment>
         <title>{title}</title>
         <Header headerText = {title}/>
-        <div className={styles.sceneContainer} id='scene-container'></div>
+        <div className={sceneContainer} id='scene-container'></div>
         <ThreeScene 
           poisData = {this.poisData} 
           triggerPane = {(poiId) => this.triggerPane(poiId)} 
         />
 
         <SlidingPane 
-          className={styles.slidePane}
+          className={slidePane}
           isOpen={this.state.isPaneOpen}
           title={currentPoi.name}
           subtitle={currentPoi.shortDescription}

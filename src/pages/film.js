@@ -1,13 +1,21 @@
 import React from "react"
 import { navigate } from 'gatsby'
 import Header from '../components/header.js';
-import styles from "./film.module.css";
+import {
+  markers,
+  container,
+  videoWrapper,
+  video,
+  playPause,
+  controlsWrapper,
+  toggle,
+  btn, } from "./film.module.css";
 import {  MdPause, MdPlayArrow, } from 'react-icons/md';
 
 function Marker(props) {
   return (
     <button 
-      className={styles.markers} onClick={ (e) => props.onClickMarker(props.target, e) }>{props.label}</button>
+      className={markers} onClick={ (e) => props.onClickMarker(props.target, e) }>{props.label}</button>
   )
 }
 
@@ -65,7 +73,7 @@ class Film extends React.Component {
     const title = 'Le film';
     const sample = this.baseURL + "pressageH264_24FPS.mp4";
     const markerList = [
-      {id: 'debut',      target: 0,    label: 'début'},
+      //{id: 'debut',      target: 0,    label: 'début'},
       {id: 'fouler',     target: 34,   label: 'fouler'},
       {id: 'jus',        target: 46,   label: 'premier jus'},
       {id: 'former',     target: 69,   label: 'former'},
@@ -82,9 +90,9 @@ class Film extends React.Component {
     const markers = this.renderMarkers(markerList);
 
     return (
-    <div className={styles.container} > 
+    <div className={container} > 
       <Header headerText = {title}/>
-        <div className={styles.videoWrapper}>
+        <div className={videoWrapper}>
           <video
             muted
             src={sample}
@@ -92,7 +100,7 @@ class Film extends React.Component {
             preload={'auto'}
             type={'video/mp4'}
             controls={false}
-            className={styles.video}
+            className={video}
             ref={this.videoRef}
             onPause={() => this.handlePause() }
             onClick={() => this.handleVideoClick()}
@@ -104,15 +112,15 @@ class Film extends React.Component {
               role= 'button'
               tabIndex = {0}
               aria-label = 'play pause the video'
-              className = {styles.playPause}
+              className = {playPause}
               onClick = {() => this.handleVideoClick()}
             />
           }
         </div>
-        <div className={styles.controlsWrapper}>
+        <div className={controlsWrapper}>
           <button 
-            id={styles.toggle} 
-            className = {`${styles.navigate} ${styles.btn}`}
+            id={toggle} 
+            className = {`${toggle}`}
             //tabIndex={0} onKeyDown={(e) => this.handleKeyDown(e)} //needs focus to work properly. Useless in touch screens interactivity
             onClick={() => this.togglePlay()}>
               {this.state.playing ? <MdPause/> : <MdPlayArrow/> }
