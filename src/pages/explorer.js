@@ -91,36 +91,48 @@ class Explorer extends React.Component {
     super(props);
     this.state = {
       isPaneOpen: false,
-      currentPoiId : 'tonneau',
+      currentPoiId : 'barrique',
     };
     this.poisData = {
       //point of interest with position to be created in the 3D wiew
-      'tonneau': {
-        name: 'tonneau',
+      'barrique': {
+        name: 'La barrique',
         position: [1.16, 0.5, -3.2],
-        shortDescription: 'description courte du tonneau',
-        content: 'texte sur ce point d\'interet. En quelques lignes. A rédiger. Sachant que les point point restente encore à définir',
+        shortDescription: 'Barrique en bois',
+        content: `Le moût n'a été en contact qu'avec des parties en bois : c'est nécessaire pour sa qualité. Le contact avec du métal pourrait produire de l'oxyde ferrique.`,
         image: tonneauPict,
       },
-      'couchage': {
-        name: 'couchages',
-        position: [3.55, 1.43, -1.54],
-        shortDescription: 'description courte du couchage',
-        content: 'texte sur ce point d\'interet. Attention il faut définir les points d\'interet  et ce qu\'on raconte à leur propos',
+      'ecrou': {
+        name: 'La vis et l\'écrou',
+        position: [4.25, 2.6, -4.62],
+        shortDescription: 'La vis et l\'écrou chantent sous l\'effort',
+        content: `En action, chargé, le pressoir "parle" lorsque la vis en bois tourne : elle frotte sur l'écrou. Chaque pressoir a une vis, un écrou et donc une "voix" différente.`,
         image: couchagePict,
       },
       'vis': {
-        name: 'vis et barre',
+        name: 'La vis et la barre',
         position: [4.1, 1, -4.76],
-        shortDescription: 'description courte de la vis',
-        content: 'texte sur ce point d\'interet. Rappel: les points restent à définir',
+        shortDescription: 'La dernière vis en bois',
+        content: `La vis en bois est soumise à de fortes pressions de torsion. C\'est pourquoi on utilise du cormier, du frêne ou du chataignier comme ici.
+        La vis peut casser : progressivement les vis en bois sont remplacées par des pièces en métal.
+        Le pressoir du musée est le dernier à conserver sa vis en bois.
+        La barre est en frene, il faut 2 hommes pour la faire tourner`,
         image: barrePict,
       },
-      'aiguille':{
-        name: 'aiguilles',
+      'chene': {
+        name: 'Ensemble en chêne',
         position: [3.64, 2, -0.31],
-        shortDescription: 'description courte des aiguilles',
-        content: 'texte sur ce point d\'interet. Toujours pas définis... qu\'est ce qu\'on montre?',
+        shortDescription: 'Les pressoirs sont construit en chêne',
+        content: `Les pressoirs sont construits par des charpentiers, avec des chênes locaux. Il fallait 5 à 6 chênes pour faire un grand pressoir.`,
+        image: aiguillePict,
+      },
+      'maie':{
+        name: 'Une maie étanche',
+        position: [2, 0.65, -1.5],
+        shortDescription: 'La maie doit être étanche',
+        content: `Les maies sont assemblées de façon précise par les charpentiers. On peut observer les marques d'assemblage.
+        Avant les vendanges, ils réparent et resserrent les pièces si nécessaire.
+        Ils renforcent aussi l'étanchéité des maies, en utilisant des joints en jonc ou en terre glaise.`,
         image: aiguillePict,
       },
     };
@@ -159,7 +171,7 @@ class Explorer extends React.Component {
             this.setState({ isPaneOpen: false });
           }}
           >
-          <div>{currentPoi.content}</div>
+          <text>{currentPoi.content}</text>
           <img alt = {currentPoi.name} src = {currentPoi.image}/>
         </SlidingPane>
       </React.Fragment>
