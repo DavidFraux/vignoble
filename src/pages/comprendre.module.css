@@ -36,3 +36,7 @@
 .mediaControls#toggle {
   background-color: #385080;
 }
+
+.videoContainer {
+  background-color: black;
+}

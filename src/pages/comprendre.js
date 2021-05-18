@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/header.js';
 import {
+  videoContainer,
   controlsWrapper,
   mediaControls,
   btn,
@@ -258,38 +259,42 @@ class Comprendre extends React.Component {
         
         <TimeLine steps={steps} activeStepIndex={this.state.activeStepIndex} navigateSteps = {(i) => this.navigateSteps(i)}/>
           <React.Fragment>
-            <video 
-                muted
-                key={currentStep.title+'L'}
-                src={currentStep.videoLeft}
-                poster={currentStep.posterLeft}
-                preload={'auto'}
-                type={'video/mp4'}
-                id={videoLeft}
-                className={`${videoLeft} ${video}`}
-                ref={this.videoL}
-                onCanPlayThrough={() => this.handleVideoReady('L')}
-                onClick={() => this.handleVideoClick()}
-                onEnded={() => this.handleVideoEnded('L')}
-                >
-                <p>impossible de charger la video</p>
-            </video>
-            <video
-                muted
-                key={currentStep.title+'R'}
-                src={currentStep.videoRight}
-                poster={currentStep.posterRight}
-                preload={'auto'}
-                type={'video/mp4'}
-                id={videoRight}
-                className={`${video} ${videoRight}`}
-                ref={this.videoR}
-                onCanPlayThrough={() => this.handleVideoReady('R')}
-                onClick={() => this.handleVideoClick()}
-                onEnded={() => this.handleVideoEnded('R')}
-                >
-                <p>impossible de charger la video</p>
-            </video>
+            <div className={videoContainer}>
+              <video 
+                  muted
+                  key={currentStep.title+'L'}
+                  src={currentStep.videoLeft}
+                  poster={currentStep.posterLeft}
+                  preload={'auto'}
+                  type={'video/mp4'}
+                  id={videoLeft}
+                  className={`${videoLeft} ${video}`}
+                  ref={this.videoL}
+                  onCanPlayThrough={() => this.handleVideoReady('L')}
+                  onClick={() => this.handleVideoClick()}
+                  onEnded={() => this.handleVideoEnded('L')}
+                  >
+                  <p>impossible de charger la video</p>
+              </video>
+            </div>
+            <div className={videoContainer}>
+              <video
+                  muted
+                  key={currentStep.title+'R'}
+                  src={currentStep.videoRight}
+                  poster={currentStep.posterRight}
+                  preload={'auto'}
+                  type={'video/mp4'}
+                  id={videoRight}
+                  className={`${video} ${videoRight}`}
+                  ref={this.videoR}
+                  onCanPlayThrough={() => this.handleVideoReady('R')}
+                  onClick={() => this.handleVideoClick()}
+                  onEnded={() => this.handleVideoEnded('R')}
+                  >
+                  <p>impossible de charger la video</p>
+              </video>
+            </div>
         </React.Fragment>
 
 
