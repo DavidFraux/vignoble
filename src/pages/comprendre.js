@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/header.js';
 import {
   controlsWrapper,
-  navigate,
+  mediaControls,
   btn,
   toggle,
   videoLeft,
@@ -251,9 +251,9 @@ class Comprendre extends React.Component {
         <title>{title}</title>
         <Header headerText = {title}/>
         <div className={controlsWrapper}>
-          <button className = {`${navigate} ${btn}`} onClick={() => this.handlePrev()}>{<MdSkipPrevious/>}</button>
-          <button id={toggle} className = {`${navigate} ${btn}`} onClick={() => this.togglePlay()}>{this.state.paused ? <MdPlayArrow/> : <MdPause/> }</button>
-          <button className = {`${navigate} ${btn}`} onClick={() => this.handleNext()}>{<MdSkipNext/>}</button>
+          <button className = {mediaControls}             onClick={() => this.handlePrev()}>{<MdSkipPrevious size='1.5x'/>}</button>
+          <button className = {mediaControls} id={toggle} onClick={() => this.togglePlay()}>{this.state.paused ? <MdPlayArrow size='1.5x'/> : <MdPause size='1.5x'/> }</button>
+          <button className = {mediaControls}             onClick={() => this.handleNext()}>{<MdSkipNext size='1.5x'/>}</button>
         </div>
         
         <TimeLine steps={steps} activeStepIndex={this.state.activeStepIndex} navigateSteps = {(i) => this.navigateSteps(i)}/>

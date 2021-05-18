@@ -2,9 +2,9 @@ import React from 'react';
 import Header from '../components/header.js';
 import  World from '../world/world';
 import {
-  btn,
+  goToMarkerControl,
   controlsWrapper,
-  toggle,
+  togglePlayPause,
   sceneContainer,
   slidePane, } from "./explorer.module.css";
 import { MdPause, MdPlayArrow, } from 'react-icons/md';
@@ -48,7 +48,7 @@ class ThreeScene extends React.Component {
         <button 
           key={id} 
           id={poiData.name} 
-          className = {btn}  
+          className = {goToMarkerControl}  
           onClick={() => this.goTo(id)}>
           {poiData.buttonName ? poiData.buttonName : poiData.name}
         </button>
@@ -75,8 +75,8 @@ class ThreeScene extends React.Component {
   render() {
     return (
       <div className={controlsWrapper}>
-        <button id={toggle} className = {btn} onClick={this.toogleLoop}>{this.state.isLooping ? <MdPause/> : <MdPlayArrow/>}</button>
-        <button id="resetCam" className = {btn}  onClick={this.resetCam}>vue d'ensemble</button>
+        <button className = {togglePlayPause} onClick={this.toogleLoop}>{this.state.isLooping ? <MdPause size='1.5x'/> : <MdPlayArrow size='1.5x'/>}</button>
+        <button className = {goToMarkerControl}  onClick={this.resetCam}>vue d'ensemble</button>
         {this.renderGoToButtons()}
       </div>
     );

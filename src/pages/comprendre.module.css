@@ -21,18 +21,18 @@
   left: 10vw;
   top: 0;
   margin: 0.2rem auto;
-  text-align: center;
 }
 
-.navigate {
+
+
+.mediaControls {
+  position: relative;
   margin-right: 25px;
   margin-left: 25px;
   width:2rem;
   border-radius: 2rem;
-  font-size: 1.5em;
 }
 
-.navigate#toggle {
+.mediaControls#toggle {
   background-color: #385080;
 }
-

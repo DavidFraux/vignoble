@@ -2,20 +2,19 @@ import React from "react"
 import { navigate } from 'gatsby'
 import Header from '../components/header.js';
 import {
-  markers,
+  goToMarkerControl,
   container,
   videoWrapper,
   video,
-  playPause,
+  onScreenPlayPause,
   controlsWrapper,
-  toggle,
-  btn, } from "./film.module.css";
+  togglePlayPause, } from "./film.module.css";
 import {  MdPause, MdPlayArrow, } from 'react-icons/md';
 
 function Marker(props) {
   return (
     <button 
-      className={markers} onClick={ (e) => props.onClickMarker(props.target, e) }>{props.label}</button>
+      className={goToMarkerControl} onClick={ (e) => props.onClickMarker(props.target, e) }>{props.label}</button>
   )
 }
 
@@ -112,18 +111,17 @@ class Film extends React.Component {
               role= 'button'
               tabIndex = {0}
               aria-label = 'play pause the video'
-              className = {playPause}
+              className = {onScreenPlayPause}
               onClick = {() => this.handleVideoClick()}
             />
           }
         </div>
         <div className={controlsWrapper}>
           <button 
-            id={toggle} 
-            className = {`${toggle}`}
+            className = {togglePlayPause}
             //tabIndex={0} onKeyDown={(e) => this.handleKeyDown(e)} //needs focus to work properly. Useless in touch screens interactivity
             onClick={() => this.togglePlay()}>
-              {this.state.playing ? <MdPause/> : <MdPlayArrow/> }
+              {this.state.playing ? <MdPause size='1.5x'/> : <MdPlayArrow size='1.5x'/> }
           </button>
           {this.state.playing? <div/> : markers}
         </div> 

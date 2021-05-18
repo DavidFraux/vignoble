@@ -10,14 +10,18 @@
   text-align: center;
 }
 
-.btn {
+.goToMarkerControl {
+  position: relative;
+  display: inline-block;
   margin-right: 25px;
   margin-left: 25px;
 }
 
-.btn#toggle {
+.togglePlayPause {
+  position: relative;
+  margin-right: 25px;
+  margin-left: 25px;
   width:2rem;
   border-radius: 2rem;
   background-color: #385080;
-  font-size: 1.5em;
 }
