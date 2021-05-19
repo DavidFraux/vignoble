@@ -7,7 +7,7 @@ function createCamera() {
   const near = 0.01;
   const far= 1000;
   const camera = new PerspectiveCamera(fov, aspect, near, far);
-  const initPos =  { x: -2.8067965626621003, y: 4.296325860580075, z: -5.898964314929673 };
+  const initPos =  { x: -3, y: 4, z: -6 };
   camera.position.set(initPos.x, initPos.y, initPos.z);
   //lookAt is managed by orbitControl.target
   let mvStep;

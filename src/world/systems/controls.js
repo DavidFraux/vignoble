@@ -1,29 +1,30 @@
 import { OrbitControls, } from 'three/examples/jsm/controls/OrbitControls.js';
-import { Box3, Vector3 } from 'three';
+import { Box3, Spherical, Vector3 } from 'three';
 import { upZtoY } from '../systems/orientation';
 import TWEEN from '@tweenjs/tween.js';
 
+function tweenGoToTarget(camera, controls, selectedObject) {
+  const sphericalCamTargetPos = new Spherical();
+  sphericalCamTargetPos.setFromVector3 ( selectedObject.position );
+  sphericalCamTargetPos.radius += 2;
+  const cartesianCamTargetPos = new Vector3();
+  cartesianCamTargetPos.setFromSpherical ( sphericalCamTargetPos );
+  const duration= 900;
+  tweenTo(camera, controls, cartesianCamTargetPos, selectedObject.position, duration)
+}
 
-function tweenCamera(camera, controls, selectedObject, duration) { 
-  new TWEEN.Tween(controls.target).to( {
-    x: selectedObject.position.x,
-    y: selectedObject.position.y,
-    z: selectedObject.position.z + 0.5
-  }, duration)
+function tweenTo(camera, controls, cameraTargetPosition, controlsTargetPosition, duration) {
+  new TWEEN.Tween(controls.target).to( controlsTargetPosition, duration)
   .easing( TWEEN.Easing.Quadratic.InOut)
   .start();
-  new TWEEN.Tween(camera.position).to({
-    x: selectedObject.position.x - 1.5,
-    y: selectedObject.position.y + 1.5,
-    z: selectedObject.position.z - 1.5
-  }, duration)
+  new TWEEN.Tween(camera.position).to(cameraTargetPosition, duration)
   .easing( TWEEN.Easing.Quadratic.InOut)
   .start();
 }
 
 function fitCameraToSelection( camera, controls, selection, fitOffset = 1 ) {
   const box = new Box3();
-  for( const object of selection ) box.expandByObject( object );
+  for( const objId in selection ) box.expandByObject( selection[objId] );
   const size = box.getSize( new Vector3() );
   const center = box.getCenter( new Vector3() );
   const maxSize = Math.max( size.x, size.y, size.z );
@@ -58,13 +59,13 @@ function createControls(camera, canvas) {
     controls.update();
   }
 
-  controls.goTo = (isLooping, target) => {
-        if (isLooping) {
-          tweenCamera(camera, controls, target, 500);
-        } else {
-          fitCameraToSelection( camera, controls, [target], 10)
-        }
-        
+  controls.goTo = (targetPosition, dist, duration) => {
+    const sphericalCamTargetPos = new Spherical();
+    sphericalCamTargetPos.setFromVector3 ( targetPosition );
+    sphericalCamTargetPos.radius += dist;
+    const cartesianCamTargetPos = new Vector3();
+    cartesianCamTargetPos.setFromSpherical ( sphericalCamTargetPos );
+    tweenTo(camera, controls, cartesianCamTargetPos, targetPosition, duration);
   }
 
   return controls;

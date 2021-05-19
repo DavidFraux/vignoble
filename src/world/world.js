@@ -8,6 +8,7 @@ import { Resizer } from './systems/Resizer.js';
 import { Loop } from './systems/Loop.js';
 import { createRaycast } from './systems/raycaster.js';
 import { createControls, fitCameraToSelection  } from './systems/controls.js';
+import { Vector3 } from 'three';
 
 
 
@@ -28,7 +29,7 @@ let controls;
 class World {
   constructor(container, poisData, callback) {
     // not declared as this.camera (etc) in order to avoid access to that variables from out of world module 
-    this.models = [];//meshes objects will be pushed here for convenience purpose
+    this.models = {};//meshes objects will be pushed here for convenience purpose
     this.pois = {};// {id: poi3DObject}
     //const targets = new Group;
     //setOrientation([0, 0, 1]);//z up
@@ -46,7 +47,7 @@ class World {
     loop.updatables.push(controls);
     const lights = createLights()
     scene.add(...lights);
-    scene.add(...this.models);
+    //scene.add(...this.models);
     const resizer = new Resizer(container, camera, renderer);
     //hook from Resizer trigger here, useless in loop styles
     resizer.onResize = () => {
@@ -58,10 +59,11 @@ class World {
   async init() {
     // asynchronous setup here, load gltf model and any other loaded stuff
     const { press, grape,} = await loadPress();
-    this.models.push(press, grape,);
+    this.models['press'] = press;
+    this.models['grape'] = grape;
     loop.updatables.push(press,);
     scene.add(press, grape);
-    this.resetCam();
+    fitCameraToSelection( camera, controls, this.models);
   }
 
 
@@ -72,11 +74,20 @@ class World {
     for ( const id in poisData ) {
       const threeObject = createPoi(id, poisData[id]);
       this.pois[id] = threeObject;
-      this.models.push(threeObject);
+      this.models[id] = threeObject;
       loop.updatables.push(threeObject);
+      scene.add(threeObject);
     };
   }
   
+  pausePressAnimation() {
+    this.models['press'].paused = true;
+  }
+
+  resumePressAnimation() {
+    this.models['press'].paused = false;
+  }
+
   // 2. Render the scene
   render() {
     // draw a single frame, render on demand
@@ -84,9 +95,8 @@ class World {
   }
 
   start() {
-    // produces a steam of frames
+    // produces a stream of frames
     loop.start();
-    
   }
   
   stop() {
@@ -98,15 +108,13 @@ class World {
   }
 
   resetCam() {
-    camera.reset();
-    controls.resetTarget();
-    fitCameraToSelection( camera, controls, this.models);
+    //fitCameraToSelection( camera, controls, this.models);
+    const decalage = new Vector3(-2,1,-2);
+    controls.goTo(decalage, 6, 1500);
   }
 
-  goTo(isLooping, poiId) {
-    controls.goTo(isLooping, this.pois[poiId]);
-    //camera.goTo(isLooping, targetPosition);
-    controls.update();//only in case loop is Off, actually it is included in loop
+  goTo(poiId) {
+    controls.goTo(this.pois[poiId].position, 2, 900);
   }
 }
   

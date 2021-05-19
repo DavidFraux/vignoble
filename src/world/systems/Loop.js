@@ -30,6 +30,7 @@ class Loop {
     //  `The last frame rendered in ${delta * 1000} milliseconds`,
     //);
     for (const object of this.updatables) {
+      if (object.paused) {continue;};
       object.tick(deltaT, elapsedT);
     }
 

@@ -1,11 +1,10 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { setupModel } from '../systems/setupModel.js';
-import pressFile from '../../assets/models/lgFut.glb';
-import grapeFile from '../../assets/models/grape.glb';
+import pressFile from '../../assets/models/lgFutCentered.glb';
+import grapeFile from '../../assets/models/grapeLP.glb';
 
 async function loadPress() {
   const loader = new GLTFLoader();
-  //const parrotData = await loader.loadAsync(parrotFile);
   const [ pressData, grapeData ] = await Promise.all([
     loader.loadAsync(pressFile),
     loader.loadAsync(grapeFile),

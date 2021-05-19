@@ -27,7 +27,7 @@ class ThreeScene extends React.Component {
 
   toogleLoop = () => {
     this.setState((prevState) => ({isLooping: !prevState.isLooping}));
-    this.state.isLooping? this.world.stop() : this.world.start();
+    this.state.isLooping? this.world.pausePressAnimation() : this.world.resumePressAnimation();
   };
 
 
@@ -36,7 +36,7 @@ class ThreeScene extends React.Component {
   };
 
   goTo = (poiId) => {
-    this.world.goTo(this.state.isLooping, poiId);
+    this.world.goTo(poiId);
     this.props.triggerPane(poiId);
   };
 
@@ -54,11 +54,11 @@ class ThreeScene extends React.Component {
         </button>
         );
     };
-    return(buttons)
+    return(buttons);
   }
 
   handleClickedPoi(poiId) {
-    this.world.goTo(this.state.isLooping, poiId);
+    this.world.goTo(poiId);
     this.props.triggerPane(poiId);
   }
 
@@ -97,21 +97,21 @@ class Explorer extends React.Component {
       //point of interest with position to be created in the 3D wiew
       'barrique': {
         name: 'La barrique',
-        position: [1.16, 0.5, -3.2],
+        position: [-3.1, 0.5, -1.63],
         shortDescription: 'Barrique en bois',
         content: `Le moût n'a été en contact qu'avec des parties en bois : c'est nécessaire pour sa qualité. Le contact avec du métal pourrait produire de l'oxyde ferrique.`,
         image: tonneauPict,
       },
       'ecrou': {
-        name: 'La vis et l\'écrou',
-        position: [4.25, 2.6, -4.62],
+        name: 'L\'écrou',
+        position: [-0.1, 2.6, -3.05],
         shortDescription: 'La vis et l\'écrou chantent sous l\'effort',
         content: `En action, chargé, le pressoir "parle" lorsque la vis en bois tourne : elle frotte sur l'écrou. Chaque pressoir a une vis, un écrou et donc une "voix" différente.`,
         image: couchagePict,
       },
       'vis': {
-        name: 'La vis et la barre',
-        position: [4.1, 1, -4.76],
+        name: 'La vis',
+        position: [-0.16, 1, -3.2],
         shortDescription: 'La dernière vis en bois',
         content: `La vis en bois est soumise à de fortes pressions de torsion. C\'est pourquoi on utilise du cormier, du frêne ou du chataignier comme ici.
         La vis peut casser : progressivement les vis en bois sont remplacées par des pièces en métal.
@@ -119,20 +119,29 @@ class Explorer extends React.Component {
         La barre est en frene, il faut 2 hommes pour la faire tourner`,
         image: barrePict,
       },
-      'chene': {
-        name: 'Ensemble en chêne',
-        position: [3.64, 2, -0.31],
+      'bois': {
+        name: 'Le bois',
+        position: [-1.4, 0.95, 0.8],
         shortDescription: 'Les pressoirs sont construit en chêne',
-        content: `Les pressoirs sont construits par des charpentiers, avec des chênes locaux. Il fallait 5 à 6 chênes pour faire un grand pressoir.`,
+        content: `Les pressoirs sont construits par des charpentiers, avec des chênes locaux. Il fallait 5 à 6 chênes pour faire un grand pressoir.
+        Sur ce pressoir tous les assemblages sont en bois: tenon, mortaise, cheville.`,
         image: aiguillePict,
       },
       'maie':{
-        name: 'Une maie étanche',
-        position: [2, 0.65, -1.5],
+        name: 'L\'étanchétité',
+        position: [-2.25, 0.65, 0],
         shortDescription: 'La maie doit être étanche',
         content: `Les maies sont assemblées de façon précise par les charpentiers. On peut observer les marques d'assemblage.
         Avant les vendanges, ils réparent et resserrent les pièces si nécessaire.
         Ils renforcent aussi l'étanchéité des maies, en utilisant des joints en jonc ou en terre glaise.`,
+        image: aiguillePict,
+      },
+      'maie2':{
+        name: 'Deux maies',
+        position: [1.2, 0.8, -0.7],
+        shortDescription: 'Une seconde maie pour travailler plus vite',
+        content: `Tandis qu'à l'arrière sur la maie de pressage, on presse le cep déjà foulé; à l'avant sur la maie de foulage on extrait un premier moût (jus). 
+        A l'avant la maie de foulage prepare donc le cep pour une prochaine pressée, peut-etre destinée à second pressoir, comme c'est le cas dans les grandes exploitations`,
         image: aiguillePict,
       },
     };
@@ -171,7 +180,7 @@ class Explorer extends React.Component {
             this.setState({ isPaneOpen: false });
           }}
           >
-          <text>{currentPoi.content}</text>
+          <div>{currentPoi.content}</div>
           <img alt = {currentPoi.name} src = {currentPoi.image}/>
         </SlidingPane>
       </React.Fragment>
