@@ -1,4 +1,5 @@
 import React from 'react';
+import { fullPage } from './TouchSwipeEvents.module.css';
 
 class TouchSwipeEvents extends React.Component {
 
@@ -42,6 +43,7 @@ class TouchSwipeEvents extends React.Component {
   render() {
     return (
       <div
+        className={fullPage}
         onTouchStart={this._onTouchStart}
         onTouchMove={this._onTouchMove}
         onTouchEnd={this._onTouchEnd}>
@@ -52,3 +54,4 @@ class TouchSwipeEvents extends React.Component {
 }
 
 export default TouchSwipeEvents
+

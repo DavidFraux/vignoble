@@ -226,7 +226,7 @@ class Comprendre extends React.Component {
   }
 
   handleswipes(i) {
-    (i === 'left')? this.handlePrev() : this.handleNext()
+    (i === 'left')? this.handleNext() : this.handlePrev();
   }
 
   componentDidUpdate() {
