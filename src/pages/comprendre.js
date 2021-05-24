@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../components/header.js';
+import TouchSwipeEvents from '../components/TouchSwipeEvents.js'
 import {
   videoContainer,
   controlsWrapper,
   mediaControls,
-  btn,
   toggle,
   videoLeft,
   video,
@@ -225,6 +225,10 @@ class Comprendre extends React.Component {
     this.setState({paused: false,});
   }
 
+  handleswipes(i) {
+    (i === 'left')? this.handlePrev() : this.handleNext()
+  }
+
   componentDidUpdate() {
     this.state.Lplaying ? this.videoL.current.play() : this.videoL.current.pause();
     this.state.Rplaying ? this.videoR.current.play() : this.videoR.current.pause();
@@ -249,6 +253,7 @@ class Comprendre extends React.Component {
     const currentStep = steps[this.state.activeStepIndex];
     return (
       <React.Fragment>
+        <TouchSwipeEvents onSwiped = {(i) => this.handleswipes(i)}/>
         <title>{title}</title>
         <Header headerText = {title}/>
         <div className={controlsWrapper}>
