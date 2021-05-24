@@ -15,6 +15,7 @@ class TouchSwipeEvents extends React.Component {
     this.minDistance = 50;
   }
 
+
   _onTouchStart(e) {
     const touch = e.touches[0];
     this._swipe = { x: touch.clientX };
