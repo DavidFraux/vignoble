@@ -8,7 +8,7 @@ import {
   toggle,
   videoLeft,
   video,
-  videoRight,} from './comprendre.module.css'
+  videoRight,} from './pasApas.module.css'
 import TimeLine from "../components/timeLine";
 import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext } from 'react-icons/md';
 
@@ -21,7 +21,7 @@ import lakeViewPoster from '../images/videoPosters/lakeViewPoster.jpg';
 import gatePoster from '../images/videoPosters/gatePoster.jpg';
 import foretPoster from '../images/videoPosters/foretPoster.jpg';
 
-const title = 'Comprendre le fonctionnement du pressoir long-fut';
+const title = 'Le fonctionnement du pressoir long-fut pas à pas';
 const baseURL = 'https://uncloud.univ-nantes.fr/index.php/s/eL8zoRTzJMB9L53/download?path=/&files=';
 const steps = [{
     title: 'Fouler',
@@ -110,7 +110,7 @@ const steps = [{
   }];
 
 
-class Comprendre extends React.Component {
+class PasApas extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -253,9 +253,9 @@ class Comprendre extends React.Component {
     const currentStep = steps[this.state.activeStepIndex];
     return (
       <React.Fragment>
-        <TouchSwipeEvents onSwiped = {(i) => this.handleswipes(i)}/>
         <title>{title}</title>
         <Header headerText = {title}/>
+        <TouchSwipeEvents onSwiped = {(i) => this.handleswipes(i)}/>
         <div className={controlsWrapper}>
           <button className = {mediaControls}             onClick={() => this.handlePrev()}>{<MdSkipPrevious size='1.5x'/>}</button>
           <button className = {mediaControls} id={toggle} onClick={() => this.togglePlay()}>{this.state.paused ? <MdPlayArrow size='1.5x'/> : <MdPause size='1.5x'/> }</button>
@@ -301,12 +301,9 @@ class Comprendre extends React.Component {
               </video>
             </div>
         </React.Fragment>
-
-
       </React.Fragment>
     )
   };
 }
 
-export default Comprendre
-
+export default PasApas

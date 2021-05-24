@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
+import { navigate } from "gatsby"
 import {
   topBar,
   siteName,
@@ -12,7 +12,7 @@ function Header(props) {
   return (
     <header>
       <div className = {topBar}>
-        <Link  className = {siteName} to = '/'><MdHome/></Link>
+        <div className = {siteName} onClick={() => navigate('/')}><MdHome/></div>
         <div className = {navigationSide}>
           {props.headerText}
         </div>

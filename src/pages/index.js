@@ -9,12 +9,12 @@ import {
   logo,
   pub,
   container,
-  comprendre,
+  pasApas,
   film,
   explorer, } from './index.module.css'
 import filmPict from '../images/film.png'
 import explorerPict from '../images/explorer.png'
-import comprendrePict from '../images/comprendre.png'
+import pasApasPict from '../images/pasApas.png'
 import logoPict from '../images/LOGO-MUSEE.png'
 
 const ShapeLink = props => (
@@ -31,7 +31,7 @@ function Home() {
     <img  className = {logo} src={logoPict} alt='logo musée' />
     <p className = {pub}>Le pressoir long-fut <br/> 1848</p>
     <div className = {container}>
-      <ShapeLink to = '/comprendre/' classe = {comprendre}  text = "comprendre" picture = {comprendrePict} />
+      <ShapeLink to = '/pasApas/' classe = {pasApas}  text = "pasApas" picture = {pasApasPict} />
       <ShapeLink to = '/film/' classe = {film} text = "film"  picture = {filmPict}/>
       <ShapeLink to = '/explorer/' classe ={explorer} text = "explorer"  picture = {explorerPict}/>
     </div>

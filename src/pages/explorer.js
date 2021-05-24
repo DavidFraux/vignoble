@@ -5,8 +5,7 @@ import {
   goToMarkerControl,
   controlsWrapper,
   togglePlayPause,
-  sceneContainer,
-  slidePane, } from "./explorer.module.css";
+  sceneContainer, } from "./explorer.module.css";
 import { MdPause, MdPlayArrow, } from 'react-icons/md';
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
@@ -170,7 +169,7 @@ class Explorer extends React.Component {
         />
 
         <SlidingPane 
-          className={slidePane}
+          //className={slidePane}
           isOpen={this.state.isPaneOpen}
           title={currentPoi.name}
           subtitle={currentPoi.shortDescription}

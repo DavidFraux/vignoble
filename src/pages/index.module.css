@@ -40,7 +40,7 @@
   object-fit: cover;
 }
 
-.comprendre{
+.pasApas{
   grid-area: b;
   align-self: center;
   /* max-width: 55vw; */
