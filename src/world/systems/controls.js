@@ -3,15 +3,6 @@ import { Box3, Spherical, Vector3 } from 'three';
 import { upZtoY } from '../systems/orientation';
 import TWEEN from '@tweenjs/tween.js';
 
-function tweenGoToTarget(camera, controls, selectedObject) {
-  const sphericalCamTargetPos = new Spherical();
-  sphericalCamTargetPos.setFromVector3 ( selectedObject.position );
-  sphericalCamTargetPos.radius += 2;
-  const cartesianCamTargetPos = new Vector3();
-  cartesianCamTargetPos.setFromSpherical ( sphericalCamTargetPos );
-  const duration= 900;
-  tweenTo(camera, controls, cartesianCamTargetPos, selectedObject.position, duration)
-}
 
 function tweenTo(camera, controls, cameraTargetPosition, controlsTargetPosition, duration) {
   new TWEEN.Tween(controls.target).to( controlsTargetPosition, duration)

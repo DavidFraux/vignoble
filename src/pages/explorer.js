@@ -113,7 +113,7 @@ class Explorer extends React.Component {
         name: 'La vis',
         position: [-0.16, 1, -3.2],
         shortDescription: 'La dernière vis en bois',
-        content: `La vis en bois est soumise à de fortes pressions de torsion. C\'est pourquoi on utilise du cormier, du frêne ou du chataignier comme ici.
+        content: `La vis en bois est soumise à de fortes pressions de torsion. C'est pourquoi on utilise du cormier, du frêne ou du chataignier comme ici.
         La vis peut casser : progressivement les vis en bois sont remplacées par des pièces en métal.
         Le pressoir du musée est le dernier à conserver sa vis en bois.
         La barre est en frene, il faut 2 hommes pour la faire tourner`,
