@@ -4,19 +4,18 @@ import Container from "../components/container"
 
 
 
-function Page404() {
-  const title = '404 page';
+function savoirPlus() {
+  const title = 'En savoir plus';
   return (
   <div>
     <title>{title}</title>
     <Header headerText = {title}/>
     <Container>
-      <p>error 404 : Cette page n'existe pas</p>
-      <p>vous avez des idées pour le musée du vignoble, contactez nous</p>
-      <p>accueil@musee-vignoble-nantais.fr</p>
+      <p>Pour en savoir plus vous êtes sur la bonne page</p>
+      <p>mais que contient cette page au fait? </p>
     </Container>
   </div>
   )
 }
 
-export default Page404
+export default savoirPlus
