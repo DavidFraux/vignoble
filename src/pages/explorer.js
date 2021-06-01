@@ -9,10 +9,13 @@ import {
 import { MdPause, MdPlayArrow, } from 'react-icons/md';
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
-import couchagePict from '../images/couchage.jpg';
+import ecrouPict from '../images/ecrou.jpg';
 import tonneauPict from '../images/tonneau.jpg';
 import aiguillePict from '../images/aiguille.jpg';
-import barrePict from '../images/barre.jpg';
+import visPict from '../images/vis.jpg';
+import maiePict from '../images/maie.jpg';
+import arrierePict from '../images/arriere.jpg';
+
 
 
 class ThreeScene extends React.Component {
@@ -106,7 +109,7 @@ class Explorer extends React.Component {
         position: [-0.1, 2.6, -3.05],
         shortDescription: 'La vis et l\'écrou chantent sous l\'effort',
         content: `En action, chargé, le pressoir "parle" lorsque la vis en bois tourne : elle frotte sur l'écrou. Chaque pressoir a une vis, un écrou et donc une "voix" différente.`,
-        image: couchagePict,
+        image: ecrouPict,
       },
       'vis': {
         name: 'La vis',
@@ -116,7 +119,7 @@ class Explorer extends React.Component {
         La vis peut casser : progressivement les vis en bois sont remplacées par des pièces en métal.
         Le pressoir du musée est le dernier à conserver sa vis en bois.
         La barre est en frene, il faut 2 hommes pour la faire tourner`,
-        image: barrePict,
+        image: visPict,
       },
       'bois': {
         name: 'Le bois',
@@ -133,7 +136,7 @@ class Explorer extends React.Component {
         content: `Les maies sont assemblées de façon précise par les charpentiers. On peut observer les marques d'assemblage.
         Avant les vendanges, ils réparent et resserrent les pièces si nécessaire.
         Ils renforcent aussi l'étanchéité des maies, en utilisant des joints en jonc ou en terre glaise.`,
-        image: aiguillePict,
+        image: maiePict,
       },
       'maie2':{
         name: 'Deux maies',
@@ -141,7 +144,7 @@ class Explorer extends React.Component {
         shortDescription: 'Une seconde maie pour travailler plus vite',
         content: `Tandis qu'à l'arrière sur la maie de pressage, on presse le cep déjà foulé; à l'avant sur la maie de foulage on extrait un premier moût (jus). 
         A l'avant la maie de foulage prepare donc le cep pour une prochaine pressée, peut-etre destinée à second pressoir, comme c'est le cas dans les grandes exploitations`,
-        image: aiguillePict,
+        image: arrierePict,
       },
     };
   };
