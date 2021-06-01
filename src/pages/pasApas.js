@@ -12,6 +12,7 @@ import {
 import TimeLine from "../components/timeLine";
 import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext } from 'react-icons/md';
 
+
 import footPoster from '../images/videoPosters/footPoster.jpg';
 import footZoomPoster from '../images/videoPosters/footZoomPoster.jpg';
 import pyramidPoster from '../images/videoPosters/pyramidPoster.jpg';
@@ -21,90 +22,113 @@ import lakeViewPoster from '../images/videoPosters/lakeViewPoster.jpg';
 import gatePoster from '../images/videoPosters/gatePoster.jpg';
 import foretPoster from '../images/videoPosters/foretPoster.jpg';
 
+import poster0 from '../images/videoPosters/poster0.jpg';
+import poster1 from '../images/videoPosters/poster1.jpg';
+import poster2 from '../images/videoPosters/poster2.jpg';
+import poster3 from '../images/videoPosters/poster3.jpg';
+import poster4 from '../images/videoPosters/poster4.jpg';
+import poster5 from '../images/videoPosters/poster5.jpg';
+import poster6 from '../images/videoPosters/poster6.jpg';
+import poster7 from '../images/videoPosters/poster7.jpg';
+import poster8 from '../images/videoPosters/poster8.jpg';
+import poster9 from '../images/videoPosters/poster9.jpg';
+import poster10 from '../images/videoPosters/poster10.jpg';
+import poster11 from '../images/videoPosters/poster11.jpg';
+import poster12 from '../images/videoPosters/poster12.jpg';
+
+
 const title = 'Le fonctionnement du pressoir long-fut pas à pas';
 const baseURL = 'https://uncloud.univ-nantes.fr/index.php/s/eL8zoRTzJMB9L53/download?path=/&files=';
 const steps = [{
-    title: 'Fouler',
-    description: 'fouler le raisin dans la maie, basse ou haute',
-    videoRight: baseURL+"foot.mp4",
-    posterRight: footPoster,
+    title: 'Verser',
+    description: 'Verser le raisin frais dans la maie',
+    videoRight: baseURL+"pressage0.mp4",
+    posterRight: poster0,
     videoLeft: baseURL+"footZoom.mp4",
     posterLeft: footZoomPoster,
   }, {
-    title: 'Préparation',
-    description: 'installer les moutons',
-    videoRight:baseURL+"pyramid.mp4",
-    posterRight: pyramidPoster,
+    title: 'Fouler',
+    description: 'Fouler aux pieds le raisin dans la maie, basse ou haute',
+    videoRight:baseURL+"pressage1.mp4",
+    posterRight: poster1,
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
   }, {
-    title: 'étape 3',
-    description: 'a completer par exemple',
-    videoRight:baseURL+"lake.mp4",
-    posterRight: lakePoster,
+    title: '1er moût',
+    description: 'Un premier moût (jus) de raisin peut être recueilli',
+    videoRight:baseURL+"pressage2.mp4",
+    posterRight: poster2,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
   }, {
-    title: 'étape 4',
-    description: 'a completer par exemple',
-    videoRight:baseURL+"gate.mp4",
-    posterRight: gatePoster,
+    title: 'Constituer',
+    description: 'Les grapes de raisin sont organisé en cep (tas de raisin à presser)',
+    videoRight:baseURL+"pressage3.mp4",
+    posterRight: poster3,
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
   }, {
-    title: 'étape 5',
-    description: 'a completer par exemple',
-    videoRight: baseURL+"foot.mp4",
-    posterRight: footPoster,
+    title: 'Habiller',
+    description: 'Le cep est couvert de qunouilles, couchages, moutons puis blins en bois, destinés à répartir la charge de pressage',
+    videoRight: baseURL+"pressage4.mp4",
+    posterRight: poster4,
     videoLeft: baseURL+"footZoom.mp4",
     posterLeft: footZoomPoster,
   }, {
-    title: 'étape 6',
-    description: 'a completer par exemple',
-    videoRight:baseURL+"lake.mp4",
-    posterRight: lakePoster,
+    title: 'Positionner',
+    description: `Le fut-haut (poutre mobile) du pressoir est positionnée et verrouillée en bas d'un coté grâce aux aiguilles`,
+    videoRight:baseURL+"pressage5.mp4",
+    posterRight: poster5,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
   }, {
-    title: 'étape 7',
-    description: 'a completer par exemple',
-    videoRight:baseURL+"pyramid.mp4",
-    posterRight: pyramidPoster,
+    title: 'Presser',
+    description: `Le pressage peut commencer, d'un coté le fut est verrouillé en bas, de l'autre on l'abaisse avec la vis`,
+    videoRight:baseURL+"pressage6.mp4",
+    posterRight: poster6,
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
   }, {
-    title: 'étape 8',
-    description: 'a completer par exemple',
-    videoRight:baseURL+"lake.mp4",
-    posterRight: lakePoster,
+    title: 'Moût',
+    description: `Au fur et à mesure, le moût est receuilli, versé dans des barriques.
+    Souvent le pression est maintenue plusieurs heures pour récupérer tout le moût.`,
+    videoRight:baseURL+"pressage7.mp4",
+    posterRight: poster7,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
   }, {
-    title: 'étape 9',
-    description: 'a completer par exemple',
-    videoRight: baseURL+"foot.mp4",
-    posterRight: footPoster,
+    title: 'Relacher',
+    description: `Après plusieurs heures, on relache la pression. Le fut est levé`,
+    videoRight: baseURL+"pressage8.mp4",
+    posterRight: poster8,
     videoLeft: baseURL+"footZoom.mp4",
     posterLeft: footZoomPoster,
   }, {
-    title: 'étape 10',
-    description: 'a completer par exemple',
-    videoRight:baseURL+"pyramid.mp4",
-    posterRight: pyramidPoster,
+    title: 'Manoeuvrer',
+    description: `La manoeuvre du fût permet de la positionner en hauteur`,
+    videoRight:baseURL+"pressage9.mp4",
+    posterRight: poster9,
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
   }, {
-    title: 'étape 11',
-    description: 'a completer par exemple',
-    videoRight:baseURL+"lake.mp4",
-    posterRight: lakePoster,
+    title: 'Déshabiller',
+    description: 'La couverture du cep est retirée',
+    videoRight:baseURL+"pressage10.mp4",
+    posterRight: poster10,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
   }, {
-    title: 'étape 12',
-    description: 'a completer par exemple',
-    videoRight:baseURL+"gate.mp4",
-    posterRight: gatePoster,
+    title: 'Cisailler',
+    description: `Le cep s'est étalé sous la pression, il est très compact, il faut le cisaillé pour le reformer`,
+    videoRight:baseURL+"pressage11.mp4",
+    posterRight: poster11,
+    videoLeft:baseURL+"foret.mp4",
+    posterLeft: foretPoster,
+  }, {
+    title: 'Reformer',
+    description:`On reforme le cep pour laisser un passage périphérique au moût et presser l'ensemble une seconde fois, parfois même une troisième fois le lendemain matin`,
+    videoRight:baseURL+"pressage12.mp4",
+    posterRight: poster12,
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
   }];
