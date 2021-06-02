@@ -359,7 +359,9 @@ class PasApas extends React.Component {
                   <p>impossible de charger la video</p>
               </video>
             </div>
+            <AnalogClock/>
             <InfoBox duration={currentStep.duration} saviezVous={currentStep.description}  />
+            
         </React.Fragment>
       </React.Fragment>
     )
