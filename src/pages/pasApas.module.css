@@ -40,3 +40,29 @@
 .videoContainer {
   background-color: black;
 }
+
+.infoBoxes{
+  position: absolute;
+  display: flex;
+  bottom: 2em;
+  left: 2em;
+}
+
+.infoBox{
+  margin:  0 10vw;
+  border-radius: 25px;
+  border: 2px solid rgb(0, 0, 88);
+  background-color: rgba(0, 0, 88, 0.150);
+  padding: 20px; 
+  width: 20vw;
+  height: 10vh; 
+
+}
+
+.duration{
+
+}
+
+.saviezVous {
+
+}

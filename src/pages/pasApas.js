@@ -8,9 +8,15 @@ import {
   toggle,
   videoLeft,
   video,
-  videoRight,} from './pasApas.module.css'
+  videoRight,
+  infoBoxes,
+  infoBox,
+  duration,
+  saviezVous,} from './pasApas.module.css'
 import TimeLine from "../components/timeLine";
-import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext } from 'react-icons/md';
+import AnalogClock from "../components/analogClock"
+import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext, MdInfoOutline } from 'react-icons/md';
+import { GiDuration } from 'react-icons/gi'
 
 
 import footPoster from '../images/videoPosters/footPoster.jpg';
@@ -21,6 +27,8 @@ import lakePoster from '../images/videoPosters/lakePoster.jpg';
 import lakeViewPoster from '../images/videoPosters/lakeViewPoster.jpg';
 import gatePoster from '../images/videoPosters/gatePoster.jpg';
 import foretPoster from '../images/videoPosters/foretPoster.jpg';
+
+import postertest from '../images/videoPosters/postertest.png';
 
 import poster0 from '../images/videoPosters/poster0.jpg';
 import poster1 from '../images/videoPosters/poster1.jpg';
@@ -44,8 +52,9 @@ const steps = [{
     description: 'Verser le raisin frais dans la maie',
     videoRight: baseURL+"pressage0.mp4",
     posterRight: poster0,
-    videoLeft: baseURL+"footZoom.mp4",
-    posterLeft: footZoomPoster,
+    videoLeft: baseURL+"test.webm",
+    posterLeft: postertest,
+    duration : '10 minutes',
   }, {
     title: 'Fouler',
     description: 'Fouler aux pieds le raisin dans la maie, basse ou haute',
@@ -53,6 +62,7 @@ const steps = [{
     posterRight: poster1,
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
+    duration : '30 minutes',
   }, {
     title: '1er moût',
     description: 'Un premier moût (jus) de raisin peut être recueilli',
@@ -60,6 +70,7 @@ const steps = [{
     posterRight: poster2,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
+    duration : '10 minutes',
   }, {
     title: 'Constituer',
     description: 'Les grapes de raisin sont organisé en cep (tas de raisin à presser)',
@@ -67,6 +78,7 @@ const steps = [{
     posterRight: poster3,
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
+    duration : '30 minutes',
   }, {
     title: 'Habiller',
     description: 'Le cep est couvert de qunouilles, couchages, moutons puis blins en bois, destinés à répartir la charge de pressage',
@@ -74,6 +86,7 @@ const steps = [{
     posterRight: poster4,
     videoLeft: baseURL+"footZoom.mp4",
     posterLeft: footZoomPoster,
+    duration : '10 minutes',
   }, {
     title: 'Positionner',
     description: `Le fut-haut (poutre mobile) du pressoir est positionnée et verrouillée en bas d'un coté grâce aux aiguilles`,
@@ -81,6 +94,7 @@ const steps = [{
     posterRight: poster5,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
+    duration : '10 minutes',
   }, {
     title: 'Presser',
     description: `Le pressage peut commencer, d'un coté le fut est verrouillé en bas, de l'autre on l'abaisse avec la vis`,
@@ -88,6 +102,7 @@ const steps = [{
     posterRight: poster6,
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
+    duration : '5 minutes',
   }, {
     title: 'Moût',
     description: `Au fur et à mesure, le moût est receuilli, versé dans des barriques.
@@ -96,6 +111,7 @@ const steps = [{
     posterRight: poster7,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
+    duration : '3 à 5 heures',
   }, {
     title: 'Relacher',
     description: `Après plusieurs heures, on relache la pression. Le fut est levé`,
@@ -103,13 +119,15 @@ const steps = [{
     posterRight: poster8,
     videoLeft: baseURL+"footZoom.mp4",
     posterLeft: footZoomPoster,
+    duration : '5 minutes',
   }, {
     title: 'Manoeuvrer',
-    description: `La manoeuvre du fût permet de la positionner en hauteur`,
+    description: `La manoeuvre du fût permet de le positionner en hauteur`,
     videoRight:baseURL+"pressage9.mp4",
     posterRight: poster9,
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
+    duration : '5 minutes',
   }, {
     title: 'Déshabiller',
     description: 'La couverture du cep est retirée',
@@ -117,6 +135,7 @@ const steps = [{
     posterRight: poster10,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
+    duration : '5 minutes',
   }, {
     title: 'Cisailler',
     description: `Le cep s'est étalé sous la pression, il est très compact, il faut le cisaillé pour le reformer`,
@@ -124,6 +143,7 @@ const steps = [{
     posterRight: poster11,
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
+    duration : '30 minutes',
   }, {
     title: 'Reformer',
     description:`On reforme le cep pour laisser un passage périphérique au moût et presser l'ensemble une seconde fois, parfois même une troisième fois le lendemain matin`,
@@ -131,7 +151,21 @@ const steps = [{
     posterRight: poster12,
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
+    duration : '20 minutes',
   }];
+
+  const InfoBox = props => (
+    <div className = {infoBoxes} >
+        <div className = {`${infoBox} ${duration}`}>
+          <div><GiDuration/> durée </div>
+          <span>{props.duration}</span>
+        </div>
+        <div className = {`${infoBox} ${saviezVous}`}>
+          <div><MdInfoOutline/> le saviez-vous ?</div>
+          <span>{props.duration}</span>
+        </div>
+  </div>
+)
 
 
 class PasApas extends React.Component {
@@ -279,6 +313,7 @@ class PasApas extends React.Component {
       <React.Fragment>
         <title>{title}</title>
         <Header headerText = {title}/>
+
         <TouchSwipeEvents onSwiped = {(i) => this.handleswipes(i)}/>
         <div className={controlsWrapper}>
           <button className = {mediaControls}             onClick={() => this.handlePrev()}>{<MdSkipPrevious size='1.5x'/>}</button>
@@ -324,6 +359,7 @@ class PasApas extends React.Component {
                   <p>impossible de charger la video</p>
               </video>
             </div>
+            <InfoBox duration={currentStep.duration} saviezVous={currentStep.description}  />
         </React.Fragment>
       </React.Fragment>
     )
