@@ -54,7 +54,9 @@ const steps = [{
     posterRight: poster0,
     videoLeft: baseURL+"test.webm",
     posterLeft: postertest,
-    duration : '10 minutes',
+    duration : '15 minutes',
+    from: '7:00',
+    to: '7:15',
   }, {
     title: 'Fouler',
     description: 'Fouler aux pieds le raisin dans la maie, basse ou haute',
@@ -63,6 +65,8 @@ const steps = [{
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
     duration : '30 minutes',
+    from: '7:15',
+    to: '7:45',
   }, {
     title: '1er moût',
     description: 'Un premier moût (jus) de raisin peut être recueilli',
@@ -70,7 +74,9 @@ const steps = [{
     posterRight: poster2,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
-    duration : '10 minutes',
+    duration : '5 minutes',
+    from: '7:45',
+    to: '7:50',
   }, {
     title: 'Constituer',
     description: 'Les grapes de raisin sont organisé en cep (tas de raisin à presser)',
@@ -78,7 +84,9 @@ const steps = [{
     posterRight: poster3,
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
-    duration : '30 minutes',
+    duration : '20 minutes',
+    from: '7:50',
+    to: '8:10',
   }, {
     title: 'Habiller',
     description: 'Le cep est couvert de qunouilles, couchages, moutons puis blins en bois, destinés à répartir la charge de pressage',
@@ -86,7 +94,9 @@ const steps = [{
     posterRight: poster4,
     videoLeft: baseURL+"footZoom.mp4",
     posterLeft: footZoomPoster,
-    duration : '10 minutes',
+    duration : '20 minutes',
+    from: '8:10',
+    to: '8:30',
   }, {
     title: 'Positionner',
     description: `Le fut-haut (poutre mobile) du pressoir est positionnée et verrouillée en bas d'un coté grâce aux aiguilles`,
@@ -95,6 +105,8 @@ const steps = [{
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
     duration : '10 minutes',
+    from: '8:30',
+    to: '8:40',
   }, {
     title: 'Presser',
     description: `Le pressage peut commencer, d'un coté le fut est verrouillé en bas, de l'autre on l'abaisse avec la vis`,
@@ -103,6 +115,8 @@ const steps = [{
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
     duration : '5 minutes',
+    from: '8:40',
+    to: '8:50:',
   }, {
     title: 'Moût',
     description: `Au fur et à mesure, le moût est receuilli, versé dans des barriques.
@@ -112,6 +126,8 @@ const steps = [{
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
     duration : '3 à 5 heures',
+    from: '8:50',
+    to: '13:00',
   }, {
     title: 'Relacher',
     description: `Après plusieurs heures, on relache la pression. Le fut est levé`,
@@ -120,6 +136,8 @@ const steps = [{
     videoLeft: baseURL+"footZoom.mp4",
     posterLeft: footZoomPoster,
     duration : '5 minutes',
+    from: '13:00',
+    to: '13:10',
   }, {
     title: 'Manoeuvrer',
     description: `La manoeuvre du fût permet de le positionner en hauteur`,
@@ -128,6 +146,8 @@ const steps = [{
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
     duration : '5 minutes',
+    from: '13:10',
+    to: '13:20',
   }, {
     title: 'Déshabiller',
     description: 'La couverture du cep est retirée',
@@ -136,6 +156,8 @@ const steps = [{
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
     duration : '5 minutes',
+    from: '13:20',
+    to: '13:30',
   }, {
     title: 'Cisailler',
     description: `Le cep s'est étalé sous la pression, il est très compact, il faut le cisaillé pour le reformer`,
@@ -143,7 +165,9 @@ const steps = [{
     posterRight: poster11,
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
-    duration : '30 minutes',
+    duration : '40 minutes',
+    from: '13:30',
+    to: '14:15',
   }, {
     title: 'Reformer',
     description:`On reforme le cep pour laisser un passage périphérique au moût et presser l'ensemble une seconde fois, parfois même une troisième fois le lendemain matin`,
@@ -152,20 +176,11 @@ const steps = [{
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
     duration : '20 minutes',
+    from: '14:15',
+    to: '14:35',
   }];
 
-  const InfoBox = props => (
-    <div className = {infoBoxes} >
-        <div className = {`${infoBox} ${duration}`}>
-          <div><GiDuration/> durée </div>
-          <span>{props.duration}</span>
-        </div>
-        <div className = {`${infoBox} ${saviezVous}`}>
-          <div><MdInfoOutline/> le saviez-vous ?</div>
-          <span>{props.duration}</span>
-        </div>
-  </div>
-)
+
 
 
 class PasApas extends React.Component {
@@ -200,7 +215,7 @@ class PasApas extends React.Component {
 
   onClickStep(i) {
     if (this.state.activeStepIndex !== i) {
-      // 
+      console.log('here');
       this.setState({activeStepIndex: i,});
       this.setState({paused: false,});
       this.resetVideoStates();
@@ -211,14 +226,19 @@ class PasApas extends React.Component {
   navigateSteps(i) {
     if (this._isMounted) {//protect from state changes if the component is unmounted during the timeOut
       const targetIndex = this.state.activeStepIndex + i;
-      if(targetIndex < 0 || targetIndex  >= steps.length) {
+      if(targetIndex < 0 ) {
         return false;
+      };
+      if(targetIndex  >= steps.length ) {
+        this.setState({activeStepIndex:4});
+        //#TODO somehow display onscreen message "on recommence une seconde pressée"
+      } 
+      else {//for all the other "normal" cases
+        this.setState((prevState) => ({activeStepIndex: prevState.activeStepIndex + i}));
       }
-      this.setState((prevState) => ({activeStepIndex: prevState.activeStepIndex + i}))
       this.videoL.current.load();
       this.videoR.current.load();
-  //    this.setState({ activeStepIndex: this.state.activeStepIndex + i })
-      this.resetVideoStates()
+      this.resetVideoStates();
     }
   }
 
@@ -359,9 +379,18 @@ class PasApas extends React.Component {
                   <p>impossible de charger la video</p>
               </video>
             </div>
-            <AnalogClock/>
-            <InfoBox duration={currentStep.duration} saviezVous={currentStep.description}  />
             
+            <div className = {infoBoxes} >
+              <AnalogClock from={currentStep.from} to={currentStep.to}/>
+              <div className = {`${infoBox} ${duration}`}>
+                <div><GiDuration/> durée </div>
+                <span>{currentStep.duration}</span>
+              </div>
+              <div className = {`${infoBox} ${saviezVous}`}>
+                <div><MdInfoOutline/> le saviez-vous ?</div>
+                <span>{currentStep.duration}</span>
+              </div>
+            </div>
         </React.Fragment>
       </React.Fragment>
     )
