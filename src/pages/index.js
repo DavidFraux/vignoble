@@ -40,7 +40,7 @@ function Home() {
       <Acces to = '/film/' classe = {film} text = "Voir le film"  subtext = "Un pressurage avec un long-fût" picture = {filmPict}/>
       <Acces to = '/explorer/' classe ={explorer} text = "Explorer en 3D"  subtext = 'Les annecdotes du long-fût' picture = {explorerPict}/>
     </div>
-    <button className = {savoirPlus}             onClick={() => navigate('/savoirPlus')}>En savoir plus</button>
+    <button className = {savoirPlus}  onClick={() => navigate('/savoirPlus')}>En savoir plus</button>
     
     </React.Fragment>
   )

@@ -1,0 +1,32 @@
+.donutWrapper{
+  position: absolute;
+	width: 7vw;
+	height: 7vw;
+  top: -1vw;
+}
+
+.circleLabel {
+  transform: translateY(0.25em);
+}
+
+.circlePercentage {
+  font-size: 0.6em;
+  line-height: 1;
+  text-anchor: middle;
+  transform: translateY(-0.25em);
+}
+
+.circleText {
+  font-size: 0.2em;
+  text-transform: uppercase;
+  text-anchor: middle;
+  transform: translateY(0.7em);
+}
+
+.ring {
+
+}
+
+.path {
+
+}

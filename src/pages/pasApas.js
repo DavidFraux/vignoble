@@ -15,6 +15,8 @@ import {
   saviezVous,} from './pasApas.module.css'
 import TimeLine from "../components/timeLine";
 import AnalogClock from "../components/analogClock"
+import Donut from "../components/donut"
+import CircleProgressBarBase from "../components/circle"
 import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext, MdInfoOutline } from 'react-icons/md';
 import { GiDuration } from 'react-icons/gi'
 
@@ -54,7 +56,7 @@ const steps = [{
     posterRight: poster0,
     videoLeft: baseURL+"test.webm",
     posterLeft: postertest,
-    duration : '15 minutes',
+    duration : 15,
     from: '7:00',
     to: '7:15',
   }, {
@@ -64,7 +66,7 @@ const steps = [{
     posterRight: poster1,
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
-    duration : '30 minutes',
+    duration : 30,
     from: '7:15',
     to: '7:45',
   }, {
@@ -74,7 +76,7 @@ const steps = [{
     posterRight: poster2,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
-    duration : '5 minutes',
+    duration : 10,
     from: '7:45',
     to: '7:50',
   }, {
@@ -84,7 +86,7 @@ const steps = [{
     posterRight: poster3,
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
-    duration : '20 minutes',
+    duration : 25,
     from: '7:50',
     to: '8:10',
   }, {
@@ -94,7 +96,7 @@ const steps = [{
     posterRight: poster4,
     videoLeft: baseURL+"footZoom.mp4",
     posterLeft: footZoomPoster,
-    duration : '20 minutes',
+    duration : 20,
     from: '8:10',
     to: '8:30',
   }, {
@@ -104,7 +106,7 @@ const steps = [{
     posterRight: poster5,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
-    duration : '10 minutes',
+    duration : 10,
     from: '8:30',
     to: '8:40',
   }, {
@@ -114,7 +116,7 @@ const steps = [{
     posterRight: poster6,
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
-    duration : '5 minutes',
+    duration : 10,
     from: '8:40',
     to: '8:50:',
   }, {
@@ -125,7 +127,7 @@ const steps = [{
     posterRight: poster7,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
-    duration : '3 à 5 heures',
+    duration : 180,
     from: '8:50',
     to: '13:00',
   }, {
@@ -135,7 +137,7 @@ const steps = [{
     posterRight: poster8,
     videoLeft: baseURL+"footZoom.mp4",
     posterLeft: footZoomPoster,
-    duration : '5 minutes',
+    duration : 10,
     from: '13:00',
     to: '13:10',
   }, {
@@ -145,7 +147,7 @@ const steps = [{
     posterRight: poster9,
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
-    duration : '5 minutes',
+    duration : 10,
     from: '13:10',
     to: '13:20',
   }, {
@@ -155,7 +157,7 @@ const steps = [{
     posterRight: poster10,
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
-    duration : '5 minutes',
+    duration : 15,
     from: '13:20',
     to: '13:30',
   }, {
@@ -165,7 +167,7 @@ const steps = [{
     posterRight: poster11,
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
-    duration : '40 minutes',
+    duration : 45,
     from: '13:30',
     to: '14:15',
   }, {
@@ -175,7 +177,7 @@ const steps = [{
     posterRight: poster12,
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
-    duration : '20 minutes',
+    duration : 30,
     from: '14:15',
     to: '14:35',
   }];
@@ -215,7 +217,6 @@ class PasApas extends React.Component {
 
   onClickStep(i) {
     if (this.state.activeStepIndex !== i) {
-      console.log('here');
       this.setState({activeStepIndex: i,});
       this.setState({paused: false,});
       this.resetVideoStates();
@@ -381,10 +382,10 @@ class PasApas extends React.Component {
             </div>
             
             <div className = {infoBoxes} >
-              <AnalogClock from={currentStep.from} to={currentStep.to}/>
+              <Donut steps={steps} activeStepIndex={this.state.activeStepIndex}/> 
               <div className = {`${infoBox} ${duration}`}>
                 <div><GiDuration/> durée </div>
-                <span>{currentStep.duration}</span>
+                <span>environ {currentStep.duration} minutes</span>
               </div>
               <div className = {`${infoBox} ${saviezVous}`}>
                 <div><MdInfoOutline/> le saviez-vous ?</div>

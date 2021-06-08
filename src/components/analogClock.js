@@ -8,18 +8,19 @@ class AnalogClock extends React.Component {
 	constructor(props) {
 		super(props);
     //#TODO simplify it -> not a class is needed
-    console.log(props.from);
-    const fromTime = props.from.split(':');//should get an array [hh, mm]
-    const toTime = props.to.split(':');//should get an array [hh, mm]
-    const fromMin = fromTime[1];
-    const fromHour = fromTime[0];
-    const toMin = toTime[1];
-    const toHour = toTime[0];
-    this.fromAngleHour = 180 + 360 * fromHour / 12  +  360 * fromMin / 60 / 12;
-    console.log(this.fromAngleHour);
-    this.toAngleHour = 180 + 360 * toHour / 12  +   360 * toMin / 60 / 12;
-    this.fromAngleMin = 180 + 360 * fromMin / 60;
-    this.toAngleMin = 180 + 360 * toMin / 60 + 360 * (toHour-fromHour);
+
+    //steps={steps} activeStepIndex={this.state.activeStepIndex}
+    this.angleSteps = []
+    for (let step of props.steps){
+      let [fromHour, fromMin] = step.from.split(':');//should get an array [hh, mm]
+      let [toHour, toMin] = step.to.split(':');//should get an array [hh, mm]
+      this.angleSteps.push({
+        fromAngleHour : 180 + 360 * fromHour / 12  +  360 * fromMin / 60 / 12,
+        toAngleHour   : 180 + 360 * toHour / 12  +   360 * toMin / 60 / 12,
+        fromAngleMin  : 180 + 360 * fromMin / 60,
+        toAngleMin    : 180 + 360 * toMin / 60 + 360 * (toHour-fromHour),
+      });
+    };
 	}
 
   buildFace(){
@@ -43,6 +44,7 @@ class AnalogClock extends React.Component {
 
 
 	render() {
+    const currentAngles = this.angleSteps[this.props.activeStepIndex];
 		return (
 			<div className={clock}>
         <svg viewBox="0 0 100 100">
@@ -51,7 +53,7 @@ class AnalogClock extends React.Component {
             <rect x="49" y="50" width="2" height="42" >
                 <animateTransform 
                   attributeName="transform" attributeType="XML" 
-                  type="rotate" from={`${this.fromAngleMin} 50,50`} to={`${this.toAngleMin} 50,50`} dur={`10s`} fill="freeze" >
+                  type="rotate" from={`${currentAngles.fromAngleMin} 50,50`} to={`${currentAngles.toAngleMin} 50,50`} dur={`5s`} fill="freeze" restart="always">
                 </animateTransform>				
             </rect>
           </clipPath>
@@ -59,7 +61,7 @@ class AnalogClock extends React.Component {
             <rect x="48" y="50" width="4" height="27" >
               <animateTransform 
                 attributeName="transform" attributeType="XML" 
-                type="rotate" from={`${this.fromAngleHour} 50,50`} to={`${this.toAngleHour} 50,50`} dur={`10s`} fill="freeze" >
+                type="rotate" from={`${currentAngles.fromAngleHour} 50,50`} to={`${currentAngles.toAngleHour} 50,50`} dur={`5s`} fill="freeze" restart="always">
               </animateTransform>				
             </rect>
           </clipPath>
@@ -70,11 +72,7 @@ class AnalogClock extends React.Component {
           <rect id="hour"  width="100" height="100" fill="black" opacity=".4" clipPath="url(#hours)" />
         </g>
         {this.buildFace()}
-        
-        {/* <circle cx="50" cy="50" r="3" style={{"fill":"rgba(0,0,0,.94)"}} />
-        <circle cx="50" cy="50" r="49" fill="rgba(0,0,0,0)" style={{"stroke":"rgba(0,0,0,.94)"}} /> */}
-
-        
+                
         </svg>
 			</div>
 		)
