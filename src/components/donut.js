@@ -6,7 +6,7 @@ import {
   circleText,
   path,
   ring,
-  donutWrapper,
+  donut,
 } from './donut.module.css'
 
 const INITIAL_OFFSET = 25;//because svg draws circle from the "right side" (of the screen)
@@ -37,12 +37,10 @@ const MovingArc = ({
     setTimeout(() => {
       setProgressBar(progressBar + 1);
     }, pace);
-    console.log('update');
   };
 
   const resetPercentage = () => { //happens when new values are given
     setProgressBar(startPercentage);
-    console.log('reset');
   };
 
   //prevent some blinking display on state changes delay when new values are given
@@ -135,8 +133,8 @@ class Donut extends React.Component {
 	render() {
     const renderedStep = this.steps[this.props.activeStepIndex];
 		return (
-      <figure className={donutWrapper}>
-        <svg viewBox={circleConfig.viewBox}>
+      <figure className={donut}>
+        <svg width="100%" height="100%" viewBox={circleConfig.viewBox}>
           <circle
             className={ring}
             cx={circleConfig.x}

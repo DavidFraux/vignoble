@@ -1,8 +1,6 @@
-.donutWrapper{
-  position: absolute;
-	width: 7vw;
-	height: 7vw;
-  top: -1vw;
+.donut{
+  height: 100%;
+  width: 100%;
 }
 
 .circleLabel {

@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../components/header.js';
 import TouchSwipeEvents from '../components/TouchSwipeEvents.js'
 import {
+  donutWrapper,
   videoContainer,
   controlsWrapper,
   mediaControls,
@@ -56,8 +57,6 @@ const steps = [{
     videoLeft: baseURL+"test.webm",
     posterLeft: postertest,
     duration : 15,
-    from: '7:00',
-    to: '7:15',
   }, {
     title: 'Fouler',
     description: 'Fouler aux pieds le raisin dans la maie, basse ou haute',
@@ -66,8 +65,6 @@ const steps = [{
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
     duration : 30,
-    from: '7:15',
-    to: '7:45',
   }, {
     title: '1er moût',
     description: 'Un premier moût (jus) de raisin peut être recueilli',
@@ -76,8 +73,6 @@ const steps = [{
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
     duration : 10,
-    from: '7:45',
-    to: '7:50',
   }, {
     title: 'Constituer',
     description: 'Les grapes de raisin sont organisé en cep (tas de raisin à presser)',
@@ -86,8 +81,6 @@ const steps = [{
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
     duration : 25,
-    from: '7:50',
-    to: '8:10',
   }, {
     title: 'Habiller',
     description: 'Le cep est couvert de qunouilles, couchages, moutons puis blins en bois, destinés à répartir la charge de pressage',
@@ -96,8 +89,6 @@ const steps = [{
     videoLeft: baseURL+"footZoom.mp4",
     posterLeft: footZoomPoster,
     duration : 20,
-    from: '8:10',
-    to: '8:30',
   }, {
     title: 'Positionner',
     description: `Le fut-haut (poutre mobile) du pressoir est positionnée et verrouillée en bas d'un coté grâce aux aiguilles`,
@@ -106,8 +97,6 @@ const steps = [{
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
     duration : 10,
-    from: '8:30',
-    to: '8:40',
   }, {
     title: 'Presser',
     description: `Le pressage peut commencer, d'un coté le fut est verrouillé en bas, de l'autre on l'abaisse avec la vis`,
@@ -116,8 +105,6 @@ const steps = [{
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
     duration : 10,
-    from: '8:40',
-    to: '8:50:',
   }, {
     title: 'Moût',
     description: `Au fur et à mesure, le moût est receuilli, versé dans des barriques.
@@ -127,8 +114,6 @@ const steps = [{
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
     duration : 180,
-    from: '8:50',
-    to: '13:00',
   }, {
     title: 'Relacher',
     description: `Après plusieurs heures, on relache la pression. Le fut est levé`,
@@ -137,8 +122,6 @@ const steps = [{
     videoLeft: baseURL+"footZoom.mp4",
     posterLeft: footZoomPoster,
     duration : 10,
-    from: '13:00',
-    to: '13:10',
   }, {
     title: 'Manoeuvrer',
     description: `La manoeuvre du fût permet de le positionner en hauteur`,
@@ -147,8 +130,6 @@ const steps = [{
     videoLeft:baseURL+"tikal.mp4",
     posterLeft: tikalPoster,
     duration : 10,
-    from: '13:10',
-    to: '13:20',
   }, {
     title: 'Déshabiller',
     description: 'La couverture du cep est retirée',
@@ -157,8 +138,6 @@ const steps = [{
     videoLeft:baseURL+"lakeView.mp4",
     posterLeft: lakeViewPoster,
     duration : 15,
-    from: '13:20',
-    to: '13:30',
   }, {
     title: 'Cisailler',
     description: `Le cep s'est étalé sous la pression, il est très compact, il faut le cisaillé pour le reformer`,
@@ -167,8 +146,6 @@ const steps = [{
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
     duration : 45,
-    from: '13:30',
-    to: '14:15',
   }, {
     title: 'Reformer',
     description:`On reforme le cep pour laisser un passage périphérique au moût et presser l'ensemble une seconde fois, parfois même une troisième fois le lendemain matin`,
@@ -177,8 +154,6 @@ const steps = [{
     videoLeft:baseURL+"foret.mp4",
     posterLeft: foretPoster,
     duration : 30,
-    from: '14:15',
-    to: '14:35',
   }];
 
 
@@ -216,7 +191,6 @@ class PasApas extends React.Component {
 
   onClickStep(i) {
     if (this.state.activeStepIndex !== i) {
-      console.log('click');
       this.setState({activeStepIndex: i,});
       this.setState({paused: false,});
       this.resetVideoStates();
@@ -382,7 +356,9 @@ class PasApas extends React.Component {
             </div>
             
             <div className = {infoBoxes} >
-              <Donut steps={steps} activeStepIndex={this.state.activeStepIndex}/> 
+              <div className = {donutWrapper} >
+                <Donut steps={steps} activeStepIndex={this.state.activeStepIndex}/>
+              </div>
               <div className = {`${infoBox} ${duration}`}>
                 <div><GiDuration/> durée </div>
                 <span>environ {currentStep.duration} minutes</span>
