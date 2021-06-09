@@ -1,6 +1,5 @@
 import React, { useState, useEffect }from "react";
 import chroma from "chroma-js";
-import CircleProgressBarBase from "../components/circle";
 import {
   circleLabel,
   circlePercentage,
@@ -10,7 +9,7 @@ import {
   donutWrapper,
 } from './donut.module.css'
 
-const INITIAL_OFFSET = 25;
+const INITIAL_OFFSET = 25;//because svg draws circle from the "right side" (of the screen)
 const STROKEWIDTH= 2;
 const STROKEWHITESPACE = 0.3;
 const circleConfig = {
@@ -22,42 +21,40 @@ const circleConfig = {
 
 
 const MovingArc = ({
-  //className,
   strokeColor,
   strokeWidth,
   innerText,
-  legendText,
   targetPercentage,
   startPercentage,
-  trailStrokeWidth,
-  trailStrokeColor,
-  trailSpaced,
   speed
 }) => {
 
   const [progressBar, setProgressBar] = useState(startPercentage);
-  const pace = (100-targetPercentage+startPercentage) / speed;
+  //pace is high (slow) when there are few numbers to move on
+  const pace = (101 - (targetPercentage - startPercentage)) / speed;
+  
   const updatePercentage = () => {
     setTimeout(() => {
       setProgressBar(progressBar + 1);
     }, pace);
+    console.log('update');
   };
 
-  const resetPercentage = () => {
+  const resetPercentage = () => { //happens when new values are given
     setProgressBar(startPercentage);
+    console.log('reset');
   };
 
-  useEffect(() => {
-    if (targetPercentage > startPercentage) updatePercentage();
+  //prevent some blinking display on state changes delay when new values are given
+  let localPercentage = ((progressBar - startPercentage) >= 0) ? (progressBar - startPercentage) : 0 ;
+
+  useEffect(() => {//triger animation when new value is given, until progressBar reaches the target
+    if (progressBar < targetPercentage && progressBar >= startPercentage) updatePercentage();
+  }, [progressBar, targetPercentage]);
+
+  useEffect(() => {//move progressBar to new given values when steps are skipped
+    if (progressBar > targetPercentage || progressBar < startPercentage ) resetPercentage();
   }, [targetPercentage]);
-
-  useEffect(() => {
-    if (progressBar < targetPercentage) updatePercentage();
-  }, [progressBar]);
-
-  useEffect(() => {
-    if (progressBar > targetPercentage+1) resetPercentage();
-  }, [progressBar]);
 
   return (
     <React.Fragment>
@@ -69,13 +66,14 @@ const MovingArc = ({
           fill="transparent"
           stroke={strokeColor}
           strokeWidth={strokeWidth}
-          strokeDasharray={`${progressBar - startPercentage} ${100 - progressBar + startPercentage}`}
+          strokeDasharray={`${localPercentage} ${100 - localPercentage}`}
           strokeDashoffset={INITIAL_OFFSET-startPercentage}
         />
 
         <g className={circleLabel}>
           <text x="50%" y="50%" className={circlePercentage}>
-            {Math.round(progressBar)}%
+            {progressBar}%
+            {/* {console.log(`progressBar:${progressBar} couleur:${progressBar - startPercentage} transparent:${100 - progressBar + startPercentage} start:${startPercentage} targetPercentage:${targetPercentage}`)} */}
           </text>
           <text x="50%" y="50%" className={circleText}>
             {innerText}
@@ -84,6 +82,8 @@ const MovingArc = ({
     </React.Fragment>
   );
 };
+
+
 
 
 
@@ -105,7 +105,6 @@ class Donut extends React.Component {
         color: colors[index],
       })
       cumulDuration += stepPercentDuration;
-      console.log(index, stepPercentDuration, cumulDuration);
     };
 	}
 
@@ -113,7 +112,7 @@ class Donut extends React.Component {
   generateOldSectors(untilIndex){
     const sectors= [];
     for(let i= 0; i<untilIndex; i++){
-      const renderedStep = this.steps[i];
+      const renderedOldStep = this.steps[i];
       sectors.push(<circle
             key = {"arc"+i}
             className={path}
@@ -121,9 +120,9 @@ class Donut extends React.Component {
             cy={circleConfig.y}
             r={circleConfig.radio}
             fill="transparent"
-            stroke={renderedStep.color}
-            strokeDasharray={`${renderedStep.duration-STROKEWHITESPACE} ${100 - renderedStep.duration-STROKEWHITESPACE}`}//"75 25"
-            strokeDashoffset={INITIAL_OFFSET-renderedStep.start}
+            stroke={renderedOldStep.color}
+            strokeDasharray={`${renderedOldStep.duration-STROKEWHITESPACE} ${100 - renderedOldStep.duration-STROKEWHITESPACE}`}//"75 25"
+            strokeDashoffset={INITIAL_OFFSET-renderedOldStep.start}
             opacity={0.4}
             strokeWidth={STROKEWIDTH}
           />)
@@ -135,7 +134,6 @@ class Donut extends React.Component {
 
 	render() {
     const renderedStep = this.steps[this.props.activeStepIndex];
-    console.log(this.props.activeStepIndex, renderedStep);
 		return (
       <figure className={donutWrapper}>
         <svg viewBox={circleConfig.viewBox}>
@@ -149,45 +147,17 @@ class Donut extends React.Component {
             strokeWidth={STROKEWIDTH}
           />
 
-
           {this.generateOldSectors(this.props.activeStepIndex)}
 
-          
           <MovingArc
             strokeColor= {renderedStep.color}
             strokeWidth= {STROKEWIDTH+1}
             innerText= {'terminé'}
-            legendText= ''
-            startPercentage= {renderedStep.start}
-            targetPercentage= {renderedStep.start + renderedStep.duration}
-            trailStrokeWidth= {1}
-            trailStrokeColor= {'#d2d3d4'}
-            trailSpaced= {false}
+            startPercentage= {Math.round(renderedStep.start)}
+            targetPercentage= {Math.round(renderedStep.start + renderedStep.duration)}
             speed= {0.3}
           />
 
-           {/*<circle
-            className={path}
-            cx={circleConfig.x}
-            cy={circleConfig.y}
-            r={circleConfig.radio}
-            fill="transparent"
-            stroke={renderedStep.color}
-            //strokeDasharray={`0 100`}//"75 25"
-            strokeDasharray={`${this.state.actualPercentage-renderedStep.start} ${100 - this.state.actualPercentage + renderedStep.start}`}//"75 25"
-            strokeDashoffset={INITIAL_OFFSET-renderedStep.start}
-            opacity={1}
-            strokeWidth={STROKEWIDTH+1}
-          />
-
-          <g className={circleLabel}>
-            <text x="50%" y="50%" className={circlePercentage}>
-              {this.state.actualPercentage}%
-            </text>
-            <text x="50%" y="50%" className={circleText}>
-              terminé
-            </text>
-          </g> */}
         </svg>
       </figure>
 		)
@@ -195,5 +165,3 @@ class Donut extends React.Component {
 }
 
 export default Donut
-
-//ReactDOM.render(<SVGClock />, document.querySelector('#SVGClock'))

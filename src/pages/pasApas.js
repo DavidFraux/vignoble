@@ -16,7 +16,6 @@ import {
 import TimeLine from "../components/timeLine";
 import AnalogClock from "../components/analogClock"
 import Donut from "../components/donut"
-import CircleProgressBarBase from "../components/circle"
 import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext, MdInfoOutline } from 'react-icons/md';
 import { GiDuration } from 'react-icons/gi'
 
@@ -217,6 +216,7 @@ class PasApas extends React.Component {
 
   onClickStep(i) {
     if (this.state.activeStepIndex !== i) {
+      console.log('click');
       this.setState({activeStepIndex: i,});
       this.setState({paused: false,});
       this.resetVideoStates();
