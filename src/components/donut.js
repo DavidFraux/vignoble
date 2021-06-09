@@ -153,7 +153,7 @@ class Donut extends React.Component {
             innerText= {'terminé'}
             startPercentage= {Math.round(renderedStep.start)}
             targetPercentage= {Math.round(renderedStep.start + renderedStep.duration)}
-            speed= {0.3}
+            speed= {0.2}
           />
 
         </svg>
