@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+.fadeOut {
+    opacity:0.05;
+    transition: opacity 2s;
+}
+
 .videoLeft {
   float: left;
   margin-left: 25px;

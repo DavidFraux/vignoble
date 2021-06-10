@@ -9,6 +9,7 @@ import {
   donut,
 } from './donut.module.css'
 
+const INNERTEXT='terminé';
 const INITIAL_OFFSET = 25;//because svg draws circle from the "right side" (of the screen)
 const STROKEWIDTH= 2;
 const STROKEWHITESPACE = 0.3;
@@ -74,7 +75,7 @@ const MovingArc = ({
             {/* {console.log(`progressBar:${progressBar} couleur:${progressBar - startPercentage} transparent:${100 - progressBar + startPercentage} start:${startPercentage} targetPercentage:${targetPercentage}`)} */}
           </text>
           <text x="50%" y="50%" className={circleText}>
-            {innerText}
+            {INNERTEXT}
           </text>
         </g>
     </React.Fragment>
@@ -147,6 +148,7 @@ class Donut extends React.Component {
 
           {this.generateOldSectors(this.props.activeStepIndex)}
 
+          {this.props.animate? 
           <MovingArc
             strokeColor= {renderedStep.color}
             strokeWidth= {STROKEWIDTH+1}
@@ -155,6 +157,16 @@ class Donut extends React.Component {
             targetPercentage= {Math.round(renderedStep.start + renderedStep.duration)}
             speed= {0.2}
           />
+          : 
+          <g className={circleLabel}>
+            <text x="50%" y="50%" className={circlePercentage}>
+              {Math.round(renderedStep.start)}%
+            </text>
+            <text x="50%" y="50%" className={circleText}>
+              {INNERTEXT}
+            </text>
+          </g>
+          }
 
         </svg>
       </figure>

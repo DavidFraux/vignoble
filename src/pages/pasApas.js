@@ -15,7 +15,8 @@ import {
   description,
   duration,
   saviezVous,
-  infoBoxTitle,} from './pasApas.module.css';
+  infoBoxTitle,
+  fadeOut,} from './pasApas.module.css';
 import TimeLine from "../components/timeLine";
 import Donut from "../components/donut";
 import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext, MdInfoOutline, MdSettings} from 'react-icons/md';
@@ -39,19 +40,6 @@ const postersFolder = require.context('../images/videoPosters', false, /./ , 'sy
 // //   });
 // });
 
-for (const step of dataSteps) {
-  const keyLeft = "./"+step.posterLeft;
-  if (postersFolder.keys().includes(keyLeft)){
-    step.posterLeftFile = postersFolder(keyLeft).default;
-  }
-  const keyRight = "./"+step.posterRight;
-  if (postersFolder.keys().includes(keyRight)){
-    step.posterRightFile = postersFolder(keyRight).default;
-  }
-  step.videoRight = baseURL+ step.videoRight;
-  step.videoLeft = baseURL+ step.videoLeft;
-} 
-
 
 
 class PasApas extends React.Component {
@@ -70,6 +58,26 @@ class PasApas extends React.Component {
     };
     this.videoL = React.createRef();
     this.videoR = React.createRef();
+    this.buildFonctionnalSteps();
+  }
+  
+  buildFonctionnalSteps() {
+    for (const [index, step] of dataSteps.entries()) {
+      const keyLeft = "./"+step.posterLeft;
+      if (postersFolder.keys().includes(keyLeft)){
+        step.posterLeftFile = postersFolder(keyLeft).default;
+      }
+      const keyRight = "./"+step.posterRight;
+      if (postersFolder.keys().includes(keyRight)){
+        step.posterRightFile = postersFolder(keyRight).default;
+      }
+      step.videoRight = baseURL+ step.videoRight;
+      step.videoLeft = baseURL+ step.videoLeft;
+      step.onClick = (e) => {//the followin manage the onClick behavious for each step of the timeLine
+        e.preventDefault();
+        this.onClickStep(index);
+      };
+    } 
   }
 
   resetVideoStates() {
@@ -112,13 +120,14 @@ class PasApas extends React.Component {
   }
 
   handleVideoEnded(side) {
+    const delayAfterEnded = 8000;
     if (this.state.paused) {return false};
     if (side === 'L') {
       this.setState({Lplaying: false, Lended : true});
-      if (this.state.Rended) {setTimeout(() => this.navigateSteps(1), 1000 )};
+      if (this.state.Rended) {setTimeout(() => this.navigateSteps(1), delayAfterEnded )};
     }  else {
       this.setState({Rplaying: false, Rended : true});
-      if (this.state.Lended) {setTimeout(() => this.navigateSteps(1), 1000 )};
+      if (this.state.Lended) {setTimeout(() => this.navigateSteps(1), delayAfterEnded )};
     };
   }
 
@@ -183,14 +192,7 @@ class PasApas extends React.Component {
   }
 
   render() {
-    //the followin manage the onClick behavious for each step of the timeLine
-    for (const [index, step] of dataSteps.entries()) {
-      step.onClick = (e) => {
-        e.preventDefault();
-        this.onClickStep(index);
-      };
-    };
-    
+    console.log(this.state.Lplaying);
     const currentStep = dataSteps[this.state.activeStepIndex];
     return (
       <React.Fragment>
@@ -214,7 +216,7 @@ class PasApas extends React.Component {
                   preload={'auto'}
                   type={'video/mp4'}
                   id={videoLeft}
-                  className={`${videoLeft} ${video}`}
+                  className={`${videoLeft} ${video} ${this.state.Lended? fadeOut : null}`}
                   ref={this.videoL}
                   onCanPlayThrough={() => this.handleVideoReady('L')}
                   onClick={() => this.handleVideoClick()}
@@ -231,7 +233,7 @@ class PasApas extends React.Component {
                   preload={'auto'}
                   type={'video/mp4'}
                   id={videoRight}
-                  className={`${video} ${videoRight}`}
+                  className={`${video} ${videoRight} ${this.state.Rended? fadeOut : null}`}
                   ref={this.videoR}
                   onCanPlayThrough={() => this.handleVideoReady('R')}
                   onClick={() => this.handleVideoClick()}
@@ -243,7 +245,7 @@ class PasApas extends React.Component {
             
             <div className = {infoBoxes} >
               <div className = {donutWrapper} >
-                <Donut steps={dataSteps} activeStepIndex={this.state.activeStepIndex}/>
+                <Donut steps={dataSteps} activeStepIndex={this.state.activeStepIndex} animate={this.state.Rended && this.state.Lended}/>
               </div>
               <div className = {`${infoBox} ${duration}`}>
                 <div className = {infoBoxTitle} ><GiDuration/>  Durée </div>
