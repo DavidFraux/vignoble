@@ -40,15 +40,7 @@
   background-color: rgba(255, 255, 255, 0);
 }
 
-.infoBoxes{
-  position: absolute;
-  display: flex;
-  bottom: 2em;
-  left: 25px;
-  height: 22vh; 
-}
-
-.infoBoxes2 {
+.infoBoxes {
   position: absolute;
   bottom: 1em;
   width: 100%;
@@ -58,10 +50,10 @@
   grid-template-columns: 1.3fr 1.1fr 5fr 2.5fr;
   grid-template-rows: 1fr 1fr;
   column-gap: 45px;
-  row-gap: 20px
+  row-gap: 20px;
 }
 
-.infoBox2{
+.infoBox{
   border-radius: 20px;
   border: rgb(88, 0, 0);
   background-color: rgba(88, 0, 0, 0.05);
@@ -69,60 +61,25 @@
   padding: 14px; 
 }
 
-.donutWrapper2 {
+.donutWrapper {
   grid-column: 1  ;
   grid-row: 1 / 3;
 }
 
-.duration2 {
+.duration {
   grid-column: 2 ;
   grid-row: 1;
 }
 
-.description2 {
+.description {
 
   grid-column: 3 ;
   grid-row: 1 / 3 ;
 }
 
-.saviezVous2 {
+.saviezVous {
   grid-column: 4 ;
   grid-row: 1 / 3;
-}
-
-
-
-
-.infoBox{
-  margin:  0 2vw;
-  border-radius: 20px;
-  border: 1px solid rgb(0, 0, 88);
-  background-color: rgba(0, 0, 88, 0.050);
-  padding: 20px; 
-  width: 20vw;
-  overflow: hidden;
-}
-
-.saviezVous{
-  width: 28vw;
-}
-
-.duration{
-  width: 13vw;
-  height: 40%;
-}
-
-.description{
-  border: rgb(88, 0, 0);
-  background-color: rgba(88, 0, 0, 0.05);
-  width: 45vw;
-}
-
-
-.donutWrapper{
-  position: relative;
-  width: auto;
-
 }
 
 .infoBoxTitle{
