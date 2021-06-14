@@ -11,16 +11,24 @@ import {
   videoRight,
   infoBoxes,
   infoBox,
+  fadeIn, 
+  hidden,
   donutWrapper,
   description,
   duration,
+  difficulty,
+  stars,
   saviezVous,
+  saviezVousFront,
+  saviezVousBack,
   infoBoxTitle,
+  infoBoxReponse,
   fadeOut,} from './pasApas.module.css';
 import TimeLine from "../components/timeLine";
 import Donut from "../components/donut";
-import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext, MdInfoOutline, MdSettings} from 'react-icons/md';
+import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext, MdInfoOutline, MdSettings, MdStar, MdStarBorder, MdTrendingUp} from 'react-icons/md';
 import { GiDuration } from 'react-icons/gi';
+import ReactCardFlip from 'react-card-flip';
 import dataSteps from "../data/steps.json";
 
 
@@ -40,6 +48,19 @@ const postersFolder = require.context('../images/videoPosters', false, /./ , 'sy
 // //   });
 // });
 
+function numberToStars(number, maxStars){
+  let i = 0;
+  let stars = []
+  for ( i; i < number; i++) {
+    stars.push(<MdStar/>);
+    stars.push(' ');
+  };
+  for (i; i<maxStars; i++) {
+    stars.push(<MdStarBorder/>);
+    stars.push(' ');
+  }
+  return stars
+}
 
 
 class PasApas extends React.Component {
@@ -55,10 +76,14 @@ class PasApas extends React.Component {
       Lplaying: false,
       Rplaying: false,
       paused: false,
+      showInfo: false,
+      animateDonut: false,
+      saviezVousClicked: false,
     };
     this.videoL = React.createRef();
     this.videoR = React.createRef();
     this.buildFonctionnalSteps();
+    this.timeOuts = [];
   }
   
   buildFonctionnalSteps() {
@@ -88,7 +113,13 @@ class PasApas extends React.Component {
       Rended: false,
       Lplaying: false,
       Rplaying: false,
+      saviezVousClicked: false,
+      showInfo: false,
+      animateDonut: false,
     });
+    for (let timeOut of this.timeOuts) {
+      clearTimeout(timeOut);
+    }
   }
 
   onClickStep(i) {
@@ -119,15 +150,22 @@ class PasApas extends React.Component {
     }
   }
 
+  handleBothVideoEnded() {
+    this.timeOuts.push(setTimeout(() => this.navigateSteps(1), 30000 ));
+    this.timeOuts.push(setTimeout(() => this.setState({showInfo:true}), 1000 ));
+    this.timeOuts.push(setTimeout(() => this.setState({animateDonut:true}), 3000 ));
+  }
+
   handleVideoEnded(side) {
-    const delayAfterEnded = 8000;
     if (this.state.paused) {return false};
     if (side === 'L') {
       this.setState({Lplaying: false, Lended : true});
-      if (this.state.Rended) {setTimeout(() => this.navigateSteps(1), delayAfterEnded )};
+      if (this.state.Rended) {//means both have now ended
+        this.handleBothVideoEnded();}
     }  else {
       this.setState({Rplaying: false, Rended : true});
-      if (this.state.Lended) {setTimeout(() => this.navigateSteps(1), delayAfterEnded )};
+      if (this.state.Lended) {//means both have now ended
+        this.handleBothVideoEnded();}
     };
   }
 
@@ -135,10 +173,10 @@ class PasApas extends React.Component {
     if (this.state.paused) {return false};
     if (side === 'L') {
       this.setState({Lready : true});
-      if (this.state.Rready) {setTimeout(() => this.playBoth(), 500 )}; //wait a littleBit the browser and element to really sync};
+      if (this.state.Rready) {this.timeOuts.push(setTimeout(() => this.playBoth(), 500 ))}; //wait a littleBit the browser and element to really sync};
     }  else {
       this.setState({Rready : true});
-      if (this.state.Lready) {setTimeout(() => this.playBoth(), 500 )};
+      if (this.state.Lready) {this.timeOuts.push(setTimeout(() => this.playBoth(), 500 ))};
     }
   }
 
@@ -184,10 +222,12 @@ class PasApas extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({isMounted : true});
+    this.setState({isMounted : true, showInfo: false});
+    
   }
 
   componentWillUnmount() {
+    this.resetVideoStates();
     this.setState({isMounted : false});
   }
 
@@ -243,21 +283,35 @@ class PasApas extends React.Component {
               </video>
             </div>
             
-            <div className = {infoBoxes} >
+            <div className = {`${infoBoxes} ${this.state.showInfo? fadeIn : hidden}`} >
               <div className = {donutWrapper} >
-                <Donut steps={dataSteps} activeStepIndex={this.state.activeStepIndex} animate={this.state.Rended && this.state.Lended}/>
+                <Donut steps={dataSteps} activeStepIndex={this.state.activeStepIndex} animate={this.state.animateDonut}/>
               </div>
               <div className = {`${infoBox} ${duration}`}>
                 <div className = {infoBoxTitle} ><GiDuration/>  Durée </div>
                 <span>environ {currentStep.duration} minutes</span>
               </div>
+              <div className = {`${infoBox} ${difficulty}`}>
+                <div className = {infoBoxTitle} ><MdTrendingUp/>  Difficulté </div>
+                <span className= {stars}>{numberToStars(currentStep.difficulty,5)}</span>
+              </div>
               <div className = {`${infoBox} ${description}`}>
                 <div className = {infoBoxTitle} ><MdSettings/>  À cette étape  </div>
                 <span>{currentStep.description}</span>
               </div>
-              <div className = {`${infoBox} ${saviezVous}`}>
-                <div className = {infoBoxTitle} ><MdInfoOutline/>  Le saviez-vous ?</div>
-                <span>{currentStep.annecdote}</span>
+              <div className = {saviezVous} onClick = {() => this.setState({ saviezVousClicked: true})}>
+                <ReactCardFlip isFlipped={this.state.saviezVousClicked} flipDirection="horizontal" containerStyle={{height: "100%"}}>
+                  <div className = {`${infoBox} ${saviezVousFront}`}>
+                    <div className = {infoBoxTitle} ><MdInfoOutline/>  Annecdote </div>
+                    <span>{currentStep.question}</span>
+                    <div className = {infoBoxReponse}>Réponse</div>
+                  </div>
+
+                  <div className = {`${infoBox} ${saviezVousBack}`}>
+                    <div className = {infoBoxTitle} ><MdInfoOutline/>  Le saviez-vous ?</div>
+                    <span>{currentStep.annecdote}</span>
+                  </div>
+                </ReactCardFlip>
               </div>
             </div>
         </React.Fragment>

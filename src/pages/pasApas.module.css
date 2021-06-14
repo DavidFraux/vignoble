@@ -7,7 +7,10 @@
 
 .fadeOut {
     opacity:0.05;
-    transition: opacity 2s;
+    filter: contrast(2.5) brightness(2);
+    transition-property: opacity, filter;
+    transition-duration: 2s, 2s;
+    transition-delay: 0s, 1s ;
 }
 
 .videoLeft {
@@ -58,9 +61,19 @@
   row-gap: 20px;
 }
 
+.fadeIn {
+  visibility: visible;
+  opacity:1;
+  transition: opacity 1s;
+}
+
+.hidden{
+  visibility: hidden;
+  opacity:0;
+}
+
 .infoBox{
   border-radius: 20px;
-  border: rgb(88, 0, 0);
   background-color: rgba(88, 0, 0, 0.05);
   overflow: hidden;
   padding: 14px; 
@@ -76,8 +89,16 @@
   grid-row: 1;
 }
 
-.description {
+.difficulty {
+  grid-column: 2 ;
+  grid-row: 2;
+}
 
+.stars a{
+  padding-left: 1rem;
+}
+
+.description {
   grid-column: 3 ;
   grid-row: 1 / 3 ;
 }
@@ -87,7 +108,29 @@
   grid-row: 1 / 3;
 }
 
+.saviezVousFront {
+  height:100%;
+}
+
+.saviezVousBack {
+  background-color: rgba(255, 0, 0, 0.1);
+  height:100%;
+  
+}
+
 .infoBoxTitle{
   font-weight: 500;
   font-size: 1.05em;
 }
+
+.saviezVous .infoBoxReponse{
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+  font-style: italic;
+  color: white;
+  border-radius: 10px;
+  background-color: rgba(88, 0, 0, 0.4);;
+  padding: 6px 14px; 
+}
+

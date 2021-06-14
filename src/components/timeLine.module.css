@@ -31,7 +31,9 @@
 .stepDescription{
   position: relative;
   display: inline-block;
-  margin-right: 20px
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 1.05em;
 }
 
 .infoBar{
