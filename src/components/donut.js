@@ -4,8 +4,6 @@ import {
   circleLabel,
   circlePercentage,
   circleText,
-  path,
-  ring,
   donut,
 } from './donut.module.css'
 
@@ -58,7 +56,7 @@ const MovingArc = ({
   return (
     <React.Fragment>
         <circle
-          className={path}
+          //className={path}
           cx={circleConfig.x}
           cy={circleConfig.y}
           r={circleConfig.radio}
@@ -113,7 +111,7 @@ class Donut extends React.Component {
       const renderedOldStep = this.steps[i];
       sectors.push(<circle
             key = {"arc"+i}
-            className={path}
+            //className={path}
             cx={circleConfig.x}
             cy={circleConfig.y}
             r={circleConfig.radio}
@@ -136,7 +134,7 @@ class Donut extends React.Component {
       <figure className={donut}>
         <svg width="100%" height="100%" viewBox={circleConfig.viewBox}>
           <circle
-            className={ring}
+            //className={ring}
             cx={circleConfig.x}
             cy={circleConfig.y}
             r={circleConfig.radio}
