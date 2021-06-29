@@ -24,6 +24,7 @@ html::-webkit-scrollbar {
 
 .photoItem {
   display: flex;
+  flex-direction: column;
   margin: 20px 0;
 }
 
@@ -36,7 +37,7 @@ html::-webkit-scrollbar {
   display: none;
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
+  padding-top: 5vh;
   left: 0;
   top: 0;
   width: 100%;
@@ -51,12 +52,10 @@ html::-webkit-scrollbar {
   margin: auto;
   padding: 0;
   max-width: 80vw;
-  max-height: 90vh;
+  max-height: 85vh;
 }
 
-.modalCaption {
-  color: #fefefe;
-}
+
 
 .close {
   color: white;
@@ -121,7 +120,8 @@ html::-webkit-scrollbar {
   width: auto;
 }
 .column {
-  padding-left: 8rem; /* gutter size */
+  padding-left: 4rem;
+  padding-right: 4rem;
   background-clip: padding-box;
 }
 
@@ -129,4 +129,24 @@ html::-webkit-scrollbar {
 .column > div { /* change div to reference your elements you put in <Masonry> */
   margin-bottom: 2rem;
   margin-top: 2rem;
+}
+
+.imgInGrid{
+ margin-bottom:0;/* rewrite something written by <Masonry> */
+}
+
+.modalInfoBox{
+  color: #fefefe;
+}
+
+.modalTitle{
+
+}
+
+.modalCaption {
+
+}
+
+.gridCaption{
+
 }

@@ -7,14 +7,18 @@ import {
   photoItem,
   modal,
   modalPict,
-  modalCaption,
   close,
   mySlides,
   prev,
   next,
 grid,
 column,
-header,} from './savoirPlus.module.css'
+header,
+modalInfoBox,
+modalTitle, 
+modalCaption,
+gridCaption,
+imgInGrid,} from './savoirPlus.module.css'
 
 import Masonry from 'react-masonry-css'
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -35,12 +39,9 @@ class savoirPlus extends React.Component {
       },
       page : 0,
     };
+    this.slideModalRef = React.createRef();
   }
 
-  
-  componentDidMount() {
-    this.getData();
-  }
 
   getData = () => {
     fetch(
@@ -56,7 +57,6 @@ class savoirPlus extends React.Component {
   }
 
   fetchData = () => {
-    console.log("fetching");
     this.setState((prevState) => ({page: prevState.page + 1}));
     this.getData();
   }
@@ -67,19 +67,35 @@ class savoirPlus extends React.Component {
     if (targetImageIndex > this.state.imagesData.length-1) {targetImageIndex=0}
     else if (targetImageIndex < 0 ) {targetImageIndex=this.state.imagesData.length-1};
     let data = this.state.imagesData[targetImageIndex];
-    console.log(targetImageIndex, data);
     this.setState((prevState) => ({
       imageModal: {
         ...prevState.imageModal,
         imageIndex: targetImageIndex,
-        modalSrc: data.urls.regular
+        modalSrc: data.urls.regular,
+        id: data.id,
+        title: data.description? data.description : "pas de titre pour cette image",
+        caption: data.alt_description? data.alt_description : "pas de légende pour cette image",
       }
     }));
+  }
+  componentDidMount() {
+    this.getData();
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+
+  handleModalClick(e) {
+    if (this.slideModalRef && (e.target  != this.slideModalRef.current) ) {
+      this.setState({imageModal: {showModal: false,}});
+    }
   }
 
 
   render () {
-    console.log(this.state);
     return (
     <React.Fragment>
       <title>{title}</title>
@@ -105,6 +121,7 @@ class savoirPlus extends React.Component {
               this.state.imagesData.map((photo, index) => (
                 <div className={photoItem} key={index}>
                   <img
+                    className={imgInGrid}
                     src={photo.urls.thumb}
                     alt={photo.alt_description}
                     onClick={() => {
@@ -112,6 +129,8 @@ class savoirPlus extends React.Component {
                         imageModal: {
                           showModal: true,
                           modalSrc: photo.urls.regular,
+                          id: photo.id,
+                          title: photo.description? photo.description : "pas de titre pour cette image",
                           caption: photo.alt_description? photo.alt_description : "pas de légende pour cette image",
                           imageIndex: index,
                           currentSectionLength: this.state.imagesData.length
@@ -119,7 +138,7 @@ class savoirPlus extends React.Component {
                       });
                     }}
                   />
-                  <span>{photo.alt_description? photo.alt_description : "pas de légende pour cette image"}</span>
+                  <div className={gridCaption}>{photo.description? photo.description : "pas de titre pour cette image"}</div>
                 </div>
               ))}
       </Masonry>
@@ -129,13 +148,13 @@ class savoirPlus extends React.Component {
           id="myModal"
           className={modal}
           style={{ display: this.state.imageModal.showModal ? "block" : "none" }}
+          onClick={(e) =>this.handleModalClick(e)}
         >
           <div>
             <span
               className={close}
               onClick={() =>
                 this.setState({imageModal: {showModal: false,}})
-                //setImageModal((modal) => ({ ...modal, showModal: false }))
               }
             >
               &times;
@@ -146,12 +165,16 @@ class savoirPlus extends React.Component {
               style={{ display: this.state.imageModal.showModal ? "block" : "none" }}
             >
               <img
+                ref={this.slideModalRef}
                 className={modalPict}
-                id="img01"
+                id={this.state.imageModal.id}
                 src={this.state.imageModal.modalSrc}
-                alt=""
+                alt={this.state.imageModal.title}
               />
-              <span className={modalCaption}>{this.state.imageModal.caption}</span>
+              <div className={modalInfoBox}>
+                <div className={modalTitle}>titre&nbsp;: {this.state.imageModal.title}</div>
+                <div className={modalCaption}>description&nbsp;: {this.state.imageModal.caption}</div>
+              </div>
             </div>
 
             <a href="#" className={prev} onClick={() => this.navigatePict(-1)}>
@@ -172,7 +195,3 @@ class savoirPlus extends React.Component {
 }
 
 export default savoirPlus
-
-
-
-///////////////////////////////////////
