@@ -49,16 +49,16 @@
 
 .container {
   position: relative ;
-  top: 8em;
+  top:0;
   left: 0.5em;
   display: grid;
   grid-template-columns: 3fr 3fr 3fr;
-  grid-template-rows: 0fr 1fr;
+  grid-template-rows: 1fr;
   grid-gap: 4vw;
   grid-template-areas:
     "c b d";
   z-index: 3;
-  height: 100vh;
+  height: 50vh;
   object-fit: cover;
 }
 
@@ -111,7 +111,7 @@
 }
 
 .savoirPlus {
-  font-size: 2em;
+  font-size: 1.3em;
   background-color: #d00244;
   padding-left: 0.5em;
   padding-right: 0.5em;

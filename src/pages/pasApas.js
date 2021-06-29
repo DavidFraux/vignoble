@@ -35,7 +35,7 @@ import dataSteps from "../data/steps.json";
 
 const title = 'Le fonctionnement du pressoir long-fut pas à pas';
 const baseURL = 'https://uncloud.univ-nantes.fr/index.php/s/eL8zoRTzJMB9L53/download?path=/&files=';
-const postersFolder = require.context('../images/videoPosters', false, /./ , 'sync');//'lazy': the underlying files will be loaded asynchronously
+const postersFolder = require.context('../images/videoPosters', false, /./ , 'sync');//'lazy': the underlying files will be loaded asynchronously -> using promises
 
 //helps the understanding of webpack loader
 // postersFolder.keys().forEach(filePath => {
@@ -132,12 +132,12 @@ class PasApas extends React.Component {
 
 
   navigateSteps(i) {
-    if (this.state.isMounted) {//protect from state changes if the component is unmounted during the timeOut
+    if (this.state.isMounted ) {//protect from state changes if the component is unmounted during the timeOut
       const targetIndex = this.state.activeStepIndex + i;
-      if(targetIndex < 0 ) {
+      if ( targetIndex < 0 ) {
         return false;
       };
-      if(targetIndex  >= dataSteps.length ) {
+      if ( targetIndex  >= dataSteps.length ) {
         this.setState({activeStepIndex:4});
         //#TODO somehow display onscreen message "on recommence une seconde pressée"
       } 
@@ -151,7 +151,7 @@ class PasApas extends React.Component {
   }
 
   handleBothVideoEnded() {
-    this.timeOuts.push(setTimeout(() => this.navigateSteps(1), 30000 ));
+    this.timeOuts.push(setTimeout(() => this.navigateSteps(1), 35000 ));
     this.timeOuts.push(setTimeout(() => this.setState({showInfo:true}), 1000 ));
     this.timeOuts.push(setTimeout(() => this.setState({animateDonut:true}), 3000 ));
   }
@@ -299,16 +299,16 @@ class PasApas extends React.Component {
                 <div className = {infoBoxTitle} ><MdSettings/>  À cette étape  </div>
                 <span>{currentStep.description}</span>
               </div>
-              <div className = {saviezVous} onClick = {() => this.setState({ saviezVousClicked: true})}>
+              <div className = {saviezVous} onClick = {() => this.setState(prevState => ({ saviezVousClicked: !prevState.saviezVousClicked }))}>
                 <ReactCardFlip isFlipped={this.state.saviezVousClicked} flipDirection="horizontal" containerStyle={{height: "100%"}}>
                   <div className = {`${infoBox} ${saviezVousFront}`}>
-                    <div className = {infoBoxTitle} ><MdInfoOutline/>  Annecdote </div>
+                    <div className = {infoBoxTitle} ><MdInfoOutline/>  Pour les curieux</div>
                     <span>{currentStep.question}</span>
                     <div className = {infoBoxReponse}>Réponse</div>
                   </div>
 
                   <div className = {`${infoBox} ${saviezVousBack}`}>
-                    <div className = {infoBoxTitle} ><MdInfoOutline/>  Le saviez-vous ?</div>
+                    <div className = {infoBoxTitle} ><MdInfoOutline/>  Pour les curieux</div>
                     <span>{currentStep.annecdote}</span>
                   </div>
                 </ReactCardFlip>

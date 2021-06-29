@@ -38,7 +38,7 @@ function Home() {
     <div className = {container}>
       <Acces to = '/pasApas/' classe = {pasApas}  text = "Pas à pas" subtext = 'Le fonctionnement du long-fût' picture = {pasApasPict} />
       <Acces to = '/film/' classe = {film} text = "Voir le film"  subtext = "Un pressurage avec un long-fût" picture = {filmPict}/>
-      <Acces to = '/explorer/' classe ={explorer} text = "Explorer en 3D"  subtext = 'Les annecdotes du long-fût' picture = {explorerPict}/>
+      <Acces to = '/explorer/' classe ={explorer} text = "Explorer en 3D"  subtext = 'Les anecdotes du long-fût' picture = {explorerPict}/>
     </div>
     <button className = {savoirPlus}  onClick={() => navigate('/savoirPlus')}>En savoir plus</button>
     

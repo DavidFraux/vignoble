@@ -78,7 +78,7 @@ class ThreeScene extends React.Component {
     return (
       <div className={controlsWrapper}>
         <button className = {togglePlayPause} onClick={this.toogleLoop}>{this.state.isLooping ? <MdPause size='1.5x'/> : <MdPlayArrow size='1.5x'/>}</button>
-        <button className = {goToMarkerControl}  onClick={this.resetCam}>vue d'ensemble</button>
+        <button className = {goToMarkerControl}  onClick={this.resetCam}>Vue d'ensemble</button>
         {this.renderGoToButtons()}
       </div>
     );
@@ -107,7 +107,7 @@ class Explorer extends React.Component {
       'ecrou': {
         name: 'L\'écrou',
         position: [-0.1, 2.6, -3.05],
-        shortDescription: 'La vis et l\'écrou chantent sous l\'effort',
+        shortDescription: 'La vis et l\'écrou chantent sous l\'effort.',
         content: `En action, chargé, le pressoir "parle" lorsque la vis en bois tourne : elle frotte sur l'écrou. Chaque pressoir a une vis, un écrou et donc une "voix" différente.`,
         image: ecrouPict,
       },
@@ -118,21 +118,21 @@ class Explorer extends React.Component {
         content: `La vis en bois est soumise à de fortes pressions de torsion. C'est pourquoi on utilise du cormier, du frêne ou du chataignier comme ici.
         La vis peut casser : progressivement les vis en bois sont remplacées par des pièces en métal.
         Le pressoir du musée est le dernier à conserver sa vis en bois.
-        La barre est en frene, il faut 2 hommes pour la faire tourner`,
+        La barre est en frêne, il faut 2 hommes pour la faire tourner.`,
         image: visPict,
       },
       'bois': {
         name: 'Le bois',
         position: [-1.4, 0.95, 0.8],
-        shortDescription: 'Les pressoirs sont construit en chêne',
+        shortDescription: 'Les pressoirs sont construits en chêne.',
         content: `Les pressoirs sont construits par des charpentiers, avec des chênes locaux. Il fallait 5 à 6 chênes pour faire un grand pressoir.
-        Sur ce pressoir tous les assemblages sont en bois: tenon, mortaise, cheville.`,
+        Sur ce pressoir tous les assemblages sont en bois: tenons, mortaises, chevilles.`,
         image: aiguillePict,
       },
       'maie':{
         name: 'L\'étanchétité',
         position: [-2.25, 0.65, 0],
-        shortDescription: 'La maie doit être étanche',
+        shortDescription: 'La maie doit être étanche.',
         content: `Les maies sont assemblées de façon précise par les charpentiers. On peut observer les marques d'assemblage.
         Avant les vendanges, ils réparent et resserrent les pièces si nécessaire.
         Ils renforcent aussi l'étanchéité des maies, en utilisant des joints en jonc ou en terre glaise.`,
@@ -142,8 +142,8 @@ class Explorer extends React.Component {
         name: 'Deux maies',
         position: [1.2, 0.8, -0.7],
         shortDescription: 'Une seconde maie pour travailler plus vite',
-        content: `Tandis qu'à l'arrière sur la maie de pressage, on presse le cep déjà foulé; à l'avant sur la maie de foulage on extrait un premier moût (jus). 
-        A l'avant la maie de foulage prepare donc le cep pour une prochaine pressée, peut-etre destinée à second pressoir, comme c'est le cas dans les grandes exploitations`,
+        content: `Tandis qu'à l'arrière sur la maie de pressage, on presse le cep déjà foulé; à l'avant, sur la maie de foulage on extrait un premier moût (jus). 
+        A l'avant, la maie de foulage prepare donc le cep pour une prochaine pressée, peut-etre destinée à second pressoir, comme c'est le cas dans les grandes exploitations.`,
         image: arrierePict,
       },
     };
@@ -159,7 +159,7 @@ class Explorer extends React.Component {
   }
 
   render() {
-    const title = 'Explorer en 3D le pressoir long-fut du musée';
+    const title = 'Explorer en 3D le pressoir long-fût du musée';
     const currentPoi = this.poisData[this.state.currentPoiId];
     return (
       <React.Fragment>

@@ -70,7 +70,7 @@ class Film extends React.Component {
   
   render() {
     const title = 'Le film';
-    const sample = this.baseURL + "pressageH264_24FPS.mp4";
+    const sample = this.baseURL + "pressageSubtitled.mp4";
     const markerList = [
       //{id: 'debut',      target: 0,    label: 'début'},
       {id: 'fouler',     target: 34,   label: 'fouler'},
