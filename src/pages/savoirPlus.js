@@ -1,7 +1,8 @@
 //tag filters https://codepen.io/goldbullet/pen/bZPOAK
-import React from "react"
+import React, { Suspense } from "react"
 import Header from '../components/header.js';
-import Container from "../components/container"
+import dataSavoirPlus from "../data/savoirPlus.json";
+import placeHolderPict from "../images/placeHolder.png";
 
 import {
   photoItem,
@@ -11,20 +12,32 @@ import {
   mySlides,
   prev,
   next,
-grid,
-column,
-header,
-modalInfoBox,
-modalTitle, 
-modalCaption,
-gridCaption,
-imgInGrid,} from './savoirPlus.module.css'
+  grid,
+  column,
+  header,
+  modalInfoBox,
+  modalTitle, 
+  modalCaption,
+  gridCaption,
+  imgInGrid,} from './savoirPlus.module.css'
 
-import Masonry from 'react-masonry-css'
+import crypto from 'crypto';
+import Masonry from 'react-masonry-css';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 
 const title = 'En savoir plus';
+const pictureFolder = require.context('../images/savoirPlus', false, /./ , 'lazy');//'lazy': the underlying files will be loaded asynchronously -> using 
+const loadedPictureBatch = 10;
+
+//helps the understanding of webpack loader
+// pictureFolder.keys().forEach(filePath => {
+//   // load the component
+// //  pictureFolder(filePath).then(module => {
+// //         // module.default is the vue component
+// //     console.log(module.default);
+// //   });
+// });
 
 class savoirPlus extends React.Component {
   constructor(props) {
@@ -37,28 +50,61 @@ class savoirPlus extends React.Component {
         imageIndex: null,
         currentSectionLength: null
       },
-      page : 0,
+      loadedPict : 0,
     };
-    this.slideModalRef = React.createRef();
+    this.pictModalRef = React.createRef();
+    this.nextModalRef = React.createRef();
+    this.prevModalRef = React.createRef();
   }
 
-
-  getData = () => {
-    fetch(
-      `https://api.unsplash.com/photos?client_id=ZqXbcY28ANlOVeIWmpXwtR9ZKeB44r24xyNIf2uVzC8&page=${
-        this.state.page + 1
-      }`
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        this.setState({imagesData:[...this.state.imagesData, ...res]});
-      })
-      .catch((err) => {});
+  dataLoader = () => {
+    const from =  this.state.loadedPict ;
+    if (dataSavoirPlus.length <= from) {return} ;
+    const until = Math.min( this.state.loadedPict + loadedPictureBatch  , dataSavoirPlus.length );
+    console.log('from ', from, ' ;  to ', until );
+    const newData = [];
+    for (let i = from ; i < until; i++) {
+      const pict = dataSavoirPlus[i];
+      pictureFolder("./" + pict.urls.regular).then(module => {
+        pict.urls.regular = module.default;
+        this.setState({});//force to re-render after promise is completed
+      }).catch(err => {
+        pict.urls.regular = placeHolderPict;
+        console.log(err);
+      });
+      pictureFolder("./" + pict.urls.thumb).then(module => {
+        pict.urls.thumb = module.default;
+        this.setState({});
+      }).catch(err => {
+        pict.urls.thumb = placeHolderPict;
+        console.log(err);
+      });
+      pict.id ? (pict.id = pict.id) : (pict.id = crypto.randomBytes(20).toString('hex'));
+      newData.push(pict);
+      console.log(pict);
+    }
+    this.setState((prevState) => ({
+      loadedPict: prevState.loadedPict + until,
+      imagesData:[...prevState.imagesData, ...newData]
+    }));
   }
+
+  // getData = () => {
+  //   fetch(
+  //     `https://api.unsplash.com/photos?client_id=ZqXbcY28ANlOVeIWmpXwtR9ZKeB44r24xyNIf2uVzC8&page=${
+  //       this.state.page + 1
+  //     }`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((res) => {
+  //       this.setState({imagesData:[...this.state.imagesData, ...res]});
+  //     })
+  //     .catch((err) => {});
+  // }
 
   fetchData = () => {
-    this.setState((prevState) => ({page: prevState.page + 1}));
-    this.getData();
+    //this.getData();
+    this.dataLoader();
   }
 
   navigatePict = (side) => {
@@ -79,23 +125,27 @@ class savoirPlus extends React.Component {
     }));
   }
   componentDidMount() {
-    this.getData();
-    document.addEventListener('mousedown', this.handleClickOutside);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
+    //this.getData();
+    this.dataLoader();
   }
 
 
-  handleModalClick(e) {
-    if (this.slideModalRef && (e.target  != this.slideModalRef.current) ) {
+
+  handleModalClick(e) {//check wether the click on slide is not on the picture, nor on the next or previous button
+    if (this.pictModalRef 
+      && this.prevModalRef 
+      && this.nextModalRef 
+      && (e.target  !==  this.pictModalRef.current) 
+      && (e.target  !==  this.prevModalRef.current) 
+      && (e.target  !==  this.nextModalRef.current)
+      ) {
       this.setState({imageModal: {showModal: false,}});
     }
   }
 
 
   render () {
+    console.log(this.state.imagesData);
     return (
     <React.Fragment>
       <title>{title}</title>
@@ -120,10 +170,11 @@ class savoirPlus extends React.Component {
         {this.state.imagesData &&
               this.state.imagesData.map((photo, index) => (
                 <div className={photoItem} key={index}>
+                  <Suspense fallback={<div>Chargement...</div>}>
                   <img
                     className={imgInGrid}
                     src={photo.urls.thumb}
-                    alt={photo.alt_description}
+                    alt={'alt : ' + photo.alt_description}
                     onClick={() => {
                       this.setState({
                         imageModal: {
@@ -138,6 +189,7 @@ class savoirPlus extends React.Component {
                       });
                     }}
                   />
+                  </Suspense>
                   <div className={gridCaption}>{photo.description? photo.description : "pas de titre pour cette image"}</div>
                 </div>
               ))}
@@ -165,7 +217,7 @@ class savoirPlus extends React.Component {
               style={{ display: this.state.imageModal.showModal ? "block" : "none" }}
             >
               <img
-                ref={this.slideModalRef}
+                ref={this.pictModalRef}
                 className={modalPict}
                 id={this.state.imageModal.id}
                 src={this.state.imageModal.modalSrc}
@@ -177,10 +229,10 @@ class savoirPlus extends React.Component {
               </div>
             </div>
 
-            <a href="#" className={prev} onClick={() => this.navigatePict(-1)}>
+            <a href="#" ref={this.prevModalRef} className={prev} onClick={() => this.navigatePict(-1)}>
               &#10094;
             </a>
-            <a href="#" className={next} onClick={() => this.navigatePict(+1)}>
+            <a href="#" ref={this.nextModalRef} className={next} onClick={() => this.navigatePict(+1)}>
               &#10095;
             </a>
 

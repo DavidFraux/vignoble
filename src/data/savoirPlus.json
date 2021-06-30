@@ -1,0 +1,21 @@
+[
+  {
+    "title": "Carte de Localisation des pressoirs",
+    "description": "Localisation des anciens pressoirs dans le vignoble Nantais en 2014-2015",
+    "urls": {
+      "regular" : "carteLocalisation.jpg",
+      "thumb" : "carteLocalisationMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "Carte de Localisation des pressoirs"
+  }, {
+    "title": "Carte de l'origine des pressoirs",
+    "description": "Carte de l'origine des pressoirs recensés dans le vignoble nantais en 2014 - 2015",
+    "urls": {
+      "regular" : "carteOrigine.jpg",
+      "thumb" : "carteOrigineMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "Carte de'origine des pressoirs"
+  }
+]

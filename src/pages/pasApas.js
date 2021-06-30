@@ -30,18 +30,16 @@ import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext, MdInfoOutline, MdSett
 import { GiDuration } from 'react-icons/gi';
 import ReactCardFlip from 'react-card-flip';
 import dataSteps from "../data/steps.json";
-
+import placeHolderPict from "../images/placeHolder.png";
 
 
 const title = 'Le fonctionnement du pressoir long-fut pas à pas';
 const baseURL = 'https://uncloud.univ-nantes.fr/index.php/s/eL8zoRTzJMB9L53/download?path=/&files=';
-const postersFolder = require.context('../images/videoPosters', false, /./ , 'sync');//'lazy': the underlying files will be loaded asynchronously -> using promises
+const postersFolder = require.context('../images/videoPosters', false, /./ , 'lazy');//'sync' sinon 'lazy': the underlying files will be loaded asynchronously -> using promises
 
 //helps the understanding of webpack loader
 // postersFolder.keys().forEach(filePath => {
-//   console.log(filePath);
 //   // load the component
-//   console.log(postersFolder(filePath).default);
 // //  postersFolder(filePath).then(module => {
 // //         // module.default is the vue component
 // //     console.log(module.default);
@@ -88,14 +86,18 @@ class PasApas extends React.Component {
   
   buildFonctionnalSteps() {
     for (const [index, step] of dataSteps.entries()) {
-      const keyLeft = "./"+step.posterLeft;
-      if (postersFolder.keys().includes(keyLeft)){
-        step.posterLeftFile = postersFolder(keyLeft).default;
-      }
-      const keyRight = "./"+step.posterRight;
-      if (postersFolder.keys().includes(keyRight)){
-        step.posterRightFile = postersFolder(keyRight).default;
-      }
+      postersFolder("./"+step.posterLeft).then(module => {
+        step.posterLeftFile = module.default;
+      }).catch(err => {
+        console.log(err);
+        step.posterLeftFile = placeHolderPict;
+      });
+      postersFolder("./"+step.posterRight).then(module => {
+        step.posterRightFile = module.default;
+      }).catch(err => {
+        console.log(err);
+        step.posterRightFile = placeHolderPict;
+      });
       step.videoRight = baseURL+ step.videoRight;
       step.videoLeft = baseURL+ step.videoLeft;
       step.onClick = (e) => {//the followin manage the onClick behavious for each step of the timeLine
@@ -232,7 +234,6 @@ class PasApas extends React.Component {
   }
 
   render() {
-    console.log(this.state.Lplaying);
     const currentStep = dataSteps[this.state.activeStepIndex];
     return (
       <React.Fragment>
