@@ -31,7 +31,7 @@ import { GiDuration } from 'react-icons/gi';
 import ReactCardFlip from 'react-card-flip';
 import dataSteps from "../data/steps.json";
 import placeHolderPict from "../images/placeHolder.png";
-
+import crypto from 'crypto';
 
 const title = 'Le fonctionnement du pressoir long-fut pas à pas';
 const baseURL = 'https://uncloud.univ-nantes.fr/index.php/s/eL8zoRTzJMB9L53/download?path=/&files=';
@@ -100,6 +100,7 @@ class PasApas extends React.Component {
       });
       step.videoRight = baseURL+ step.videoRight;
       step.videoLeft = baseURL+ step.videoLeft;
+      if (!step.id) {step.id = crypto.randomBytes(20).toString('hex')};
       step.onClick = (e) => {//the followin manage the onClick behavious for each step of the timeLine
         e.preventDefault();
         this.onClickStep(index);
@@ -251,7 +252,7 @@ class PasApas extends React.Component {
             <div className={videosWrapper}>
               <video 
                   muted
-                  key={currentStep.title+'L'}
+                  key={currentStep.id+'L'}
                   src={currentStep.videoLeft}
                   poster={currentStep.posterLeftFile}
                   preload={'auto'}
@@ -268,7 +269,7 @@ class PasApas extends React.Component {
 
               <video
                   muted
-                  key={currentStep.title+'R'}
+                  key={currentStep.id+'R'}
                   src={currentStep.videoRight}
                   poster={currentStep.posterRightFile}
                   preload={'auto'}
@@ -290,15 +291,15 @@ class PasApas extends React.Component {
               </div>
               <div className = {`${infoBox} ${duration}`}>
                 <div className = {infoBoxTitle} ><GiDuration/>  Durée </div>
-                <span>environ {currentStep.duration} minutes</span>
+                <div>environ {currentStep.duration} minutes</div>
               </div>
               <div className = {`${infoBox} ${difficulty}`}>
                 <div className = {infoBoxTitle} ><MdTrendingUp/>  Difficulté </div>
-                <span className= {stars}>{numberToStars(currentStep.difficulty,5)}</span>
+                <div className= {stars}>{numberToStars(currentStep.difficulty,5)}</div>
               </div>
               <div className = {`${infoBox} ${description}`}>
                 <div className = {infoBoxTitle} ><MdSettings/>  À cette étape  </div>
-                <span>{currentStep.description}</span>
+                <div>{currentStep.description}</div>
               </div>
               <div className = {saviezVous} onClick = {() => this.setState(prevState => ({ saviezVousClicked: !prevState.saviezVousClicked }))}>
                 <ReactCardFlip isFlipped={this.state.saviezVousClicked} flipDirection="horizontal" containerStyle={{height: "100%"}}>
