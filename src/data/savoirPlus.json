@@ -2,7 +2,7 @@
   {
     "title": "Carte de Localisation des pressoirs",
     "description": "Localisation des anciens pressoirs dans le vignoble Nantais en 2014-2015",
-    "urls": {
+    "fileNames": {
       "regular" : "carteLocalisation.jpg",
       "thumb" : "carteLocalisationMini.jpg"
     },
@@ -11,11 +11,209 @@
   }, {
     "title": "Carte de l'origine des pressoirs",
     "description": "Carte de l'origine des pressoirs recensés dans le vignoble nantais en 2014 - 2015",
-    "urls": {
+    "fileNames": {
       "regular" : "carteOrigine.jpg",
       "thumb" : "carteOrigineMini.jpg"
     },
     "id" : null,
     "alt_description": "Carte de'origine des pressoirs"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
+  }, {
+    "title": "autre image serait bien",
+    "description": "une image à ajouter -> inventaire des pressoirs?",
+    "fileNames": {
+      "regular" : "None.jpg",
+      "thumb" : "NoneMini.jpg"
+    },
+    "id" : null,
+    "alt_description": "une iamge à ajouter"
   }
 ]

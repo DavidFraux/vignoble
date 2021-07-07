@@ -29,7 +29,7 @@ import Donut from "../components/donut";
 import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext, MdInfoOutline, MdSettings, MdStar, MdStarBorder, MdTrendingUp} from 'react-icons/md';
 import { GiDuration } from 'react-icons/gi';
 import ReactCardFlip from 'react-card-flip';
-import dataSteps from "../data/steps.json";
+import dataSteps from "../data/stepsv1.1.json";
 import placeHolderPict from "../images/placeHolder.png";
 import crypto from 'crypto';
 
@@ -46,15 +46,16 @@ const postersFolder = require.context('../images/videoPosters', false, /./ , 'la
 // //   });
 // });
 
+
 function numberToStars(number, maxStars){
   let i = 0;
   let stars = []
   for ( i; i < number; i++) {
-    stars.push(<MdStar/>);
+    stars.push(<MdStar key = {crypto.randomBytes(20).toString('hex')}/>);
     stars.push(' ');
   };
   for (i; i<maxStars; i++) {
-    stars.push(<MdStarBorder/>);
+    stars.push(<MdStarBorder key = {crypto.randomBytes(20).toString('hex')}/>);
     stars.push(' ');
   }
   return stars

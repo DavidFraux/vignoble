@@ -3,6 +3,8 @@ import React, { Suspense } from "react"
 import Header from '../components/header.js';
 import dataSavoirPlus from "../data/savoirPlus.json";
 import placeHolderPict from "../images/placeHolder.png";
+import Loader from "react-loader-spinner";
+
 
 import {
   photoItem,
@@ -39,6 +41,15 @@ const loadedPictureBatch = 10;
 // //   });
 // });
 
+const spinner = 
+<Loader
+  type="Puff"
+  color="#00BFFF"
+  height={100}
+  width={100}
+  timeout={3000} //3 secs
+/>
+
 class savoirPlus extends React.Component {
   constructor(props) {
     super(props);
@@ -51,6 +62,7 @@ class savoirPlus extends React.Component {
         currentSectionLength: null
       },
       loadedPict : 0,
+      hasMorePict : true,
     };
     this.pictModalRef = React.createRef();
     this.nextModalRef = React.createRef();
@@ -59,29 +71,34 @@ class savoirPlus extends React.Component {
 
   dataLoader = () => {
     const from =  this.state.loadedPict ;
-    if (dataSavoirPlus.length <= from) {return} ;
+    if (dataSavoirPlus.length <= from) {
+      this.setState({hasMorePict : false});
+      return;
+    }
     const until = Math.min( this.state.loadedPict + loadedPictureBatch  , dataSavoirPlus.length );
     console.log('from ', from, ' ;  to ', until );
     const newData = [];
     for (let i = from ; i < until; i++) {
       const pict = dataSavoirPlus[i];
-      pictureFolder("./" + pict.urls.regular).then(module => {
+      pict.urls = {regular : spinner, thumb : spinner};
+      pictureFolder("./" + pict.fileNames.regular).then(module => {
         pict.urls.regular = module.default;
         this.setState({});//force to re-render after promise is completed
       }).catch(err => {
         pict.urls.regular = placeHolderPict;
         console.log(err);
+        this.setState({});
       });
-      pictureFolder("./" + pict.urls.thumb).then(module => {
+      pictureFolder("./" + pict.fileNames.thumb).then(module => {
         pict.urls.thumb = module.default;
         this.setState({});
       }).catch(err => {
         pict.urls.thumb = placeHolderPict;
         console.log(err);
+        this.setState({});
       });
-      pict.id ? (pict.id = pict.id) : (pict.id = crypto.randomBytes(20).toString('hex'));
+      if (!pict.id) {(pict.id = crypto.randomBytes(20).toString('hex'))};
       newData.push(pict);
-      console.log(pict);
     }
     this.setState((prevState) => ({
       loadedPict: prevState.loadedPict + until,
@@ -151,18 +168,18 @@ class savoirPlus extends React.Component {
       <title>{title}</title>
       <Header headerText = {title} customClass= {header} />
 
-        <InfiniteScroll
-          dataLength={this.state.imagesData.length}
-          next={this.fetchData}
-          hasMore={true}
-          loader={<h4>ça charge...</h4>}
-          scrollThreshold="50px"
-          endMessage={
-            <p style={{ textAlign: "center" }}>
-              <b>il n'y pas d'autres images à afficher</b>
-            </p>
-          }
-        >
+      <InfiniteScroll
+        dataLength={this.state.imagesData.length}
+        next={this.fetchData}
+        hasMore={this.state.hasMorePict}
+        loader={<h4>ça charge...</h4>}
+        scrollThreshold="50px"
+        endMessage={
+          <p style={{ textAlign: "center" }}>
+            <b>il n'y pas d'autres images à afficher</b>
+          </p>
+        }
+      >
       <Masonry
         breakpointCols={3}
         className={grid}
@@ -170,7 +187,6 @@ class savoirPlus extends React.Component {
         {this.state.imagesData &&
               this.state.imagesData.map((photo, index) => (
                 <div className={photoItem} key={index}>
-                  <Suspense fallback={<div>Chargement...</div>}>
                   <img
                     className={imgInGrid}
                     src={photo.urls.thumb}
@@ -189,7 +205,6 @@ class savoirPlus extends React.Component {
                       });
                     }}
                   />
-                  </Suspense>
                   <div className={gridCaption}>{photo.description? photo.description : "pas de titre pour cette image"}</div>
                 </div>
               ))}

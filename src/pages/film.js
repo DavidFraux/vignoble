@@ -70,7 +70,7 @@ class Film extends React.Component {
   
   render() {
     const title = 'Le film';
-    const sample = this.baseURL + "pressageSubtitled.mp4";
+    const sample = this.baseURL + "pressagev2.1.mp4";
     const markerList = [
       //{id: 'debut',      target: 0,    label: 'début'},
       {id: 'fouler',     target: 34,   label: 'fouler'},
@@ -123,7 +123,7 @@ class Film extends React.Component {
             onClick={() => this.togglePlay()}>
               {this.state.playing ? <MdPause size='1.5x'/> : <MdPlayArrow size='1.5x'/> }
           </button>
-          {this.state.playing? <div/> : markers}
+          {markers}
         </div> 
     </div>
     )
