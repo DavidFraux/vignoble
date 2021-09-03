@@ -29,7 +29,7 @@ import Donut from "../components/donut";
 import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext, MdInfoOutline, MdSettings, MdStar, MdStarBorder, MdTrendingUp} from 'react-icons/md';
 import { GiDuration } from 'react-icons/gi';
 import ReactCardFlip from 'react-card-flip';
-import dataSteps from "../data/stepsv1.1.json";
+import dataSteps from "../data/steps.json";
 import placeHolderPict from "../images/placeHolder.png";
 import crypto from 'crypto';
 
@@ -83,6 +83,7 @@ class PasApas extends React.Component {
     this.videoR = React.createRef();
     this.buildFonctionnalSteps();
     this.timeOuts = [];
+    this.readingTimeOut = null;
   }
   
   buildFonctionnalSteps() {
@@ -155,7 +156,9 @@ class PasApas extends React.Component {
   }
 
   handleBothVideoEnded() {
-    this.timeOuts.push(setTimeout(() => this.navigateSteps(1), 35000 ));
+    this.readingTimeOut = setTimeout(() => this.navigateSteps(1), 35000 );
+    this.timeOuts.push(this.readingTimeOut);
+    //this.timeOuts.push(setTimeout(() => this.navigateSteps(1), 35000 )); //#TODO stop this timeOut if paused
     this.timeOuts.push(setTimeout(() => this.setState({showInfo:true}), 1000 ));
     this.timeOuts.push(setTimeout(() => this.setState({animateDonut:true}), 3000 ));
   }
@@ -197,8 +200,10 @@ class PasApas extends React.Component {
     if (this.state.paused) {
       this.playBoth()
       this.setState({ paused: false});
+      if (this.state.Lended && this.state.Rended) {this.readingTimeOut = setTimeout(() => this.navigateSteps(1), 5000 );}//if timeOut was set, reset something shorter, just in order not to be "stucked" in a step for "lost" people
     } else {
-      this.setState({ Lplaying: false, Rplaying: false, paused: true});
+      if (this.readingTimeOut) {clearTimeout(this.readingTimeOut)}; //avoid navigating to next step while paused
+      this.setState({ Lplaying: false, Rplaying: false, paused: true, });
     }
   }
 
@@ -227,7 +232,6 @@ class PasApas extends React.Component {
 
   componentDidMount() {
     this.setState({isMounted : true, showInfo: false});
-    
   }
 
   componentWillUnmount() {

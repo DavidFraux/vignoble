@@ -15,7 +15,7 @@
 
 .controlsWrapper {
   position: absolute;
-  left: 10vw;
+  left: 6vw;
   top: 0.3rem;
   margin: 0.2rem auto;
 }
@@ -44,7 +44,7 @@
 .togglePlayPause {
   position: relative;
   margin-right: 25px;
-  margin-left: 25px;
+  margin-left: 0px;
   width:2rem;
   border-radius: 2rem;
   background-color: #385080;

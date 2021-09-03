@@ -25,7 +25,7 @@
   object-fit: cover;
 }
 
-.accesText {
+.accesText, .accesSubText, .accessDuration{
   font-size: 2vw;
   text-align: center;
   color: rgb(255, 255, 255);
@@ -36,15 +36,14 @@
   z-index: 3;
 }
 
-.accesSubText {
-  font-size: 2vw;
-  text-align: center;
-  color: rgb(255, 255, 255);
-  position: relative;
+.accesSubText{
   font-weight: 300;
-  word-wrap: break-word;
-  font-kerning: normal;
-  z-index: 3;
+  white-space: pre;/*in order to have lineBreaks when \n is typed*/
+}
+
+.accessDuration {
+  font-size: 1.5vw;
+  font-weight: 300;
 }
 
 .container {

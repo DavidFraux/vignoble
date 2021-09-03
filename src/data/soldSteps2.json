@@ -3,7 +3,7 @@
     "title": "Verser",
     "short": "Verser le raisin frais dans la maie.",
     "description": "Directement issu de la vendange le raisin frais est étalé dans la maie",
-    "annecdote": "Les pressoirs sont construits par des charpentiers, avec des chênes locaux. Il fallait 5 à 6 chênes pour faire un pressoir. ",
+    "annecdote": "Les pressoirs sont construits par des charpentiers, avec des chênes locaux. Il fallait 5 à 6 chênes pour faire un grand pressoir. ",
     "question": "Combien d'arbres faut-il pour construire un pressoir long-fût?",
     "videoRight": "pressage0.mp4",
     "posterRight": "poster0.jpg",
@@ -14,9 +14,9 @@
   }, {
     "title": "Fouler",
     "short": "Fouler le raisin dans la maie.",
-    "description": "Avec les pieds, à plusieurs, parfois en musique, les vendangeurs et vendangeuses foulent le raisin dans la maie; d'autres chantent pour donner le rythme. Cette opération casse les peaux de raisins, libère le jus et rend l'ensemble plus compact. Ce travail peut être remplacé par un moulin à vendange posé dans la maie.",
+    "description": "Avec les pieds, à plusieurs, parfois en musique, les jeunes foulent le raisin dans la maie. Les jeunes filles, qui ont aussi vendangé, chantent pour donner le rythme. Cette opération casse les peaux de raisins, libère le jus et rend l'ensemble plus compact. Ce travail peut être remplacé par un moulin à vendange posé dans la maie.",
     "annecdote": "Avec 2 maies, on foule le raisin dans la maie basse, pendant qu'une pressée est menée dans la maie haute. Surement le signe d'un domaine important.",
-    "question": "Pourquoi le pressoir du musée possède 2 maies?",
+    "question": "Pourquoi le pressoir du musée du musée possède 2 maies?",
     "videoRight": "pressage1.mp4",
     "posterRight": "poster1.jpg",
     "videoLeft": "test.webm",
@@ -38,7 +38,7 @@
   }, {
     "title": "Constituer",
     "short": "Les grappes de raisin sont organisées en cep (tas de raisin à presser).",
-    "description": "Les raisins sont disposés de façon pyramidale dans la haute maie. Un écart de 20 à 30 cm est laissé entre les banchots de la maie et le cep. Selon le type de raisin, de la paille est installée  - au moins aux angles -  pour maintenir le cep. ",
+    "description": "Les raisins sont disposés de façon pyramidale dans la haute maie. Un écart de 20 à 30 cm est laissé entre les banchots de la maie et le cep. Souvent de la paille est installée  - au moins aux angles -  pour maintenir le cep. ",
     "annecdote": "Il fallait 4 à 5 personnes pour faire fonctionner un pressoir comme celui du musée",
     "question": "Combien de personnes travaillaient à faire fonctionner un grand pressoir?",
     "videoRight": "pressage3.mp4",
@@ -62,7 +62,7 @@
   }, {
     "title": "Positionner",
     "short": "Le fût haut (poutre mobile) du pressoir est positionné, prêt à presser.",
-    "description": "Le fût haut est verrouillé d'un coté grâce aux aiguilles. Les aiguilles sont les pièces de bois qui sont déplacées dans les fentes appelées \"lumières\". Le serrage est optimal quand le fût haut est à l'horizontal. On est alors en position pour presser.",
+    "description": "Le fût haut est verrouillé d'un coté grâce aux aiguilles. Les aiguilles sont les pièces de bois qui sont déplacées dans les fente appelées \"lumières\". Le serrage est optimal quand le fût haut est à l'horizontal. On est alors en position pour presser.",
     "annecdote": "Oui, on dit que le pressoir \"parle\" lorsque la vis en bois tourne et frotte sur l'écrou. Chaque pressoir avait une vis, un écrou et donc une \"voix\" différente. ",
     "question": "Le pressoir parle-t-il?",
     "videoRight": "pressage5.mp4",
@@ -86,7 +86,7 @@
   }, {
     "title": "Moût",
     "short": "Le moût est receuilli, versé dans des barriques.",
-    "description": "La pression est maintenue plusieurs heures pour récupérer tout le moût, parfois même toute la nuit. Régulièrement on ressere la vis. Traditionnelement la vis était en cormier, frêne ou chataignier comme sur le pressoir du musée .",
+    "description": "La pression est maintenue plusieurs heures pour récupérer tout le moût, parfois même toute la nuit. Régulièrement on ressere la vis. On utilisait du cormier, du frêne ou du chataignier comme ici.",
     "annecdote": "Au niveau de la vis, il faut bloquer le levier de serrage en frêne sinon la vis risque de \"dévirer\" sous la pression.",
     "question": "Une fois la vis serrée, à quoi faut-il penser?",
     "videoRight": "pressage7.mp4",
@@ -134,7 +134,7 @@
   }, {
     "title": "Tailler",
     "short": "On taille la périphérie du cep, qui s'est étalé sous la pression.",
-    "description": "Le cep s'est étalé sous la pression, il est très compact. Il faut libérer un passage en périphérie et décompacter les grappes. Pour le décompacter et le reformer il faut le tailler. On utilise un \"couteau à pressoir\". ",
+    "description": "Le cep s'est étalé sous la pression, il est très compact. Il faut libérer un passage en périphérie et de décompacter les grappes. Pour le décompacter et le reformer il faut le tailler. On utilise un \"couteau à pressoir\". ",
     "annecdote": "On peut aussi l’appeler coupe-marc.",
     "question": "Quel est l’autre nom du couteau à pressoir ?",
     "videoRight": "pressage11.mp4",
@@ -146,7 +146,7 @@
   }, {
     "title": "Reformer",
     "short": "Le cep est reformé en pyramide, pour presser ce qui reste.", 
-    "description":"La râpe est brassée à la fourche et rechargée sur le cep. On reforme le cep en laissant un passage périphérique au moût. On reprend alors à l'étape 7 \"presser\". Souvent 2 ou 3 pressurages sont nécessaires pour assécher le cep car ses marges glissent hors de la pression des couchages.",
+    "description":"La râpe est brassée à la fourche et rechargée sur le cep. On reforme le cep en laissant un passage périphérique au moût. Souvent 2 ou 3 pressurages sont nécessaires pour assécher le cep car ses marges glissent hors de la pression des couchages.",
     "annecdote": "Parfois pour aller au toilettes, mais plus souvent pour serrer la vis d'un petit tour lors du pressurage !", 
     "question": "Pourquoi le vigneron doit-il parfois se relever la nuit? ",
     "videoRight": "pressage12.mp4",
