@@ -19,7 +19,7 @@ exports.onCreateWebpackConfig = ({
     module: {
       rules: [
         {
-          test: /\.(glb)$/i,
+          test: /\.(glb|vtt)$/i,
           use: [
             {
               loader: 'file-loader',
