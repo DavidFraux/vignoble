@@ -8,7 +8,7 @@
     "videoRight": "pressage0.mp4",
     "posterRight": "poster0.jpg",
     "videoLeft": "0_verser.webm",
-    "posterLeft": "poster1verser.png",
+    "posterLeft": "poster0verser.png",
     "duration": 15,
     "difficulty": 1
   }, {
@@ -19,8 +19,8 @@
     "question": "Pourquoi le pressoir du musée possède 2 maies?",
     "videoRight": "pressage1.mp4",
     "posterRight": "poster1.jpg",
-    "videoLeft": "test.webm",
-    "posterLeft": "postertest.png",
+    "videoLeft": "1_fouler.webm",
+    "posterLeft": "poster1fouler.png",
     "duration": 50,
     "difficulty": 3
   }, {
@@ -31,8 +31,8 @@
     "question": "Avec quels matériaux le jus de raisin est-il en contact?",
     "videoRight": "pressage2.mp4",
     "posterRight": "poster2.jpg",
-    "videoLeft": "lakeView.mp4",
-    "posterLeft": "lakeViewPoster.jpg",
+    "videoLeft": "2_mout.webm",
+    "posterLeft": "poster2mout.png",
     "duration": 10,
     "difficulty": 1
   }, {
@@ -74,7 +74,7 @@
   }, {
     "title": "Presser",
     "short": "En serrant la vis, on presse le cep.",
-    "description": "Deux personnes sont necessaires pour tourner la vis et abaisser le fût haut. Il est fixe de l'autre coté, verrouillé par les aiguilles. Sous la pression le fût haut est arqué, au fur et à mesure de la pressée, il reprend sa forme normale. ",
+    "description": "Deux personnes sont necessaires pour tourner la vis et abaisser le fût haut. Il est fixe de l'autre coté, verrouillé par les aiguilles. Sous la pression le fût haut est arqué, au fur et à mesure de la pressée, il reprend sa forme normale. Les vis en bois sont moins facilement manipulables et plus encombrantes que les vis en métal qui les remplacent progressivement.",
     "annecdote": "La vis. Le pressoir du musée est le dernier à conserver sa vis en bois. Soumise à de fortes contraintes, elle casse facilement. Progressivement les vis en bois sont remplacées par des pièces en métal.",
     "question": "Quelle est la partie la plus fragile du pressoir?",
     "videoRight": "pressage6.mp4",
@@ -91,8 +91,8 @@
     "question": "Une fois la vis serrée, à quoi faut-il penser?",
     "videoRight": "pressage7.mp4",
     "posterRight": "poster7.jpg",
-    "videoLeft": "lakeView.mp4",
-    "posterLeft": "lakeViewPoster.jpg",
+    "videoLeft": "7_mout2.webm",
+    "posterLeft": "poster7mout2.png",
     "duration": 180,
     "difficulty": 1
   }, {
@@ -127,8 +127,8 @@
     "question": "Comment assure-t-on l'étanchéité?",
     "videoRight": "pressage10.mp4",
     "posterRight": "poster10.jpg",
-    "videoLeft": "lakeView.mp4",
-    "posterLeft": "lakeViewPoster.jpg",
+    "videoLeft": "10_deshabiller.webm",
+    "posterLeft": "poster10deshabiller.png",
     "duration": 20,
     "difficulty": 3
   }, {
@@ -139,8 +139,8 @@
     "question": "Quel est l’autre nom du couteau à pressoir ?",
     "videoRight": "pressage11.mp4",
     "posterRight": "poster11.jpg",
-    "videoLeft": "foret.mp4",
-    "posterLeft": "foretPoster.jpg",
+    "videoLeft": "11_tailler.webm",
+    "posterLeft": "poster11tailler.png",
     "duration": 45,
     "difficulty": 5
   }, {
@@ -151,8 +151,8 @@
     "question": "Pourquoi le vigneron doit-il parfois se relever la nuit? ",
     "videoRight": "pressage12.mp4",
     "posterRight": "poster12.jpg",
-    "videoLeft": "foret.mp4",
-    "posterLeft": "foretPoster.jpg",
+    "videoLeft": "12_reformer.webm",
+    "posterLeft": "poster12reformer.png",
     "duration": 30,
     "difficulty": 4
   }]

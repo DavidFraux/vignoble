@@ -15,6 +15,7 @@ import {
   hidden,
   donutWrapper,
   description,
+  short,
   duration,
   difficulty,
   stars,
@@ -31,11 +32,13 @@ import { GiDuration } from 'react-icons/gi';
 import ReactCardFlip from 'react-card-flip';
 import dataSteps from "../data/steps.json";
 import placeHolderPict from "../images/placeHolder.png";
+import placeHolderVideo from "../video/placeHolder.webm";
 import crypto from 'crypto';
 
 const title = 'Le fonctionnement du pressoir long-fut pas à pas';
-const baseURL = 'https://uncloud.univ-nantes.fr/index.php/s/eL8zoRTzJMB9L53/download?path=/&files=';
-const postersFolder = require.context('../images/videoPosters', false, /./ , 'lazy');//'sync' sinon 'lazy': the underlying files will be loaded asynchronously -> using promises
+const videoFolder = require.context('../video/pasApas', false, /./ , 'lazy');
+const postersFolder = require.context('../images/videoPosters', false, /./ , 'lazy');//'sync' sinon 'lazy': the underlying files will be loaded synchronously -> using promises
+
 
 //helps the understanding of webpack loader
 // postersFolder.keys().forEach(filePath => {
@@ -68,6 +71,7 @@ class PasApas extends React.Component {
     this.state = {
       isMounted : true,
       activeStepIndex: 0,
+      step:{},
       Lready : false,
       Rready : false,
       Lended: false,
@@ -81,7 +85,6 @@ class PasApas extends React.Component {
     };
     this.videoL = React.createRef();
     this.videoR = React.createRef();
-    this.buildFonctionnalSteps();
     this.timeOuts = [];
     this.readingTimeOut = null;
   }
@@ -100,8 +103,18 @@ class PasApas extends React.Component {
         console.log(err);
         step.posterRightFile = placeHolderPict;
       });
-      step.videoRight = baseURL+ step.videoRight;
-      step.videoLeft = baseURL+ step.videoLeft;
+      videoFolder("./"+step.videoLeft).then(module => {
+        step.videoLeftFile = module.default;
+      }).catch(err => {
+        console.log(err);
+        step.videoLeftFile = placeHolderVideo;
+      });
+      videoFolder("./"+step.videoRight).then(module => {
+        step.videoRightFile = module.default;
+      }).catch(err => {
+        console.log(err);
+        step.videoRightFile = placeHolderVideo;
+      });
       if (!step.id) {step.id = crypto.randomBytes(20).toString('hex')};
       step.onClick = (e) => {//the followin manage the onClick behavious for each step of the timeLine
         e.preventDefault();
@@ -134,7 +147,6 @@ class PasApas extends React.Component {
       this.resetVideoStates();
     };
   }
-
 
   navigateSteps(i) {
     if (this.state.isMounted ) {//protect from state changes if the component is unmounted during the timeOut
@@ -232,6 +244,7 @@ class PasApas extends React.Component {
 
   componentDidMount() {
     this.setState({isMounted : true, showInfo: false});
+    this.buildFonctionnalSteps();
   }
 
   componentWillUnmount() {
@@ -258,7 +271,7 @@ class PasApas extends React.Component {
               <video 
                   muted
                   key={currentStep.id+'L'}
-                  src={currentStep.videoLeft}
+                  src={currentStep.videoLeftFile}
                   poster={currentStep.posterLeftFile}
                   preload={'auto'}
                   type={'video/mp4'}
@@ -275,7 +288,7 @@ class PasApas extends React.Component {
               <video
                   muted
                   key={currentStep.id+'R'}
-                  src={currentStep.videoRight}
+                  src={currentStep.videoRightFile}
                   poster={currentStep.posterRightFile}
                   preload={'auto'}
                   type={'video/mp4'}
@@ -291,6 +304,9 @@ class PasApas extends React.Component {
             </div>
             
             <div className = {`${infoBoxes} ${this.state.showInfo? fadeIn : hidden}`} >
+              <div className = {`${infoBox} ${short}`} >
+                {currentStep.short}
+              </div>
               <div className = {donutWrapper} >
                 <Donut steps={dataSteps} activeStepIndex={this.state.activeStepIndex} animate={this.state.animateDonut}/>
               </div>
