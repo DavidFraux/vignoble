@@ -1,7 +1,7 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { setupModel } from '../systems/setupModel.js';
-import pressFile from '../../assets/models/lgFutCentered.glb';
-import grapeFile from '../../assets/models/grapeLP.glb';
+import pressFile from '../../3Dassets/models/lgFutCentered.glb';
+import grapeFile from '../../3Dassets/models/grapeLP.glb';
 
 async function loadPress() {
   const loader = new GLTFLoader();

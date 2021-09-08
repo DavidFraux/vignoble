@@ -1,6 +1,6 @@
 import { OrbitControls, } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Box3, Spherical, Vector3 } from 'three';
-import { upZtoY } from '../systems/orientation';
+import { upZtoY } from './orientation';
 import TWEEN from '@tweenjs/tween.js';
 
 

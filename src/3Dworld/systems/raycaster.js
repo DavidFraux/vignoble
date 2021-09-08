@@ -22,15 +22,10 @@ function getTouchCoord( event ) {
 	// (-1 to +1) for both components
     //sets the mouse position with a coordinate system where the center
     //   of the screen is the origin
-  console.log('touchStart');
   event.preventDefault();
   // for the touchscreens
-  console.log('event', event);
-  console.log('XtouchPosition', event.targetTouches[0].pageX);
-  console.log('mouseX', event.targetTouches[0].pageX, (event.targetTouches[0].pageX / window.innerWidth) * 2 - 1);
   mouse.x = +(event.targetTouches[0].pageX / window.innerWidth) * 2 - 1;
   mouse.y = -( (event.targetTouches[0].pageY-headerHeight) / window.innerHeight) * 2 + 1;
-
   raycaster.cast();
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../components/header.js';
-import  World from '../world/world';
+import  World from '../3Dworld/world';
 import {
   goToMarkerControl,
   controlsWrapper,
