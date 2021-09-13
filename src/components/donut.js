@@ -1,5 +1,4 @@
 import React, { useState, useEffect }from "react";
-import chroma from "chroma-js";
 import {
   circleLabel,
   circlePercentage,
@@ -92,13 +91,15 @@ class Donut extends React.Component {
       totalDuration += step.duration;
     };
     let cumulDuration = 0;
-    const colors = chroma.scale(['deeppink','teal','yellow','red']).mode('lch').colors(props.steps.length);
+    //const colors = chroma.scale(['red','yellow','blue','darkgreen','deeppink' ]).mode('lch').colors(props.steps.length);
+    console.log(props.steps);
     for (const [index, step] of props.steps.entries()){
       const stepPercentDuration = step.duration / totalDuration * 100;
+      console.log('color',step.color);
       this.steps.push({
         start: cumulDuration,
         duration: stepPercentDuration,
-        color: colors[index],
+        color: step.color,
       })
       cumulDuration += stepPercentDuration;
     };

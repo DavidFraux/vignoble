@@ -34,6 +34,7 @@ import dataSteps from "../data/steps.json";
 import placeHolderPict from "../images/placeHolder.png";
 import placeHolderVideo from "../video/placeHolder.webm";
 import crypto from 'crypto';
+import chroma from "chroma-js";
 
 const title = 'Le fonctionnement du pressoir long-fut pas à pas';
 const videoFolder = require.context('../video/pasApas', false, /./ , 'lazy');
@@ -87,9 +88,14 @@ class PasApas extends React.Component {
     this.videoR = React.createRef();
     this.timeOuts = [];
     this.readingTimeOut = null;
+    this.buildFonctionnalSteps();
   }
   
   buildFonctionnalSteps() {
+    const colors = chroma.scale(
+      ['deeppink','teal','yellow','red']//['red','yellow','blue','darkgreen','deeppink' ]
+    ).mode('hsv').colors(dataSteps.length);
+
     for (const [index, step] of dataSteps.entries()) {
       postersFolder("./"+step.posterLeft).then(module => {
         step.posterLeftFile = module.default;
@@ -115,6 +121,7 @@ class PasApas extends React.Component {
         console.log(err);
         step.videoRightFile = placeHolderVideo;
       });
+      step.color = colors[index];
       if (!step.id) {step.id = crypto.randomBytes(20).toString('hex')};
       step.onClick = (e) => {//the followin manage the onClick behavious for each step of the timeLine
         e.preventDefault();
@@ -244,7 +251,6 @@ class PasApas extends React.Component {
 
   componentDidMount() {
     this.setState({isMounted : true, showInfo: false});
-    this.buildFonctionnalSteps();
   }
 
   componentWillUnmount() {
