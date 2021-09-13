@@ -29,7 +29,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 
 const title = 'En savoir plus';
-const pictureFolder = require.context('../images/savoirPlus', false, /./ , 'lazy');//'lazy': the underlying files will be loaded asynchronously -> using 
+const pictureFolder = require.context('../images/savoirPlus', false, /./ , 'lazy');
 const loadedPictureBatch = 10;
 
 //helps the understanding of webpack loader
@@ -166,7 +166,7 @@ class savoirPlus extends React.Component {
     return (
     <React.Fragment>
       <title>{title}</title>
-      <Header headerText = {title} customClass= {header} />
+      <Header headerText = {title} className= {header} />
 
       <InfiniteScroll
         dataLength={this.state.imagesData.length}
