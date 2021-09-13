@@ -4,27 +4,27 @@ import {
   ShaderMaterial,
   FrontSide,
   AdditiveBlending,
+  Box3,
 } from 'three'
 
 // ======== MOVES ===========
 const sizePerSecond = 0.5;
-const cycleDuration = 3; //in seconds
-const cycleFrames = 60 * cycleDuration;
-let isGrowing = true;
-let frame = 1; //initialized
-function dynascale(delta, meshObj) {
+const maxSize = 1.3;
+function dynascale2(delta, meshObj) {
   const factor = 1 + sizePerSecond * delta;
-  //isGrowing ? (currentSize = currenSize * variation) : (currentSize = currenSize / variation);
-  if (frame === cycleFrames || frame === 0) {isGrowing = !isGrowing};
-  if (isGrowing) {
+  if (meshObj.scale.x >=  maxSize) {
+    meshObj.isGrowing = !meshObj.isGrowing; 
+    meshObj.scale.set(maxSize-0.01, maxSize-0.01, maxSize-0.01);
+  } else if (meshObj.scale.x <= 1 ){
+    meshObj.isGrowing = !meshObj.isGrowing; 
+    meshObj.scale.set(1.01, 1.01, 1.01);
+  }
+  if (meshObj.isGrowing) {
      meshObj.scale.multiplyScalar(factor);
-     frame += 1;
   } else {
     meshObj.scale.multiplyScalar(1/factor);
-    frame -= 1;
   };
 }
-
 
 
 
@@ -49,8 +49,11 @@ function createPoi(id, poiData) {
   meshObj.position.set(...poiData.position);
   meshObj.name = poiData.name;
   meshObj.keyname = id;
+  meshObj.isGrowing = true;
+  const initScale = Math.random() * maxSize-0.1  + 1;
+  meshObj.scale.set(initScale, initScale, initScale);
   meshObj.tick = (deltaT, elapsedT) => {//delta is time elapsed since last frame in seconds
-    dynascale(deltaT, meshObj);
+    dynascale2(deltaT, meshObj);
   };
   return meshObj;
 }
