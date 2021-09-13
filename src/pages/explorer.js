@@ -185,7 +185,7 @@ class Explorer extends React.Component {
       <React.Fragment>
         <title>{title}</title>
         <Header headerText = {title}/>
-        <LogoutPopup logoutDelay = '15' warnDelay = '10' />
+        <IdleLogout logoutDelay = '15' warnDelay = '10' />
         <div className={sceneContainer} id='scene-container'></div>
         <ThreeScene 
           poisData = {this.poisData} 
