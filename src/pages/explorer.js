@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/header.js';
+import { navigate } from 'gatsby'
 import  World from '../3Dworld/world';
 import {
   goToMarkerControl,
@@ -7,12 +8,15 @@ import {
   togglePlayPause,
   sceneContainer,
   paneTextContent,
-  headerCustom} from "./explorer.module.css";
+  headerCustom,} from "./explorer.module.css";
 import { MdPause, MdPlayArrow, } from 'react-icons/md';
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import IdleLogout from '../components/IdleLogout.js';
+import Warning from '../components/logoutWarning.js';
 import dataPois from "../data/pois.json";
+import { render } from 'react-dom';
+
 
 class ThreeScene extends React.Component {
   constructor(props) {
@@ -86,14 +90,13 @@ class ThreeScene extends React.Component {
 }
 
 
-
-
 class Explorer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isPaneOpen: false,
       currentPoiId : 'barrique',
+      logoutWarning : false,
     };
     this.poisData = dataPois;
   }
@@ -107,6 +110,21 @@ class Explorer extends React.Component {
     });
   }
 
+  handleLogout() {
+    navigate('/');
+  }
+
+  handleActivate() {
+    this.setState({logoutWarning : false});
+  }
+
+  handleWarning() {
+    this.setState({logoutWarning : true});
+    console.log("vous allez être déconnecté");
+  }
+
+
+
   render() {
     const title = 'Explorer le long-fût du musée';
     const currentPoi = this.poisData[this.state.currentPoiId];
@@ -114,13 +132,19 @@ class Explorer extends React.Component {
       <React.Fragment>
         <title>{title}</title>
         <Header className = {headerCustom} headerText = {title}/>
-        <IdleLogout logoutDelay = '15' warnDelay = '10' />
+        <IdleLogout 
+          logoutDelay = '45' 
+          logoutFunction = {() => this.handleLogout()}
+          warnDelay = '3' 
+          warnFunction = {() => this.handleWarning()}
+          activateFunction = {() => this.handleActivate()}
+          />
         <div className={sceneContainer} id='scene-container'></div>
         <ThreeScene 
           poisData = {this.poisData} 
           triggerPane = {(poiId) => this.triggerPane(poiId)} 
         />
-
+        {this.state.logoutWarning? <Warning/> : <div/>}
         <SlidingPane 
           //className={slidePane}
           isOpen={this.state.isPaneOpen}

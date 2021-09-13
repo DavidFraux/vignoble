@@ -1,0 +1,96 @@
+.wrapper {
+  position: absolute;
+  top: 5rem;
+  margin: 0.2rem auto;
+  text-align: center;
+  margin-left: 1vw;
+  
+}
+
+.text{
+  color: rgb(255, 255, 255);
+  background-color: red;
+  padding: 0 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 20px;
+}
+
+.progress {
+  position: relative;
+  height: 10px;
+}
+
+
+
+.left,
+.center,
+.right,
+.bounding{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.bounding {
+  border-style: solid;
+  border-width:1px;
+  border-color: black;
+  border-radius: 20px;
+  width: 45rem;
+}
+
+.left {
+  background: red;
+}
+.center {
+  background: red;
+}
+.right {
+  background: red;
+}
+
+.left,
+.right {
+  width: 1rem;
+}
+
+.left {
+  border-radius: 1rem 0 0 1rem;
+}
+.right {
+  border-radius: 0 1rem 1rem 0;
+}
+
+
+.center {
+  left: 1rem;
+  width: 1rem;
+  transform: scaleX(43);/*final position*/
+  transform-origin: left;
+  animation: center-animate 15s ease-out  ;
+}
+
+.right {
+  transform: translateX(44rem);/*final position*/
+  animation: right-animate 15s ease-out  ;
+}
+
+@keyframes center-animate {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(43);
+  }
+}
+
+
+@keyframes right-animate {
+  0% {
+    transform: translateX(1rem);
+  }
+  100% {
+    transform: translateX(44rem);
+  }
+}
+
