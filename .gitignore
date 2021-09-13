@@ -1,6 +1,7 @@
 #picturesPhotoshopSources
 *.psd
 *.mp4
+*.webm
 
 # Logs
 logs
