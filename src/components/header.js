@@ -10,7 +10,7 @@ import { MdHome } from 'react-icons/md';
 
 function Header(props) {
   return (
-    <header className= {props.customClass}>
+    <header className= {props.className}>
       <div className = {topBar}>
         <div className = {siteName} onClick={() => navigate('/')}><MdHome/></div>
         <div className = {navigationSide}>

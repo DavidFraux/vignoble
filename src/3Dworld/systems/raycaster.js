@@ -2,7 +2,7 @@ import { Raycaster, Vector2 } from 'three';
 
 const mouse = new Vector2();
 const raycaster = new Raycaster();
-const headerHeight = 55;//in px approx
+
 
 function getMouseCoord( event ) {
 
@@ -12,7 +12,8 @@ function getMouseCoord( event ) {
     //   of the screen is the origin
   event.preventDefault();
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( (event.clientY-headerHeight) / (window.innerHeight) ) * 2 + 1;
+	mouse.y = - ( (event.clientY) / (window.innerHeight) ) * 2 + 1;
+  // header must be "fixed" in css in order not be taken into account here in clientY
   raycaster.cast();
 }
 
@@ -25,7 +26,8 @@ function getTouchCoord( event ) {
   event.preventDefault();
   // for the touchscreens
   mouse.x = +(event.targetTouches[0].pageX / window.innerWidth) * 2 - 1;
-  mouse.y = -( (event.targetTouches[0].pageY-headerHeight) / window.innerHeight) * 2 + 1;
+  mouse.y = -( (event.targetTouches[0].pageY) / window.innerHeight) * 2 + 1;
+    // header must be "fixed" in css in order not be taken into account here in pageY
   raycaster.cast();
 }
 

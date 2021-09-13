@@ -13,8 +13,9 @@
 .goToMarkerControl {
   position: relative;
   display: inline-block;
-  margin-right: 25px;
-  margin-left: 25px;
+  margin-right: 15px;
+  margin-left: 15px;
+  padding: 0px 18px;
 }
 
 .togglePlayPause {
@@ -24,4 +25,13 @@
   width:2rem;
   border-radius: 2rem;
   background-color: #385080;
+}
+
+.paneTextContent {
+  margin-bottom: 30px;
+}
+
+.headerCustom {/*usefull to have fixed header to calculate raycast instersection with click*/
+  position: fixed;
+  width: 100%;
 }

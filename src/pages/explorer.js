@@ -6,7 +6,8 @@ import {
   controlsWrapper,
   togglePlayPause,
   sceneContainer,
-  paneTextContent } from "./explorer.module.css";
+  paneTextContent,
+  headerCustom} from "./explorer.module.css";
 import { MdPause, MdPlayArrow, } from 'react-icons/md';
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
@@ -16,7 +17,7 @@ import charpentePict from '../images/3Dfocus/charpente.jpg';
 import visPict from '../images/3Dfocus/vis.jpg';
 import maiePict from '../images/3Dfocus/maie.jpg';
 import arrierePict from '../images/3Dfocus/arriere.jpg';
-import LogoutPopup from '../components/IdleLogout.js';
+import IdleLogout from '../components/IdleLogout.js';
 
 
 class ThreeScene extends React.Component {
@@ -184,7 +185,7 @@ class Explorer extends React.Component {
     return (
       <React.Fragment>
         <title>{title}</title>
-        <Header headerText = {title}/>
+        <Header className = {headerCustom} headerText = {title}/>
         <IdleLogout logoutDelay = '15' warnDelay = '10' />
         <div className={sceneContainer} id='scene-container'></div>
         <ThreeScene 
