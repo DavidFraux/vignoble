@@ -10,10 +10,12 @@ import {
   bounding} from './logoutWarning.module.css'
 
 
+
 function Warning() {
+
   return(
-    <div classNameName = {wrapper}>
-      <div classNameName = {text}>Si aucune action sur l'écran n'est produite, vous allez prochainement être redirigé vers l'accueil</div>
+    <div className = {wrapper}>
+      <div className = {text}>Si aucune action sur l'écran n'est produite, vous allez prochainement être redirigé vers l'accueil</div>
       <div className={progress}>
       <div className={bounding}></div>
         <div className={left} ></div>

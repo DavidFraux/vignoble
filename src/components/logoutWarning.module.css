@@ -12,14 +12,13 @@
   background-color: red;
   padding: 0 1rem;
   margin-bottom: 0.5rem;
-  border-radius: 20px;
+  border-radius: 1rem;
 }
 
 .progress {
   position: relative;
   height: 10px;
 }
-
 
 
 .left,
@@ -35,42 +34,30 @@
   border-style: solid;
   border-width:1px;
   border-color: black;
-  border-radius: 20px;
+  border-radius: 1rem;
   width: 45rem;
 }
 
-.left {
-  background: red;
-}
-.center {
-  background: red;
-}
-.right {
-  background: red;
-}
-
 .left,
-.right {
+.right,
+.center {
   width: 1rem;
+  background: red;
 }
 
 .left {
   border-radius: 1rem 0 0 1rem;
 }
-.right {
-  border-radius: 0 1rem 1rem 0;
-}
-
 
 .center {
   left: 1rem;
-  width: 1rem;
   transform: scaleX(43);/*final position*/
   transform-origin: left;
   animation: center-animate 15s ease-out  ;
 }
 
 .right {
+  border-radius: 0 1rem 1rem 0;
   transform: translateX(44rem);/*final position*/
   animation: right-animate 15s ease-out  ;
 }

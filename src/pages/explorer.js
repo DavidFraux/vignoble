@@ -135,7 +135,7 @@ class Explorer extends React.Component {
         <IdleLogout 
           logoutDelay = '45' 
           logoutFunction = {() => this.handleLogout()}
-          warnDelay = '3' 
+          warnDelay = '30' 
           warnFunction = {() => this.handleWarning()}
           activateFunction = {() => this.handleActivate()}
           />
@@ -144,7 +144,7 @@ class Explorer extends React.Component {
           poisData = {this.poisData} 
           triggerPane = {(poiId) => this.triggerPane(poiId)} 
         />
-        {this.state.logoutWarning? <Warning/> : <div/>}
+        {this.state.logoutWarning? <Warning /> : <div/>}
         <SlidingPane 
           //className={slidePane}
           isOpen={this.state.isPaneOpen}
