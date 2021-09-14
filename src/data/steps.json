@@ -2,7 +2,7 @@
   {
     "title": "Verser",
     "short": "Verser le raisin frais dans la maie.",
-    "description": "Directement issu de la vendange le raisin frais est étalé dans la maie",
+    "description": "Directement issu de la vendange le raisin frais est étalé dans la maie.",
     "annecdote": "Les pressoirs sont construits par des charpentiers, avec des chênes locaux. Il fallait 5 à 6 chênes pour faire un pressoir. ",
     "question": "Combien d'arbres faut-il pour construire un pressoir long-fût?",
     "videoRight": "pressage0.mp4",
@@ -25,8 +25,8 @@
     "difficulty": 3
   }, {
     "title": "1er moût",
-    "short": "Un premier moût (jus) de raisin peut être recueilli.",
-    "description": "En foulant le raisin un premier moût s'écoule par l'anche. Le viticulteur puise le moût dans le jarlot pour le mettre en barrique. Le jus sera naturellement stérilisé par l'alcool qui se developpera dans le vin.",
+    "short": "Un premier moût de raisin peut être recueilli.",
+    "description": "En foulant le raisin un premier moût (jus) s'écoule par l'anche. Le viticulteur puise le moût dans le jarlot pour le mettre en barrique. Le jus sera naturellement stérilisé par l'alcool qui se developpera dans le vin.",
     "annecdote": "Le pressoir est totalement en bois, le jus ne trouve jamais de metal sur son passage, cela pourrait altérer le goût du vin",
     "question": "Avec quels matériaux le jus de raisin est-il en contact?",
     "videoRight": "pressage2.mp4",
@@ -37,8 +37,8 @@
     "difficulty": 1
   }, {
     "title": "Constituer",
-    "short": "Les grappes de raisin sont organisées en cep (tas de raisin à presser).",
-    "description": "Les raisins sont disposés de façon pyramidale dans la haute maie. Un écart de 20 à 30 cm est laissé entre les banchots de la maie et le cep. Selon le type de raisin, de la paille est installée  - au moins aux angles -  pour maintenir le cep. ",
+    "short": "Les grappes de raisin sont organisées en cep.",
+    "description": "Les raisins sont disposés en cep (tas de raisin à presser) de façon pyramidale dans la haute maie. Un écart de 20 à 30 cm est laissé entre les banchots de la maie et le cep. Selon le type de raisin, de la paille est installée  - au moins aux angles -  pour maintenir le cep. ",
     "annecdote": "Il fallait 4 à 5 personnes pour faire fonctionner un pressoir comme celui du musée",
     "question": "Combien de personnes travaillaient à faire fonctionner un grand pressoir?",
     "videoRight": "pressage3.mp4",
@@ -49,7 +49,7 @@
     "difficulty": 4
   }, {
     "title": "Habiller",
-    "short": "Le cep est couvert de pièces de bois destinées à répartir la charge de pressage.",
+    "short": "Le cep est couvert de pièces de bois pour répartir la charge de pressage.",
     "description": "La couverture sert à répartir la pression sur l'ensemble du cep. On dispose d'abord 2 perches appelées quenouilles, puis, les couchages, puis les moutons. Au-dessus encore, 2 ou 3 madriers plus courts, les blins reçoivent le fût haut.",
     "annecdote": "Oui, pour répartir la pression. Les couchages sont des madrierrs de 6 à 7 cm d'épaisseur, les moutons font 15 cm d'épaisseur",
     "question": "Est-il important que la couverture soit faite de madrier épais?",
@@ -61,8 +61,8 @@
     "difficulty": 3
   }, {
     "title": "Positionner",
-    "short": "Le fût haut (poutre mobile) du pressoir est positionné, prêt à presser.",
-    "description": "Le fût haut est verrouillé d'un coté grâce aux aiguilles. Les aiguilles sont les pièces de bois qui sont déplacées dans les fentes appelées \"lumières\". Le serrage est optimal quand le fût haut est à l'horizontal. On est alors en position pour presser.",
+    "short": "Le fût haut du pressoir est positionné, prêt à presser.",
+    "description": "Le fût haut (poutre mobile) est verrouillé d'un coté grâce aux aiguilles. Les aiguilles sont les pièces de bois qui sont déplacées dans les fentes appelées \"lumières\". Le serrage est optimal quand le fût haut est à l'horizontal. On est alors en position pour presser.",
     "annecdote": "Oui, on dit que le pressoir \"parle\" lorsque la vis en bois tourne et frotte sur l'écrou. Chaque pressoir avait une vis, un écrou et donc une \"voix\" différente. ",
     "question": "Le pressoir parle-t-il?",
     "videoRight": "pressage5.mp4",
@@ -111,7 +111,7 @@
     "title": "Manoeuvrer",
     "short": "On positionne le fût en hauteur.",
     "description": "En manipulant les aiguilles, on lève progressivement le fût en porte-à-faux au dessus de la maie pour libérer l'accès au cep.",
-    "annecdote": "Le fût du pressoir du musée se verrouille toujours avec les même cales, tandis que le film montre un plus petit pressoir qui se vérouille avec une goupille métallique du coté de la vis. C'est plus pratique, et surement moins ancien.",
+    "annecdote": "Le fût du musée se verrouille toujours avec les même cales en bois, tandis que celui du film se vérouille avec une goupille métallique du coté de la vis. C'est plus pratique, et surement moins ancien.",
     "question": "Avez-repéré les différents systèmes de verrouillage sur les vidéos? ",
     "videoRight": "pressage9.mp4",
     "posterRight": "poster9.jpg",
@@ -123,7 +123,7 @@
     "title": "Déshabiller",
     "short": "La couverture du cep est retirée.",
     "description": "La couverture du cep est retirée ",
-    "annecdote": "Pour ne pas perdre de moût, les maies sont assemblées avec précision par les charpentiers. Avant les vendanges, ils réparent et resserrent les pièces. Ils renforcent l'étanchéité des maies, en utilisant des joints en jonc ou en terre glaise. ", 
+    "annecdote": "Les maies sont assemblées avec précision. Avant les vendanges, les charpentiers réparent, resserrent les pièces et renforcent l'étanchéité en utilisant des joints en jonc ou en terre glaise.", 
     "question": "Comment assure-t-on l'étanchéité?",
     "videoRight": "pressage10.mp4",
     "posterRight": "poster10.jpg",

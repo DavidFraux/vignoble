@@ -39,9 +39,9 @@ button {
   overflow: hidden;
   border-width: 0;
   outline: none;
-  border-radius: 3px;
+  border-radius: 10px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .6);
-  background-color: #22262e;
+  background-color: #353c49;
   color: #f3f3f3;
   /* #3463ca;
   #3463cace; */
@@ -49,7 +49,7 @@ button {
 }
 
 button:hover, button:focus {
-  background-color: #1d325ece;
+  background-color: #233866ce;
 }
 
 button > * {

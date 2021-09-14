@@ -1,4 +1,5 @@
 import React from 'react';
+import { navigate } from 'gatsby'
 import Header from '../components/header.js';
 import TouchSwipeEvents from '../components/TouchSwipeEvents.js';
 import {
@@ -162,8 +163,8 @@ class PasApas extends React.Component {
         return false;
       };
       if ( targetIndex  >= dataSteps.length ) {
-        this.setState({activeStepIndex:4});
-        //#TODO somehow display onscreen message "on recommence une seconde pressée"
+        //this.setState({activeStepIndex:4});//#TODO somehow display onscreen message "on recommence une seconde pressée"
+        navigate('/');
       } 
       else {//for all the other "normal" cases
         this.setState((prevState) => ({activeStepIndex: prevState.activeStepIndex + i}));
@@ -263,7 +264,7 @@ class PasApas extends React.Component {
     return (
       <React.Fragment>
         <title>{title}</title>
-        <Header headerText = {title}/>        
+        <Header />        
         <TouchSwipeEvents onSwiped = {(i) => this.handleswipes(i)}/>
         <div className={controlsWrapper}>
           <button className = {mediaControls}             onClick={() => this.handlePrev()}>{<MdSkipPrevious size='1.5x'/>}</button>
@@ -310,7 +311,7 @@ class PasApas extends React.Component {
             </div>
             
             <div className = {`${infoBoxes} ${this.state.showInfo? fadeIn : hidden}`} >
-              <div className = {`${infoBox} ${short}`} >
+              <div className = {`${infoBox} ${short}`} style= {{backgroundColor: chroma(currentStep.color).alpha(0.3)}} >
                 {currentStep.short}
               </div>
               <div className = {donutWrapper} >
@@ -325,7 +326,7 @@ class PasApas extends React.Component {
                 <div className= {stars}>{numberToStars(currentStep.difficulty,5)}</div>
               </div>
               <div className = {`${infoBox} ${description}`}>
-                <div className = {infoBoxTitle} ><MdSettings/>  À cette étape  </div>
+                {/* <div className = {infoBoxTitle} ><MdSettings/>  À cette étape  </div> */}
                 <div>{currentStep.description}</div>
               </div>
               <div className = {saviezVous} onClick = {() => this.setState(prevState => ({ saviezVousClicked: !prevState.saviezVousClicked }))}>

@@ -115,7 +115,7 @@ class Film extends React.Component {
 
     return (
         <div className={container} >
-          <Header headerText = {title}/>
+          <Header />
           <div className={videoWrapper}>
             <video
               id='video'

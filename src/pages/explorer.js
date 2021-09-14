@@ -131,7 +131,7 @@ class Explorer extends React.Component {
     return (
       <React.Fragment>
         <title>{title}</title>
-        <Header className = {headerCustom} headerText = {title}/>
+        <Header className = {headerCustom}/>
         <IdleLogout 
           logoutDelay = '45' 
           logoutFunction = {() => this.handleLogout()}
