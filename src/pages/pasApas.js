@@ -30,6 +30,7 @@ import TimeLine from "../components/timeLine";
 import Donut from "../components/donut";
 import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext, MdInfoOutline, MdSettings, MdStar, MdStarBorder, MdTrendingUp} from 'react-icons/md';
 import { GiDuration } from 'react-icons/gi';
+import {GoLightBulb} from 'react-icons/go';
 import ReactCardFlip from 'react-card-flip';
 import dataSteps from "../data/steps.json";
 import placeHolderPict from "../images/placeHolder.png";
@@ -318,8 +319,8 @@ class PasApas extends React.Component {
                 <Donut steps={dataSteps} activeStepIndex={this.state.activeStepIndex} animate={this.state.animateDonut}/>
               </div>
               <div className = {`${infoBox} ${duration}`}>
-                <div className = {infoBoxTitle} ><GiDuration/>  Durée </div>
-                <div>environ {currentStep.duration} minutes</div>
+                <div className = {infoBoxTitle} ><GiDuration/>  Durée estimée</div>
+                <div>{currentStep.duration} minutes</div>
               </div>
               <div className = {`${infoBox} ${difficulty}`}>
                 <div className = {infoBoxTitle} ><MdTrendingUp/>  Difficulté </div>
@@ -332,13 +333,13 @@ class PasApas extends React.Component {
               <div className = {saviezVous} onClick = {() => this.setState(prevState => ({ saviezVousClicked: !prevState.saviezVousClicked }))}>
                 <ReactCardFlip isFlipped={this.state.saviezVousClicked} flipDirection="horizontal" containerStyle={{height: "100%"}}>
                   <div className = {`${infoBox} ${saviezVousFront}`}>
-                    <div className = {infoBoxTitle} ><MdInfoOutline/>  Pour les curieux</div>
+                    <div className = {infoBoxTitle} ><GoLightBulb/>  Pour les curieux</div>
                     <span>{currentStep.question}</span>
                     <div className = {infoBoxReponse}>Réponse</div>
                   </div>
 
                   <div className = {`${infoBox} ${saviezVousBack}`}>
-                    <div className = {infoBoxTitle} ><MdInfoOutline/>  Pour les curieux</div>
+                    <div className = {infoBoxTitle} ><GoLightBulb/>  Pour les curieux</div>
                     <span>{currentStep.annecdote}</span>
                   </div>
                 </ReactCardFlip>

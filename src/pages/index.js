@@ -19,7 +19,7 @@ import filmPict from '../images/logoFilm.svg'
 import explorerPict from '../images/logo3D.svg'
 import pasApasPict from '../images/logopasApas.svg'
 import logoPict from '../images/LOGO-MUSEE.png'
-import { GiDuration } from 'react-icons/gi';
+import {GiDuration} from 'react-icons/gi';
 
 
 const Acces = props => (

@@ -67,7 +67,7 @@ class Film extends React.Component {
   }
 
   handleVideoClick() {
-    this.togglePlay();
+    //this.togglePlay();
   }
 
   handleKeyDown(e) {
@@ -102,7 +102,7 @@ class Film extends React.Component {
       {id: 'jus',        target: 46,   label: '1er jus'},
       {id: 'former',     target: 69,   label: 'former'},
       {id: 'habiller',   target: 126,  label: 'habiller'},
-      {id: 'manoeuvre1', target: 192,  label: 'manoeuvrer'},
+      {id: 'manoeuvre1', target: 192,  label: 'manœuvrer'},
       {id: 'presser',    target: 220,  label: 'presser'},
       {id: 'mout',       target: 251.5,label: 'moût'},
       {id: 'manoeuvre2', target: 274,  label: 'lever'},
@@ -117,13 +117,14 @@ class Film extends React.Component {
         <div className={container} >
           <Header />
           <div className={videoWrapper}>
+            
             <video
               id='video'
-              muted
+              allow="autoplay"
               autoPlay
               preload={'auto'}
               type={'video/mp4'}
-              controls={false}
+              controls={true}
               className={video}
               ref={this.videoRef}
               onPause={() => this.handlePause() }
@@ -158,7 +159,7 @@ class Film extends React.Component {
               onClick={() => this.togglePlay()}>
                 {this.state.playing ? <MdPause size='1.5x'/> : <MdPlayArrow size='1.5x'/> }
             </button>
-            {markers}
+            {this.state.playing? <div/> : markers }
           </div> 
       </div>
     )
