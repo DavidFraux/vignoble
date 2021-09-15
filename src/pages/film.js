@@ -15,7 +15,7 @@ import videoFile from '../video/pressagev2.2.mp4';
 import videoFrSubtitleFR from '../video/pressageV2.2-FR.vtt';
 import videoFrSubtitleEN from '../video/pressagev2.2-EN.vtt';
 import Switch from "react-switch";
-
+import VideoPlayer from "../components/videoPlayer.js";
 
 function Marker(props) {
   return (
@@ -51,31 +51,6 @@ class Film extends React.Component {
     this.setState(prevState => ({ playing: !prevState.playing }));
   }
 
-  handleSwitchChange() {
-    const lang = this.state.english ? 'fr' : 'en';//the upcomming lang,
-    this.setState(prevState => ({ english: !prevState.english }));
-    const textTracks = this.videoRef.current.textTracks;
-    for (var i = 0; i < textTracks.length; i++) {
-      console.log(textTracks[i].language);
-      if (textTracks[i].language == lang) {
-         textTracks[i].mode = 'showing';
-      }
-      else {
-         textTracks[i].mode = 'hidden';
-      }
-   }
-  }
-
-  handleVideoClick() {
-    //this.togglePlay();
-  }
-
-  handleKeyDown(e) {
-    if (e.keyCode === 32) {
-      this.togglePlay();
-    }
-  }
-  
 
   renderMarkers(markerList) {
     let markersRendered = [];
@@ -117,8 +92,12 @@ class Film extends React.Component {
         <div className={container} >
           <Header />
           <div className={videoWrapper}>
-            
-            <video
+            <VideoPlayer
+              autoplay = {true}
+              type = {'video/mp4'}
+              src="https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4"
+              subtitles = {[{lang: 'fr', src: videoFrSubtitleFR}, {lang: 'en', src: videoFrSubtitleEN}]}/>
+            {/* <video
               id='video'
               allow="autoplay"
               autoPlay
@@ -131,26 +110,11 @@ class Film extends React.Component {
               onPlay={() => this.handlePlay() }
               onClick={() => this.handleVideoClick()}
               onEnded={() => this.handleEnd() }
-            >
+            > 
               <source src={videoFile} type="video/mp4"/>
-
               <track label="Français" kind="subtitles" srcLang="fr" src={videoFrSubtitleFR} default/>
               <track label="Anglais" kind="subtitles" srcLang="en" src={videoFrSubtitleEN} />
-            </video>
-            {this.state.playing? 
-              <div/> : 
-              <div 
-                id='videoPlayPause'
-                role= 'button'
-                tabIndex = {0}
-                aria-label = 'play pause the video'
-                className = {onScreenPlayPause}
-                onClick = {() => this.handleVideoClick()}
-              />
-            }
-            <label className = {langSwitchWrapper}>
-              <span>FR</span> <Switch onChange={() => this.handleSwitchChange()} checked={this.state.english} onColor='#385080' offColor='#385080' uncheckedIcon={false} checkedIcon={false} /> <span>EN</span>
-            </label>
+            </video>*/}
           </div>
           <div className={controlsWrapper}>
             <button 

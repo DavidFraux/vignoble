@@ -1,0 +1,170 @@
+:root {
+  --progress-color: #9cec5b;
+  --progressbar-color: rgba(223, 224, 226, 0.55);
+  --text-color: #a2aebb;
+  --video-player-width: 800px;
+  --easing: 0.25s;
+}
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap");
+/* .videoPlayer {
+  font-family: "Roboto Mono", monospace;
+}
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.videoPlayer {
+  padding-bottom: 0px;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  width: 100vw;
+  height: 100%;
+}
+
+.onScreenPlayPause {
+  background-image: url(../images//playButton.svg);
+  position: absolute;
+  align-self: center;
+  padding: 2rem;
+}
+
+.videoControls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: rgba(26, 29, 26, 0.75);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  transform: translateY(0);
+  transition: all ease 0.25s;
+}
+
+.videoPlayer.showControls .videoControls {
+  transform: translateY(0);
+  transition: all ease 0.25s;
+}
+
+.videoPlayer.hideControls .videoControls {
+  transform: translateY(90%);
+}
+
+.videoControls .progressBar {
+  height: 4px;
+  background-color: var(--progressbar-color);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.videoControls .progressBar .progress {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  margin: auto;
+  background-color: var(--progress-color);
+  transition: all ease var(--easing);
+}
+
+.videoOptions {
+  display: flex;
+  justify-content: left; /*space-between; */
+  align-items: center;
+  width: 100%;
+  padding: 0 0 5px 1rem;
+  box-sizing: border-box;
+}
+.controlBtn {
+  height: 40px;
+  width: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  color: var(--text-color);
+  outline: 0;
+}
+.timeControl {
+  display: flex;
+  color: var(--text-color);
+  font-size: 12px;
+}
+.time {
+  color: var(--text-color);
+  width: 64px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.startTime{
+
+}
+
+.endTime{
+
+}
+
+.volumeControls, .togglePlay, .langSwitchWrapper, .timeControl {
+  padding: 0 1rem;
+}
+
+.togglePlay{
+  display: inline-flex;
+}
+
+.volumeControls {
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+}
+
+.volumeProgressbar {
+  display: inline-flex;
+  width: 100px;
+  height: 4px;
+  background-color: var(--progressbar-color);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.volumeProgressbar .volumeProgress {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  height: 100%;
+  width: 50%;
+  background-color: var(--progress-color);
+  transition: all ease var(--easing);
+}
+
+
+.langSwitchWrapper {
+  display: flex;
+  padding-top: 0.55rem;
+  color: var(--text-color);
+}
+
+.langSwitchWrapper span{
+  padding: 0 0.5rem;
+  bottom: 0.35rem;
+  position: relative;
+;}

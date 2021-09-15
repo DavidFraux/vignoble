@@ -8,11 +8,7 @@
   position:relative;
   display: flex;
   justify-content: center;
-}
-
-.video {
-  width: 100%;
-  max-height: 94vh;
+  height: 95vh;
 }
 
 .video::cue {
