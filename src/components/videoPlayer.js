@@ -22,9 +22,6 @@ import {
 import {MdVolumeUp, MdVolumeOff, MdPlayCircleOutline, MdPauseCircleOutline}  from 'react-icons/md';
 import Switch from "react-switch";
 
-import videoFrSubtitleFR from '../video/pressagev2.2-FR.vtt';
-import videoFrSubtitleEN from '../video/pressagev2.2-EN.vtt';
-
 
 /**
  *  function that takes in the complete duration and returns the duration in format {hours:00,minutes:00,seconds:00}
@@ -88,9 +85,20 @@ class VideoPlayer extends React.Component {
       isShowingControls: true,
       langB: false,// wich language in the subtitle switch selection langA or langB
     };
+    this.buildSubtitleTracks(this.props.subtitles)//ex: [{lang: 'fr', src: videoFrSubtitleFR, default: true}, {lang: 'en', src: videoFrSubtitleEN default: false}]
   }
 
-  
+  buildSubtitleTracks(subtitles) {
+    //this.subtitleTracks = lisOfTracks.map(subtitle => <track kind="subtitles" srcLang={subtitle.lang} src={subtitle.src} />)
+    this.subtitleTracks = [];
+    for (var subtitle of subtitles) {
+      if (subtitle.default){
+        this.subtitleTracks += <track kind="subtitles" srcLang={subtitle.lang} src={subtitle.src} default/>
+      } else {
+        this.subtitleTracks += <track kind="subtitles" srcLang={subtitle.lang} src={subtitle.src} />
+      }
+    }
+  }
 
   componentDidMount() {
     console.log(this.videoRef);
@@ -295,8 +303,8 @@ class VideoPlayer extends React.Component {
             disablePictureInPicture = {true}
           >
             <source src={this.props.src} />
-            <track label="Français" kind="subtitles" srcLang="fr" src={videoFrSubtitleFR} default/>
-            <track label="Anglais" kind="subtitles" srcLang="en" src={videoFrSubtitleEN} />
+            {/* SUBTITLE TRACK */}
+            {this.subtitleTracks}
           </video>
           {this.state.isPlaying? 
               <div/> : 
@@ -311,6 +319,7 @@ class VideoPlayer extends React.Component {
             }
 
           <div className={videoControls} ref = {this.controlsRef}>
+            {/* PROGRESSBAR */}
             <div
               className={progressBar}
               ref={this.progressBar}
@@ -344,9 +353,9 @@ class VideoPlayer extends React.Component {
                   />
                 </div>
               </div>
-              {/* LANGUAGE */}
+              {/* SUBTITLE SWITCH */}
               <div className = {langSwitchWrapper}>
-                <span>FR</span> <Switch onChange={() => this.handleSwitchChange()} checked={this.state.langB} onColor='#9cec5b' offColor='#9cec5b' uncheckedIcon={false} checkedIcon={false} height={20} /> <span>EN</span>
+                <span>{this.props.subtitles[0].lang}</span> <Switch onChange={() => this.handleSwitchChange()} checked={this.state.langB} onColor='#9cec5b' offColor='#9cec5b' uncheckedIcon={false} checkedIcon={false} height={20} /> <span>{this.props.subtitles[1].lang}</span>
               </div>
               
               {/* TIME */}

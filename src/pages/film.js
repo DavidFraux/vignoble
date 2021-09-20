@@ -88,8 +88,8 @@ class Film extends React.Component {
             <VideoPlayer
               autoplay = {true}
               type = {'video/mp4'}
-              src={videoFile}//"https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4"
-              subtitles = {[{lang: 'fr', src: videoFrSubtitleFR}, {lang: 'en', src: videoFrSubtitleEN}]}
+              src={videoFile}
+              subtitles = {[{lang: 'fr', src: videoFrSubtitleFR, default: true}, {lang: 'en', src: videoFrSubtitleEN}]}
               playTime = {this.state.playTime}
               onPause={() => this.handlePause() }
               onPlay={() => this.handlePlay() }
