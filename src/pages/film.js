@@ -8,9 +8,9 @@ import {
   controlsWrapper,
   togglePlayPause } from "./film.module.css";
 import {  MdPause, MdPlayArrow, } from 'react-icons/md';
-import videoFile from '../video/pressagev2.2.mp4';
-import videoFrSubtitleFR from '../video/pressageV2.2-FR.vtt';
-import videoFrSubtitleEN from '../video/pressagev2.2-EN.vtt';
+import videoFile from '../video/pressagev2.4.mp4';
+import videoFrSubtitleFR from '../video/pressageFR.vtt';
+import videoFrSubtitleEN from '../video/pressageEN.vtt';
 import VideoPlayer from "../components/videoPlayer.js";
 
 function Marker(props) {
