@@ -16,7 +16,7 @@
   "ecrou" : {
     "name": "Écrou" ,
     "position": [-0.16, 1.8, -3.2],
-    "shortDescription": "La vis et l\" écrou chantent sous l\" effort." ,
+    "shortDescription": "La vis et l'écrou chantent sous l'effort." ,
     "content": "En action, chargé, le pressoir \"parle\" lorsque la vis en bois tourne : elle frotte sur l'écrou. Chaque pressoir a une vis, un écrou et donc une \"voix\" différente.",
     "image": "ecrou.jpg"
   },
