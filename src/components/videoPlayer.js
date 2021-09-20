@@ -95,13 +95,24 @@ class VideoPlayer extends React.Component {
   componentDidMount() {
     console.log(this.videoRef);
     //briefly show the controls so the user knows it exists
-    this.timerControlsAppearAtStart = setTimeout(() => { this.setState({isShowingControls: false}) }, 1500);
+    this.timerControlsAppearAtStart = setTimeout(() => { this.setState({isShowingControls: false}) }, 2500);
   }
 
   componentWillUnmount() {
     clearTimeout(this.timerControlsAppearAtStart);
     this.setState({ isPlaying: false });
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.playTime !== prevProps.playTime) {//this is used to set chapter access from outside the component 
+      this.videoRef.current.currentTime = this.props.playTime;
+      }
+    if (this.props.play !== prevProps.play) {//this is used to set play/pause access from outside the component
+      this.props.play ? this.handlePlay() : this.handlePause();
+    }
+    }
+  
+    
 
   /**
    *onLoadedData - we need to update the completeDurationInSeconds and completeDuration
@@ -134,9 +145,10 @@ class VideoPlayer extends React.Component {
   /**
    *onEnded - once the video is ended set the isPlaying state to false
    */
-  updateEnded = () => {
-    this.setState({ isPlaying: false, isShowingControls: true });
-    this.videoRef.current.currentTime = 0;
+  onEnded = () => {
+    // this.setState({ isPlaying: false, isShowingControls: true });
+    // this.videoRef.current.currentTime = 0;
+    this.props.onEnded();
   };
 
   /*
@@ -146,6 +158,7 @@ class VideoPlayer extends React.Component {
     this.videoRef.current.play();
     this.setState({ isPlaying: true });
     this.setState({ isShowingControls: false });
+    this.props.onPlay();
   };
 
   /**
@@ -156,6 +169,7 @@ class VideoPlayer extends React.Component {
     this.videoRef.current.pause();
     this.setState({ isPlaying: false });
     this.setState({ isShowingControls: true });
+    this.props.onPause();
   };
 
   /**
@@ -273,9 +287,10 @@ class VideoPlayer extends React.Component {
             preload={'auto'}
             type={this.props.type}
             onPlay = {this.handlePlay}
+            onPause  ={this.handlePause}
             onTimeUpdate={this.updateCurrentDuration}
             onLoadedData={this.updateCompleteDuration}
-            onEnded={this.updateEnded}
+            onEnded={this.onEnded}
             onVolumeChange={this.updateVolume}
             disablePictureInPicture = {true}
           >
@@ -330,9 +345,9 @@ class VideoPlayer extends React.Component {
                 </div>
               </div>
               {/* LANGUAGE */}
-              <label className = {langSwitchWrapper}>
+              <div className = {langSwitchWrapper}>
                 <span>FR</span> <Switch onChange={() => this.handleSwitchChange()} checked={this.state.langB} onColor='#9cec5b' offColor='#9cec5b' uncheckedIcon={false} checkedIcon={false} height={20} /> <span>EN</span>
-              </label>
+              </div>
               
               {/* TIME */}
               <div className={timeControl}>

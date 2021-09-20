@@ -5,16 +5,12 @@ import {
   goToMarkerControl,
   container,
   videoWrapper,
-  video,
-  onScreenPlayPause,
   controlsWrapper,
-  togglePlayPause,
-  langSwitchWrapper } from "./film.module.css";
+  togglePlayPause } from "./film.module.css";
 import {  MdPause, MdPlayArrow, } from 'react-icons/md';
 import videoFile from '../video/pressagev2.2.mp4';
 import videoFrSubtitleFR from '../video/pressageV2.2-FR.vtt';
 import videoFrSubtitleEN from '../video/pressagev2.2-EN.vtt';
-import Switch from "react-switch";
 import VideoPlayer from "../components/videoPlayer.js";
 
 function Marker(props) {
@@ -29,10 +25,8 @@ class Film extends React.Component {
     super(props);
     this.state = {
       playing: true,
-      english: false,
+      playTime: 0,
     };
-    this.videoRef = React.createRef();
-//    this.baseURL = 'https://uncloud.univ-nantes.fr/index.php/s/eL8zoRTzJMB9L53/download?path=/&files=';
   }
 
   handlePause() {
@@ -44,7 +38,7 @@ class Film extends React.Component {
   }
 
   handleEnd() {
-    setTimeout(() => navigate('/'), 1500 );
+    setTimeout(() => navigate('/'), 2500 );
   }
 
   togglePlay() {
@@ -61,11 +55,10 @@ class Film extends React.Component {
   }
 
   handleMarkerClick(i) {
-    this.videoRef.current.currentTime = i;
+    this.setState({playTime: i})
   }
 
   componentDidUpdate() {
-    this.state.playing? this.videoRef.current.play() : this.videoRef.current.pause()
   }
 
   
@@ -95,26 +88,14 @@ class Film extends React.Component {
             <VideoPlayer
               autoplay = {true}
               type = {'video/mp4'}
-              src="https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4"
-              subtitles = {[{lang: 'fr', src: videoFrSubtitleFR}, {lang: 'en', src: videoFrSubtitleEN}]}/>
-            {/* <video
-              id='video'
-              allow="autoplay"
-              autoPlay
-              preload={'auto'}
-              type={'video/mp4'}
-              controls={true}
-              className={video}
-              ref={this.videoRef}
+              src={videoFile}//"https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4"
+              subtitles = {[{lang: 'fr', src: videoFrSubtitleFR}, {lang: 'en', src: videoFrSubtitleEN}]}
+              playTime = {this.state.playTime}
               onPause={() => this.handlePause() }
               onPlay={() => this.handlePlay() }
-              onClick={() => this.handleVideoClick()}
               onEnded={() => this.handleEnd() }
-            > 
-              <source src={videoFile} type="video/mp4"/>
-              <track label="Français" kind="subtitles" srcLang="fr" src={videoFrSubtitleFR} default/>
-              <track label="Anglais" kind="subtitles" srcLang="en" src={videoFrSubtitleEN} />
-            </video>*/}
+              play = {this.state.playing}
+            />
           </div>
           <div className={controlsWrapper}>
             <button 
