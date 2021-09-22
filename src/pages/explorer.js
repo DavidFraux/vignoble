@@ -101,6 +101,13 @@ class ThreeScene extends React.Component {
 }
 
 
+
+
+
+
+
+
+
 class Explorer extends React.Component {
   constructor(props) {
     super(props);
@@ -139,8 +146,10 @@ class Explorer extends React.Component {
       let poisObj = {}
       for (let poi of pois) {
         poisObj[poi.id] = poi
-      }
-      setTimeout(() => this.setState({poisData : poisObj, currentPoiId : Object.keys(poisObj)[0],}), 1000 )
+      };
+      //this.setState({poisData : poisObj, currentPoiId : Object.keys(poisObj)[0],});
+        //if too fast but flashing: bad sensation: better waiting a bit
+      setTimeout(() => this.setState({poisData : poisObj, currentPoiId : Object.keys(poisObj)[0],}), 800 )
     }); 
   }
 
@@ -157,37 +166,38 @@ class Explorer extends React.Component {
           warnFunction = {() => this.handleWarning()}
           activateFunction = {() => this.handleActivate()}
           />
-        {this.state.poisData ? 
-          <React.Fragment>
-            <div className={sceneContainer} id='scene-container'></div>
-            <ThreeScene 
-              poisData = {this.state.poisData} 
-              triggerPane = {(poiId) => this.triggerPane(poiId)} 
-            /> 
-            {this.state.logoutWarning? <Warning /> : <div/>}
-            <SlidingPane 
-              className={slidePane}//background color not available option
-              isOpen={this.state.isPaneOpen}
-              title={this.state.poisData[this.state.currentPoiId].targetName}
-              subtitle={this.state.poisData[this.state.currentPoiId].shortDescription}
-              width="400px"
-              onRequestClose={() => {
-                // triggered on "<" on left top click or on outside click
-                this.setState({ isPaneOpen: false });
-              }}
-              >
-              <div className = {paneTextContent}>{this.state.poisData[this.state.currentPoiId].description}</div>
-              <img 
-                alt = {this.state.poisData[this.state.currentPoiId].image[0].alternatieText} 
-                src = {process.env.GATSBY_API_URL + this.state.poisData[this.state.currentPoiId].image[0].formats.large.url}
-              />
-            </SlidingPane>
-          </React.Fragment>
-          :
-          <div className = {waitingGrey}>
-            <div><Loading /></div>
-          </div>
-        }
+        <div className={sceneContainer} id='scene-container'>
+          {this.state.logoutWarning? <Warning /> : <div/>}
+          {this.state.poisData ?
+            <React.Fragment>
+              <ThreeScene 
+                poisData = {this.state.poisData} 
+                triggerPane = {(poiId) => this.triggerPane(poiId)} 
+              /> 
+              <SlidingPane 
+                className={slidePane}//background color not available option
+                isOpen={this.state.isPaneOpen}
+                title={this.state.poisData[this.state.currentPoiId].targetName}
+                subtitle={this.state.poisData[this.state.currentPoiId].shortDescription}
+                width="400px"
+                onRequestClose={() => {
+                  // triggered on "<" on left top click or on outside click
+                  this.setState({ isPaneOpen: false });
+                }}
+                >
+                <div className = {paneTextContent}>{this.state.poisData[this.state.currentPoiId].description}</div>
+                <img 
+                  alt = {this.state.poisData[this.state.currentPoiId].image[0].alternatieText} 
+                  src = {process.env.GATSBY_API_URL + this.state.poisData[this.state.currentPoiId].image[0].formats.large.url}
+                />
+              </SlidingPane>
+            </React.Fragment>
+            :
+            <div className = {waitingGrey}>
+              <div><Loading /></div>
+            </div>
+          }
+        </div>
       </React.Fragment>
     )
   }
