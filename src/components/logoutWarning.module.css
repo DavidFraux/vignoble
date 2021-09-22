@@ -57,6 +57,7 @@
 }
 
 .right {
+  left: 1rem;
   border-radius: 0 1rem 1rem 0;
   transform: translateX(44rem);/*final position*/
   animation: right-animate 15s ease-out  ;
@@ -74,10 +75,10 @@
 
 @keyframes right-animate {
   0% {
-    transform: translateX(1rem);
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(44rem);
+    transform: translateX(43rem);
   }
 }
 

@@ -70,11 +70,11 @@ class World {
 
   createPois (poisData) {
     //creates pois from high level defined pois data
-    //creates {id1:poi3Dobject1; id2:poi3Dobject2}  from {id1:poiData1; id2:poiData2}
-    for ( const id in poisData ) {
-      const threeObject = createPoi(id, poisData[id]);
-      this.pois[id] = threeObject;
-      this.models[id] = threeObject;
+    //creates {id1:poi3Dobject1; id2:poi3Dobject2}  from {id1:poiData1, id2:poiData2}
+    for ( const  poi of Object.values(poisData) ) {
+      const threeObject = createPoi(poi.id, poi);
+      this.pois[poi.id] = threeObject;
+      this.models[poi.id] = threeObject;
       loop.updatables.push(threeObject);
       scene.add(threeObject);
     };

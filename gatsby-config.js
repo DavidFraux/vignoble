@@ -1,9 +1,12 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    mediaBaseURL: `https://uncloud.univ-nantes.fr/index.php/s/eL8zoRTzJMB9L53/download?path=/&files=`,
+    title: `Les pressoirs du musée du Vignoble Nantais`,
+    description: `Une application semi-statique avec du contenu 3D et un API locale`,
+    author: `Matthieu Quantin @EcoleCentraleDeNantes`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -21,7 +24,7 @@ module.exports = {
       options: {
         pathToConfigModule: `src/utils/typography`,
       },
-    },
+    },  
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

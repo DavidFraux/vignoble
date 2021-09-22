@@ -8,14 +8,25 @@ import {
   togglePlayPause,
   sceneContainer,
   paneTextContent,
-  headerCustom,} from "./explorer.module.css";
+  headerCustom,
+  slidePane,
+  waitingGrey,} from "./explorer.module.css";
 import { MdPause, MdPlayArrow, } from 'react-icons/md';
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import IdleLogout from '../components/IdleLogout.js';
 import Warning from '../components/logoutWarning.js';
-import dataPois from "../data/pois.json";
-import { render } from 'react-dom';
+import Loading from '../components/loading.js'
+
+async function fetchAPI (){
+  const response = await fetch(`${process.env.GATSBY_API_URL}/pois`)
+  //.then((res) => res.json())
+  //.then((res) => {  console.log('in', res) })
+  .catch((err) => {console.log(err)});
+  const pois = await response.json();
+  return pois;
+}
+
 
 
 class ThreeScene extends React.Component {
@@ -49,10 +60,10 @@ class ThreeScene extends React.Component {
       buttons.push(
         <button 
           key={id} 
-          id={poiData.name} 
+          id={poiData.targetName} 
           className = {goToMarkerControl}  
           onClick={() => this.goTo(id)}>
-          {poiData.buttonName ? poiData.buttonName : poiData.name}
+          {poiData.buttonName ? poiData.buttonName : poiData.targetName}
         </button>
         );
     };
@@ -95,10 +106,10 @@ class Explorer extends React.Component {
     super(props);
     this.state = {
       isPaneOpen: false,
-      currentPoiId : 'barrique',
+      currentPoiId : null,
       logoutWarning : false,
+      poisData : null,
     };
-    this.poisData = dataPois;
   }
 
 
@@ -123,14 +134,21 @@ class Explorer extends React.Component {
     console.log("vous allez être déconnecté");
   }
 
+  componentDidMount() {
+    fetchAPI().then( pois => {
+      let poisObj = {}
+      for (let poi of pois) {
+        poisObj[poi.id] = poi
+      }
+      setTimeout(() => this.setState({poisData : poisObj, currentPoiId : Object.keys(poisObj)[0],}), 2500 )
+    }); 
+  }
 
 
   render() {
-    const title = 'Explorer le long-fût du musée';
-    const currentPoi = this.poisData[this.state.currentPoiId];
     return (
       <React.Fragment>
-        <title>{title}</title>
+        <title>Explorer le long fut du musée</title>
         <Header className = {headerCustom}/>
         <IdleLogout 
           logoutDelay = '45' 
@@ -139,26 +157,37 @@ class Explorer extends React.Component {
           warnFunction = {() => this.handleWarning()}
           activateFunction = {() => this.handleActivate()}
           />
-        <div className={sceneContainer} id='scene-container'></div>
-        <ThreeScene 
-          poisData = {this.poisData} 
-          triggerPane = {(poiId) => this.triggerPane(poiId)} 
-        />
-        {this.state.logoutWarning? <Warning /> : <div/>}
-        <SlidingPane 
-          //className={slidePane}
-          isOpen={this.state.isPaneOpen}
-          title={currentPoi.name}
-          subtitle={currentPoi.shortDescription}
-          width="400px"
-          onRequestClose={() => {
-            // triggered on "<" on left top click or on outside click
-            this.setState({ isPaneOpen: false });
-          }}
-          >
-          <div className = {paneTextContent}>{currentPoi.content}</div>
-          <img alt = {currentPoi.name} src = {currentPoi.image}/>
-        </SlidingPane>
+        {this.state.poisData ? 
+          <React.Fragment>
+            <div className={sceneContainer} id='scene-container'></div>
+            <ThreeScene 
+              poisData = {this.state.poisData} 
+              triggerPane = {(poiId) => this.triggerPane(poiId)} 
+            /> 
+            {this.state.logoutWarning? <Warning /> : <div/>}
+            <SlidingPane 
+              className={slidePane}//background color not available option
+              isOpen={this.state.isPaneOpen}
+              title={this.state.poisData[this.state.currentPoiId].targetName}
+              subtitle={this.state.poisData[this.state.currentPoiId].shortDescription}
+              width="400px"
+              onRequestClose={() => {
+                // triggered on "<" on left top click or on outside click
+                this.setState({ isPaneOpen: false });
+              }}
+              >
+              <div className = {paneTextContent}>{this.state.poisData[this.state.currentPoiId].description}</div>
+              <img 
+                alt = {this.state.poisData[this.state.currentPoiId].image[0].alternatieText} 
+                src = {process.env.GATSBY_API_URL + this.state.poisData[this.state.currentPoiId].image[0].formats.large.url}
+              />
+            </SlidingPane>
+          </React.Fragment>
+          :
+          <div className = {waitingGrey}>
+            <div><Loading /></div>
+          </div>
+        }
       </React.Fragment>
     )
   }
@@ -166,3 +195,5 @@ class Explorer extends React.Component {
 
 
 export default Explorer
+
+

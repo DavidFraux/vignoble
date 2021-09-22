@@ -27,7 +27,7 @@ function dynascale2(delta, meshObj) {
 
 
 
-function createPoi(id, poiData) {
+function createPoi(id, poi) {
   const customMaterial = new ShaderMaterial( 
     {
         uniforms: 
@@ -45,8 +45,8 @@ function createPoi(id, poiData) {
   const meshObj = new Mesh(geometry);
   //createMaterial(meshObj);
   meshObj.material = customMaterial;
-  meshObj.position.set(...poiData.position);
-  meshObj.name = poiData.name;
+  meshObj.position.set(...poi.positionXYZ);
+  meshObj.name = poi.targetName;
   meshObj.keyname = id;
   meshObj.isGrowing = true;
   const initScale = Math.random() * maxSize-0.1  + 1;

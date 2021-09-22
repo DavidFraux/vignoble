@@ -1,4 +1,5 @@
 .sceneContainer{
+  background-color: grey;
   height: 100vh;
 }
 
@@ -36,3 +37,14 @@
   width: 100%;
 }
 
+.slidePane {
+  background-color: papayawhip;
+}
+
+.waitingGrey {
+  background-color: grey;
+  height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
