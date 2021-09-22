@@ -17,26 +17,19 @@ import "react-sliding-pane/dist/react-sliding-pane.css";
 import IdleLogout from '../components/IdleLogout.js';
 import Warning from '../components/logoutWarning.js';
 import Loading from '../components/loading.js'
+import fetchAPI from '../components/fetchREST.js';
 
-async function fetchAPI (){
-  const response = await fetch(`${process.env.GATSBY_API_URL}/pois`)
-  //.then((res) => res.json())
-  //.then((res) => {  console.log('in', res) })
-  .catch((err) => {console.log(err)});
-  const pois = await response.json();
-  return pois;
-}
-
-
-
-class ThreeScene extends React.Component {
+class Explorer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isPaneOpen: false,
+      currentPoiId : null,
+      logoutWarning : false,
+      poisData : null,
       isLooping : true,
     };
-  };
-
+  }
 
   toogleLoop = () => {
     this.setState((prevState) => ({isLooping: !prevState.isLooping}));
@@ -50,13 +43,13 @@ class ThreeScene extends React.Component {
 
   goTo = (poiId) => {
     this.world.goTo(poiId);
-    this.props.triggerPane(poiId);
+    this.triggerPane(poiId);
   };
 
   renderGoToButtons() {
     let buttons = []
-    for (const id in this.props.poisData) {
-      const poiData = this.props.poisData[id];
+    for (const id in this.state.poisData) {
+      const poiData = this.state.poisData[id];
       buttons.push(
         <button 
           key={id} 
@@ -72,54 +65,8 @@ class ThreeScene extends React.Component {
 
   handleClickedPoi(poiId) {
     this.world.goTo(poiId);
-    this.props.triggerPane(poiId);
+    this.triggerPane(poiId);
   }
-
-  async componentDidMount() {
-    const callback = (clickedPoiId) => {
-      this.handleClickedPoi(clickedPoiId)
-    };
-    const sceneContainer = document.querySelector('#scene-container');
-    this.world = new World(sceneContainer, this.props.poisData, callback);
-    await this.world.init();//#TODO error handling with async react app
-    this.world.start();
-  };
-
-  componentWillUnmount() {
-    this.world.stop();
-  }
-
-  render() {
-    return (
-      <div className={controlsWrapper}>
-        <button className = {togglePlayPause} onClick={this.toogleLoop}>{this.state.isLooping ? <MdPause size='1.5x'/> : <MdPlayArrow size='1.5x'/>}</button>
-        <button className = {goToMarkerControl}  onClick={this.resetCam}>Vue d'ensemble</button>
-        {this.renderGoToButtons()}
-      </div>
-    );
-  }
-}
-
-
-
-
-
-
-
-
-
-class Explorer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isPaneOpen: false,
-      currentPoiId : null,
-      logoutWarning : false,
-      poisData : null,
-    };
-  }
-
-
 
   triggerPane = (poiId) => {
     this.setState({ 
@@ -142,15 +89,25 @@ class Explorer extends React.Component {
   }
 
   componentDidMount() {
-    fetchAPI().then( pois => {
+    const callback = (clickedPoiId) => {
+      this.handleClickedPoi(clickedPoiId)
+    };
+    const sceneContainer = document.querySelector('#scene-container');
+    fetchAPI('pois').then( pois => {
       let poisObj = {}
       for (let poi of pois) {
         poisObj[poi.id] = poi
       };
+      this.world = new World(sceneContainer, poisObj, callback);
+      this.world.init().then ( this.world.start() ).catch((err) => { console.log(err); alert('ERROR : 3D model cannot load')});
       //this.setState({poisData : poisObj, currentPoiId : Object.keys(poisObj)[0],});
         //if too fast but flashing: bad sensation: better waiting a bit
       setTimeout(() => this.setState({poisData : poisObj, currentPoiId : Object.keys(poisObj)[0],}), 800 )
     }); 
+  }
+
+  componentWillUnmount() {
+    this.world.stop();
   }
 
 
@@ -170,10 +127,11 @@ class Explorer extends React.Component {
           {this.state.logoutWarning? <Warning /> : <div/>}
           {this.state.poisData ?
             <React.Fragment>
-              <ThreeScene 
-                poisData = {this.state.poisData} 
-                triggerPane = {(poiId) => this.triggerPane(poiId)} 
-              /> 
+              <div className={controlsWrapper}>
+                <button className = {togglePlayPause} onClick={this.toogleLoop}>{this.state.isLooping ? <MdPause size='1.5x'/> : <MdPlayArrow size='1.5x'/>}</button>
+                <button className = {goToMarkerControl}  onClick={this.resetCam}>Vue d'ensemble</button>
+                {this.renderGoToButtons()}
+              </div>
               <SlidingPane 
                 className={slidePane}//background color not available option
                 isOpen={this.state.isPaneOpen}
