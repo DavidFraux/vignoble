@@ -140,7 +140,7 @@ class Explorer extends React.Component {
       for (let poi of pois) {
         poisObj[poi.id] = poi
       }
-      setTimeout(() => this.setState({poisData : poisObj, currentPoiId : Object.keys(poisObj)[0],}), 2500 )
+      setTimeout(() => this.setState({poisData : poisObj, currentPoiId : Object.keys(poisObj)[0],}), 1000 )
     }); 
   }
 
