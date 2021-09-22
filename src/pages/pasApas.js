@@ -16,7 +16,7 @@ import {
   hidden,
   donutWrapper,
   description,
-  short,
+  shortDescription,
   duration,
   difficulty,
   stars,
@@ -24,7 +24,7 @@ import {
   saviezVousFront,
   saviezVousBack,
   infoBoxTitle,
-  infoBoxReponse,
+  infoBoxResponse,
   fadeOut,} from './pasApas.module.css';
 import TimeLine from "../components/timeLine";
 import Donut from "../components/donut";
@@ -312,8 +312,8 @@ class PasApas extends React.Component {
             </div>
             
             <div className = {`${infoBoxes} ${this.state.showInfo? fadeIn : hidden}`} >
-              <div className = {`${infoBox} ${short}`} style= {{backgroundColor: chroma(currentStep.color).alpha(0.3)}} >
-                {currentStep.short}
+              <div className = {`${infoBox} ${shortDescription}`} style= {{backgroundColor: chroma(currentStep.color).alpha(0.3)}} >
+                {currentStep.shortDescription}
               </div>
               <div className = {donutWrapper} >
                 <Donut steps={dataSteps} activeStepIndex={this.state.activeStepIndex} animate={this.state.animateDonut}/>
@@ -335,12 +335,12 @@ class PasApas extends React.Component {
                   <div className = {`${infoBox} ${saviezVousFront}`}>
                     <div className = {infoBoxTitle} ><GoLightBulb/>  Pour les curieux</div>
                     <span>{currentStep.question}</span>
-                    <div className = {infoBoxReponse}>Réponse</div>
+                    <div className = {infoBoxResponse}>Réponse</div>
                   </div>
 
                   <div className = {`${infoBox} ${saviezVousBack}`}>
                     <div className = {infoBoxTitle} ><GoLightBulb/>  Pour les curieux</div>
-                    <span>{currentStep.annecdote}</span>
+                    <span>{currentStep.response}</span>
                   </div>
                 </ReactCardFlip>
               </div>

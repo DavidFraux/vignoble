@@ -99,7 +99,7 @@
   padding-left: 1rem;
 }
 
-.short {
+.shortDescription {
   background-color: transparent;
   border: 1px dotted black;
   grid-column: 1/5 ;
@@ -134,7 +134,7 @@
   font-size: 1.05em;
 }
 
-.saviezVous .infoBoxReponse{
+.saviezVous .infoBoxResponse{
   position: absolute;
   bottom: 0.5em;
   right: 0.5em;
