@@ -15,8 +15,8 @@ async function fetchAPI (collection){
   //.then((res) => res.json())
   //.then((res) => {  console.log('in', res) })
   .catch((err) => {console.log(err); alert('ERROR: API data cannot be reached');});
-  const pois = await response.json();
-  return pois;
+  const res = await response.json();
+  return res;
 }
 
 export default fetchAPI

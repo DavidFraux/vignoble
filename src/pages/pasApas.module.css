@@ -145,3 +145,11 @@
   padding: 6px 14px; 
 }
 
+.waiting {
+  background-color: rgb(255, 255, 255);
+  height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index:1;
+}

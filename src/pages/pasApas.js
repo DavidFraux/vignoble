@@ -25,32 +25,22 @@ import {
   saviezVousBack,
   infoBoxTitle,
   infoBoxResponse,
-  fadeOut,} from './pasApas.module.css';
+  fadeOut,
+  waiting} from './pasApas.module.css';
 import TimeLine from "../components/timeLine";
 import Donut from "../components/donut";
 import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext, MdInfoOutline, MdSettings, MdStar, MdStarBorder, MdTrendingUp} from 'react-icons/md';
 import { GiDuration } from 'react-icons/gi';
 import {GoLightBulb} from 'react-icons/go';
 import ReactCardFlip from 'react-card-flip';
-import dataSteps from "../data/steps.json";
 import placeHolderPict from "../images/placeHolder.png";
 import placeHolderVideo from "../video/placeHolder.webm";
 import crypto from 'crypto';
 import chroma from "chroma-js";
+import fetchAPI from '../components/fetchREST.js';
+import Loading from '../components/loading.js'
 
 const title = 'Le fonctionnement du pressoir long-fut pas à pas';
-const videoFolder = require.context('../video/pasApas', false, /./ , 'lazy');
-const postersFolder = require.context('../images/videoPosters', false, /./ , 'lazy');//'sync' sinon 'lazy': the underlying files will be loaded synchronously -> using promises
-
-
-//helps the understanding of webpack loader
-// postersFolder.keys().forEach(filePath => {
-//   // load the component
-// //  postersFolder(filePath).then(module => {
-// //         // module.default is the vue component
-// //     console.log(module.default);
-// //   });
-// });
 
 
 function numberToStars(number, maxStars){
@@ -74,7 +64,8 @@ class PasApas extends React.Component {
     this.state = {
       isMounted : true,
       activeStepIndex: 0,
-      step:{},
+      stepsData: null,
+      apiFetched: false,
       Lready : false,
       Rready : false,
       Lended: false,
@@ -90,48 +81,8 @@ class PasApas extends React.Component {
     this.videoR = React.createRef();
     this.timeOuts = [];
     this.readingTimeOut = null;
-    this.buildFonctionnalSteps();
   }
   
-  buildFonctionnalSteps() {
-    const colors = chroma.scale(
-      ['deeppink','teal','yellow','red']//['red','yellow','blue','darkgreen','deeppink' ]
-    ).mode('hsv').colors(dataSteps.length);
-
-    for (const [index, step] of dataSteps.entries()) {
-      postersFolder("./"+step.posterLeft).then(module => {
-        step.posterLeftFile = module.default;
-      }).catch(err => {
-        console.log(err);
-        step.posterLeftFile = placeHolderPict;
-      });
-      postersFolder("./"+step.posterRight).then(module => {
-        step.posterRightFile = module.default;
-      }).catch(err => {
-        console.log(err);
-        step.posterRightFile = placeHolderPict;
-      });
-      videoFolder("./"+step.videoLeft).then(module => {
-        step.videoLeftFile = module.default;
-      }).catch(err => {
-        console.log(err);
-        step.videoLeftFile = placeHolderVideo;
-      });
-      videoFolder("./"+step.videoRight).then(module => {
-        step.videoRightFile = module.default;
-      }).catch(err => {
-        console.log(err);
-        step.videoRightFile = placeHolderVideo;
-      });
-      step.color = colors[index];
-      if (!step.id) {step.id = crypto.randomBytes(20).toString('hex')};
-      step.onClick = (e) => {//the followin manage the onClick behavious for each step of the timeLine
-        e.preventDefault();
-        this.onClickStep(index);
-      };
-    } 
-  }
-
   resetVideoStates() {
     this.setState({
       Lready : false,
@@ -163,7 +114,7 @@ class PasApas extends React.Component {
       if ( targetIndex < 0 ) {
         return false;
       };
-      if ( targetIndex  >= dataSteps.length ) {
+      if ( targetIndex  >= this.state.stepsData.length ) {
         //this.setState({activeStepIndex:4});//#TODO somehow display onscreen message "on recommence une seconde pressée"
         navigate('/');
       } 
@@ -221,7 +172,7 @@ class PasApas extends React.Component {
     if (this.state.paused) {
       this.playBoth()
       this.setState({ paused: false});
-      if (this.state.Lended && this.state.Rended) {this.readingTimeOut = setTimeout(() => this.navigateSteps(1), 5000 );}//if timeOut was set, reset something shorter, just in order not to be "stucked" in a step for "lost" people
+      if (this.state.Lended && this.state.Rended) {this.readingTimeOut = setTimeout(() => this.navigateSteps(1), 5000 );}//if paused while reading, then go to next step 5 sec after play
     } else {
       if (this.readingTimeOut) {clearTimeout(this.readingTimeOut)}; //avoid navigating to next step while paused
       this.setState({ Lplaying: false, Rplaying: false, paused: true, });
@@ -247,12 +198,29 @@ class PasApas extends React.Component {
   }
 
   componentDidUpdate() {
-    this.state.Lplaying ? this.videoL.current.play() : this.videoL.current.pause();
-    this.state.Rplaying ? this.videoR.current.play() : this.videoR.current.pause();
+      this.state.Lplaying ? this.videoL.current.play() : this.videoL.current.pause();
+      this.state.Rplaying ? this.videoR.current.play() : this.videoR.current.pause();
   }
 
   componentDidMount() {
     this.setState({isMounted : true, showInfo: false});
+    // BUILD FONCTIONNAL STEPS //
+    fetchAPI('steps').then( apiSteps => {
+      const colors = chroma.scale(
+        ['deeppink','teal','yellow','red']//['red','yellow','blue','darkgreen','deeppink' ]
+      ).mode('hsv').colors(apiSteps.length);
+      apiSteps.sort((a, b) => a.stepNum - b.stepNum);// sort the array with ascending stepNum
+      for (const [index, step] of apiSteps.entries()) {
+        step.color = colors[index];
+        step.onClick = (e) => {//the followin manage the onClick behavious for each step of the timeLine
+          e.preventDefault();
+          this.onClickStep(index);
+        };
+      };
+      //this.setState({stepsData : apiSteps , apiFetched: true});
+        //firsts renders are without this state, if too fast, it's flashing: bad sensation: better waiting a bit
+      setTimeout(() => this.setState({stepsData : apiSteps , apiFetched: true}), 1000 )
+    }); 
   }
 
   componentWillUnmount() {
@@ -261,7 +229,11 @@ class PasApas extends React.Component {
   }
 
   render() {
-    const currentStep = dataSteps[this.state.activeStepIndex];
+    const currentStep = 
+      this.state.apiFetched? 
+      this.state.stepsData[this.state.activeStepIndex] 
+      : 
+      {id:null, videoLeft: null, posterLeft: null, videoRight: null, posterRight: null, color: '#ffff'};
     return (
       <React.Fragment>
         <title>{title}</title>
@@ -273,16 +245,23 @@ class PasApas extends React.Component {
           <button className = {mediaControls}             onClick={() => this.handleNext()}>{<MdSkipNext size='1.5x'/>}</button>
         </div>
         
-        <TimeLine steps={dataSteps} activeStepIndex={this.state.activeStepIndex} navigateSteps = {(i) => this.navigateSteps(i)}/>
+        
+          {this.state.apiFetched ?
+            <TimeLine steps={this.state.stepsData} activeStepIndex={this.state.activeStepIndex} navigateSteps = {(i) => this.navigateSteps(i)}/> 
+            : 
+            <div className = {waiting}>
+              <div><Loading dark={true} /></div>
+            </div>
+          }
           <React.Fragment>
             <div className={videosWrapper}>
               <video 
                   muted
                   key={currentStep.id+'L'}
-                  src={currentStep.videoLeftFile}
-                  poster={currentStep.posterLeftFile}
+                  src={currentStep.videoLeft ? process.env.GATSBY_API_URL + currentStep.videoLeft.url : placeHolderVideo}
+                  poster={currentStep.posterLeft ? process.env.GATSBY_API_URL + currentStep.posterLeft.url : placeHolderPict}
                   preload={'auto'}
-                  type={'video/mp4'}
+                  type={'video/webm'}
                   id={videoLeft}
                   className={`${videoLeft} ${video} ${this.state.Lended? fadeOut : null}`}
                   ref={this.videoL}
@@ -296,8 +275,8 @@ class PasApas extends React.Component {
               <video
                   muted
                   key={currentStep.id+'R'}
-                  src={currentStep.videoRightFile}
-                  poster={currentStep.posterRightFile}
+                  src={currentStep.videoRight ? process.env.GATSBY_API_URL + currentStep.videoRight.url : placeHolderVideo }
+                  poster={currentStep.posterRight ? process.env.GATSBY_API_URL + currentStep.posterRight.url : placeHolderPict }
                   preload={'auto'}
                   type={'video/mp4'}
                   id={videoRight}
@@ -313,10 +292,15 @@ class PasApas extends React.Component {
             
             <div className = {`${infoBoxes} ${this.state.showInfo? fadeIn : hidden}`} >
               <div className = {`${infoBox} ${shortDescription}`} style= {{backgroundColor: chroma(currentStep.color).alpha(0.3)}} >
+              {/* <div className = {`${infoBox} ${shortDescription}`}> */}
                 {currentStep.shortDescription}
               </div>
               <div className = {donutWrapper} >
-                <Donut steps={dataSteps} activeStepIndex={this.state.activeStepIndex} animate={this.state.animateDonut}/>
+                {this.state.apiFetched ? 
+                  <Donut steps={this.state.stepsData} activeStepIndex={this.state.activeStepIndex} animate={this.state.animateDonut}/>
+                  :
+                  <Loading/>
+                }
               </div>
               <div className = {`${infoBox} ${duration}`}>
                 <div className = {infoBoxTitle} ><GiDuration/>  Durée estimée</div>

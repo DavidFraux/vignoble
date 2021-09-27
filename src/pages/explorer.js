@@ -93,9 +93,9 @@ class Explorer extends React.Component {
       this.handleClickedPoi(clickedPoiId)
     };
     const sceneContainer = document.querySelector('#scene-container');
-    fetchAPI('pois').then( pois => {
+    fetchAPI('pois').then( apiPois => {
       let poisObj = {}
-      for (let poi of pois) {
+      for (let poi of apiPois) {
         poisObj[poi.id] = poi
       };
       this.world = new World(sceneContainer, poisObj, callback);

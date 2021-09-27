@@ -1,10 +1,13 @@
 import React from 'react';
-import {ldsRipple} from './loading.module.css'
+import {ldsRipple, ldsRippleLine, ldsRippleLineDark} from './loading.module.css'
 
-function Loading() {
-
+function Loading(props) {
+  const useClass = props.dark ? ldsRippleLineDark : ldsRippleLine
   return(
-    <div className={ldsRipple}><div></div><div></div></div>
+    <div className={ldsRipple}>
+      <div className={useClass}/>
+      <div className={useClass}/>
+    </div>
   )
 } 
 
