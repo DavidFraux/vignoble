@@ -2,7 +2,7 @@ import React from "react"
 import { navigate } from 'gatsby'
 import Header from '../components/header.js';
 import {
-  goToMarkerControl,
+  goToChapterControl,
   container,
   videoWrapper,
   controlsWrapper,
@@ -12,11 +12,13 @@ import videoFile from '../video/pressagev2.4.mp4';
 import videoFrSubtitleFR from '../video/pressageFR.vtt';
 import videoFrSubtitleEN from '../video/pressageEN.vtt';
 import VideoPlayer from "../components/videoPlayer.js";
+import fetchAPI from '../components/fetchREST.js';
+import Loading from '../components/loading.js'
 
-function Marker(props) {
+function Chapter(props) {
   return (
     <button 
-      className={goToMarkerControl} onClick={ (e) => props.onClickMarker(props.target, e) }>{props.label}</button>
+      className={goToChapterControl} onClick={ (e) => props.onClickChapter(props.target, e) }>{props.label}</button>
   )
 }
 
@@ -26,6 +28,10 @@ class Film extends React.Component {
     this.state = {
       playing: true,
       playTime: 0,
+      filmURL : null, 
+      chapterList: null,
+      substitles: null,
+      apiFetched: false
     };
   }
 
@@ -46,41 +52,50 @@ class Film extends React.Component {
   }
 
 
-  renderMarkers(markerList) {
-    let markersRendered = [];
-    for (const marker of markerList) {
-      markersRendered.push(<Marker key = {marker.id} label= {marker.label} target = {marker.target} onClickMarker = {(i) => this.handleMarkerClick(i)} />)
+  renderChapters(chapterList) {
+    let chaptersRendered = [];
+    for (const chapter of chapterList) {
+      chaptersRendered.push(<Chapter key = {chapter.id} label= {chapter.label} target = {chapter.second} onClickChapter = {(i) => this.handleChapterClick(i)} />)
     };
-    return ( markersRendered )
+    return ( chaptersRendered )
   }
 
-  handleMarkerClick(i) {
+  handleChapterClick(i) {
     this.setState({playTime: i})
   }
 
   componentDidUpdate() {
   }
 
+  componentDidMount() {
+    this.setState({isMounted : true,});
+    fetchAPI('film').then( film => {
+      film.film_chapters.sort((a, b) => a.second - b.second);// sort the array of chapters with ascending seconds
+      const subtitleList = film.film_subtitles.map(sub => {
+        let subtitle = {
+          id: sub.id,
+          lang: sub.langue,
+          src: process.env.GATSBY_API_URL + sub.fichier.url,
+          default: sub.default,
+        }; 
+        return subtitle;
+      })
+      this.setState({
+        filmURL : process.env.GATSBY_API_URL + film.video.url, 
+        chapterList: film.film_chapters,
+        substitles: subtitleList,
+        apiFetched: true
+      });
+      //firsts renders are without this state, if too fast, it's flashing: bad sensation: better waiting a bit
+      //setTimeout(() => this.setState({stepsData : apiSteps , apiFetched: true}), 800 )
+    }); 
+  }
+
+
   
   render() {
-    const title = 'Le film';
-    const markerList = [
-      //{id: 'debut',      target: 0,    label: 'début'},
-      {id: 'fouler',     target: 34,   label: 'fouler'},
-      {id: 'jus',        target: 46,   label: '1er jus'},
-      {id: 'former',     target: 69,   label: 'former'},
-      {id: 'habiller',   target: 126,  label: 'habiller'},
-      {id: 'manoeuvre1', target: 192,  label: 'manœuvrer'},
-      {id: 'presser',    target: 220,  label: 'presser'},
-      {id: 'mout',       target: 251.5,label: 'moût'},
-      {id: 'manoeuvre2', target: 274,  label: 'lever'},
-      {id: 'retirer',    target: 303,  label: 'retirer'},
-      {id: 'tailler',    target: 346,  label: 'tailler'},
-      {id: 'reformer',   target: 388,  label: 'reformer'},
-      {id: 'rhabiller',  target: 410,  label: 'rhabiller'},
-    ];
-    const markers = this.renderMarkers(markerList);
-
+    const chapters = this.state.apiFetched ?  this.renderChapters(this.state.chapterList) : <div/>;
+    console.log(this.state);
     return (
         <div className={container} >
           <Header />
@@ -104,7 +119,7 @@ class Film extends React.Component {
               onClick={() => this.togglePlay()}>
                 {this.state.playing ? <MdPause size='1.5x'/> : <MdPlayArrow size='1.5x'/> }
             </button>
-            {this.state.playing? <div/> : markers }
+            {this.state.playing? <div/> : chapters }
           </div> 
       </div>
     )

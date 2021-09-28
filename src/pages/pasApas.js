@@ -214,12 +214,11 @@ class PasApas extends React.Component {
         step.color = colors[index];
         step.onClick = (e) => {//the followin manage the onClick behavious for each step of the timeLine
           e.preventDefault();
-          this.onClickStep(index);
         };
       };
       //this.setState({stepsData : apiSteps , apiFetched: true});
         //firsts renders are without this state, if too fast, it's flashing: bad sensation: better waiting a bit
-      setTimeout(() => this.setState({stepsData : apiSteps , apiFetched: true}), 1000 )
+      setTimeout(() => this.setState({stepsData : apiSteps , apiFetched: true}), 800 )
     }); 
   }
 
