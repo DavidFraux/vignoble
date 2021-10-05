@@ -119,3 +119,29 @@
   right: 2em;
   z-index: 3;
 }
+
+.marianne {
+  font-size: 0.65em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  position: absolute;
+  bottom: 0.5em;
+  left: 0.5em;
+  z-index: 3;
+  display: flex;
+  align-items: end;
+}
+
+.marianne > img {
+  width: 3vw;
+  min-width: 50px;
+  margin-bottom: 0;
+}
+
+.marianne > div {
+  max-width: 25vw;
+  padding-left: 0.7rem;
+  color:rgb(255, 255, 255);
+}
+
+

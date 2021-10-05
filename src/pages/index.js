@@ -14,10 +14,12 @@ import {
   pasApas,
   film,
   explorer, 
-  savoirPlus} from './index.module.css'
+  savoirPlus, 
+  marianne, } from './index.module.css'
 import filmPict from '../images/logoFilm.svg'
 import explorerPict from '../images/logo3D.svg'
 import pasApasPict from '../images/logopasApas.svg'
+import marianeMCpict from '../images/marianneMC.jpg'
 import logoPict from '../images/LOGO-MUSEE.png'
 import {GiDuration} from 'react-icons/gi';
 
@@ -60,8 +62,14 @@ function Home() {
         duration = " 5 minutes"
         picture = {explorerPict}/>
     </div>
-    <button className = {savoirPlus}  onClick={() => navigate('/savoirPlus')}>En savoir plus</button>
-    
+    <button className = {savoirPlus}  onClick={() => navigate('/savoirPlus')}>Découvrir plus</button>
+    <div className = {marianne}>
+      <img src = {marianeMCpict} alt= 'logo ministère français de la culture' />
+      <div>
+        <div> Avec le soutien de l’Etat </div>
+        <div> Direction régionale des affaires culturelles des Pays de la Loire</div>
+      </div>
+    </div>
     </React.Fragment>
   )
 }
