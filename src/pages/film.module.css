@@ -1,14 +1,16 @@
 .container {
   background-color: black;
   height: 100vh;
+  position: sticky;
+  overflow: hidden;
 }
 
 .videoWrapper {
-  /*don't specify height nor max-height -> bug in moz firefox makes cue disapear*/
+  /*height depends on header height in order to fit well*/
   position:relative;
   display: flex;
   justify-content: center;
-  height: 95vh;
+  height: calc(100vh - 2.8rem);
 }
 
 .video::cue {
@@ -19,7 +21,7 @@
 .controlsWrapper {
   position: absolute;
   left: 6vw;
-  top: 0.3rem;
+  top: 0.4rem;
   margin: 0.2rem auto;
 }
 
