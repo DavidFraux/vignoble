@@ -101,8 +101,7 @@ class Film extends React.Component {
                 autoplay = {true}
                 type = {'video/mp4'}
                 src={this.state.filmURL}
-                subtitles = {this.state.subtitles}
-                //subtitles = {[{lang: 'fr', src: videoFrSubtitleFR, default: true}, {lang: 'en', src: videoFrSubtitleEN}]}
+                subtitles = {this.state.subtitles}//needs [{id: 'xx', lang: 'fr', src: videoFrSubtitleFR, default: true}, {id: 'xx', lang: 'en', src: videoFrSubtitleEN}]
                 playTime = {this.state.playTime}
                 onPause={() => this.handlePause() }
                 onPlay={() => this.handlePlay() }
