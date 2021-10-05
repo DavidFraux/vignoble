@@ -85,23 +85,22 @@ class VideoPlayer extends React.Component {
       isShowingControls: true,
       langB: false,// wich language in the subtitle switch selection langA or langB
     };
-    this.buildSubtitleTracks(this.props.subtitles)//ex: [{lang: 'fr', src: videoFrSubtitleFR, default: true}, {lang: 'en', src: videoFrSubtitleEN default: false}]
   }
 
   buildSubtitleTracks(subtitles) {
     //this.subtitleTracks = lisOfTracks.map(subtitle => <track kind="subtitles" srcLang={subtitle.lang} src={subtitle.src} />)
-    this.subtitleTracks = [];
+    let subtitleTracks = [];
     for (var subtitle of subtitles) {
       if (subtitle.default){
-        this.subtitleTracks += <track kind="subtitles" srcLang={subtitle.lang} src={subtitle.src} default/>
+        subtitleTracks.push (<track kind="subtitles" key={subtitle.id} srcLang={subtitle.lang} src={subtitle.src} default/>)
       } else {
-        this.subtitleTracks += <track kind="subtitles" srcLang={subtitle.lang} src={subtitle.src} />
+        subtitleTracks.push(<track kind="subtitles" key={subtitle.id} srcLang={subtitle.lang} src={subtitle.src} />)
       }
     }
+    return ( subtitleTracks )
   }
 
   componentDidMount() {
-    console.log(this.videoRef);
     //briefly show the controls so the user knows it exists
     this.timerControlsAppearAtStart = setTimeout(() => { this.setState({isShowingControls: false}) }, 2500);
   }
@@ -221,7 +220,6 @@ class VideoPlayer extends React.Component {
     this.setState(prevState => ({ langB: !prevState.langB }));
     const textTracks = this.videoRef.current.textTracks;
     for (var i = 0; i < textTracks.length; i++) {
-      console.log(textTracks[i].language);
       if (textTracks[i].language == lang) {
          textTracks[i].mode = 'showing';
       }
@@ -289,6 +287,7 @@ class VideoPlayer extends React.Component {
           onClick = {this.handleClick}
         >
           <video
+            crossOrigin="anonymous"//in order to load subtitle file. Avoiding crossOrigin errors as "Unsafe attempt to load URL <url.vtt>. Domains, protocols and ports must match"
             ref={this.videoRef}
             allow="autoplay"
             autoPlay = {this.props.autoplay}
@@ -304,7 +303,7 @@ class VideoPlayer extends React.Component {
           >
             <source src={this.props.src} />
             {/* SUBTITLE TRACK */}
-            {this.subtitleTracks}
+            {this.buildSubtitleTracks(this.props.subtitles)}
           </video>
           {this.state.isPlaying? 
               <div/> : 
