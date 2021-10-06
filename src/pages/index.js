@@ -22,7 +22,7 @@ import pasApasPict from '../images/logopasApas.svg'
 import marianeMCpict from '../images/marianneMC.jpg'
 import logoPict from '../images/LOGO-MUSEE.png'
 import {GiDuration} from 'react-icons/gi';
-
+import { Helmet } from "react-helmet"
 
 const Acces = props => (
     <div role = 'button' tabIndex = {0} className = {`${props.classe} ${acces}`} onClick={() => navigate(props.to)} >
@@ -36,6 +36,10 @@ const Acces = props => (
 function Home() {
   return (
     <React.Fragment>
+    <Helmet>
+        <meta charSet="utf-8" />
+        <title>Vignoble app</title>
+    </Helmet>
     <div className = {background}/>
     <img  className = {logo} src={logoPict} alt='logo musée' />
     <p className = {pub}>COMPRENDRE LES PRESSOIRS</p>
