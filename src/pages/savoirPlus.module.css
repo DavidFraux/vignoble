@@ -138,6 +138,10 @@ html::-webkit-scrollbar {
   color: #fefefe;
 }
 
+.scrollState{
+  text-align: center;
+}
+
 .modalTitle{
 
 }

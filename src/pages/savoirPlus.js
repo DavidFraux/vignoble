@@ -3,8 +3,8 @@ import React, { Suspense } from "react"
 import Header from '../components/header.js';
 import dataSavoirPlus from "../data/savoirPlus.json";
 import placeHolderPict from "../images/placeHolder.png";
-import Loader from "react-loader-spinner";
-
+import Loading from '../components/loading.js'
+import fetchAPI from '../components/fetchREST.js';
 
 import {
   photoItem,
@@ -21,34 +21,15 @@ import {
   modalTitle, 
   modalCaption,
   gridCaption,
-  imgInGrid,} from './savoirPlus.module.css'
+  imgInGrid,
+  scrollState} from './savoirPlus.module.css'
 
-import crypto from 'crypto';
 import Masonry from 'react-masonry-css';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 
-const title = 'En savoir plus';
-const pictureFolder = require.context('../images/savoirPlus', false, /./ , 'lazy');
-const loadedPictureBatch = 10;
+const title = 'Découvrir plus';
 
-//helps the understanding of webpack loader
-// pictureFolder.keys().forEach(filePath => {
-//   // load the component
-// //  pictureFolder(filePath).then(module => {
-// //         // module.default is the vue component
-// //     console.log(module.default);
-// //   });
-// });
-
-const spinner = 
-<Loader
-  type="Puff"
-  color="#00BFFF"
-  height={100}
-  width={100}
-  timeout={3000} //3 secs
-/>
 
 class savoirPlus extends React.Component {
   constructor(props) {
@@ -63,66 +44,42 @@ class savoirPlus extends React.Component {
       },
       loadedPict : 0,
       hasMorePict : true,
+      imgCount : 11,//so it tries to load picture, will be updated by "count" api request response
     };
     this.pictModalRef = React.createRef();
     this.nextModalRef = React.createRef();
     this.prevModalRef = React.createRef();
   }
 
-  dataLoader = () => {
-    const from =  this.state.loadedPict ;
-    if (dataSavoirPlus.length <= from) {
-      this.setState({hasMorePict : false});
-      return;
-    }
-    const until = Math.min( this.state.loadedPict + loadedPictureBatch  , dataSavoirPlus.length );
-    console.log('from ', from, ' ;  to ', until );
-    const newData = [];
-    for (let i = from ; i < until; i++) {
-      const pict = dataSavoirPlus[i];
-      pict.urls = {regular : spinner, thumb : spinner};
-      pictureFolder("./" + pict.fileNames.regular).then(module => {
-        pict.urls.regular = module.default;
-        this.setState({});//force to re-render after promise is completed
-      }).catch(err => {
-        pict.urls.regular = placeHolderPict;
-        console.log(err);
-        this.setState({});
-      });
-      pictureFolder("./" + pict.fileNames.thumb).then(module => {
-        pict.urls.thumb = module.default;
-        this.setState({});
-      }).catch(err => {
-        pict.urls.thumb = placeHolderPict;
-        console.log(err);
-        this.setState({});
-      });
-      if (!pict.id) {(pict.id = crypto.randomBytes(20).toString('hex'))};
-      newData.push(pict);
-    }
-    this.setState((prevState) => ({
-      loadedPict: prevState.loadedPict + until,
-      imagesData:[...prevState.imagesData, ...newData]
-    }));
-  }
-
-  // getData = () => {
-  //   fetch(
-  //     `https://api.unsplash.com/photos?client_id=ZqXbcY28ANlOVeIWmpXwtR9ZKeB44r24xyNIf2uVzC8&page=${
-  //       this.state.page + 1
-  //     }`
-  //   )
-  //     .then((response) => response.json())
-  //     .then((res) => {
-  //       this.setState({imagesData:[...this.state.imagesData, ...res]});
-  //     })
-  //     .catch((err) => {});
-  // }
 
   fetchData = () => {
-    //this.getData();
-    this.dataLoader();
+    const loadedPictureBatch = 10;
+    fetchAPI(`moreimages?_start=${this.state.loadedPict}&_limit=${loadedPictureBatch}`).then( apiMoreImages => {
+      const newData = [];
+      apiMoreImages.sort((a, b) => a.id - b.id);// sort the array with ascending id
+      for (const  moreImg of apiMoreImages) {
+        newData.push({
+          urls:{
+            regular : 
+              moreImg.image.formats.large ? 
+              process.env.GATSBY_API_URL + moreImg.image.formats.large.url 
+              : process.env.GATSBY_API_URL + moreImg.image.url,
+            thumb: process.env.GATSBY_API_URL + moreImg.image.formats.small.url,
+          },
+          id: moreImg.id,
+          alt: moreImg.image.alternativeText ? moreImg.image.alternativeText : moreImg.title,
+          title: moreImg.title, 
+          description: moreImg.description ? moreImg.description : moreImg.title
+        });
+      };
+      this.setState((prevState) => ({
+        loadedPict: prevState.loadedPict + newData.length,
+        imagesData:[...prevState.imagesData, ...newData],
+        hasMorePict : (this.state.imgCount > prevState.loadedPict + newData.length)
+      }));
+    }); 
   }
+
 
   navigatePict = (side) => {
     //side is -1 for previous // +1 for next
@@ -142,8 +99,10 @@ class savoirPlus extends React.Component {
     }));
   }
   componentDidMount() {
-    //this.getData();
-    this.dataLoader();
+    fetchAPI('moreimages/count').then( count => { 
+      this.setState({imgCount: count});
+    });
+    this.fetchData();
   }
 
 
@@ -162,7 +121,6 @@ class savoirPlus extends React.Component {
 
 
   render () {
-    console.log(this.state.imagesData);
     return (
     <React.Fragment>
       <title>{title}</title>
@@ -172,10 +130,10 @@ class savoirPlus extends React.Component {
         dataLength={this.state.imagesData.length}
         next={this.fetchData}
         hasMore={this.state.hasMorePict}
-        loader={<h4>ça charge...</h4>}
+        loader={<div className={scrollState}><Loading dark={true} /></div>}
         scrollThreshold="50px"
         endMessage={
-          <p style={{ textAlign: "center" }}>
+          <p className={scrollState}>
             <b>il n'y pas d'autres images à afficher</b>
           </p>
         }
@@ -197,15 +155,15 @@ class savoirPlus extends React.Component {
                           showModal: true,
                           modalSrc: photo.urls.regular,
                           id: photo.id,
-                          title: photo.description? photo.description : "pas de titre pour cette image",
-                          caption: photo.alt_description? photo.alt_description : "pas de légende pour cette image",
+                          title: photo.title? photo.title : "pas de titre pour cette image",
+                          description: photo.description? photo.description : "pas de légende pour cette image",
                           imageIndex: index,
                           currentSectionLength: this.state.imagesData.length
                         }
                       });
                     }}
                   />
-                  <div className={gridCaption}>{photo.description? photo.description : "pas de titre pour cette image"}</div>
+                  <div className={gridCaption}>{photo.title? photo.title : "pas de titre pour cette image"}</div>
                 </div>
               ))}
       </Masonry>
@@ -240,7 +198,7 @@ class savoirPlus extends React.Component {
               />
               <div className={modalInfoBox}>
                 <div className={modalTitle}>titre&nbsp;: {this.state.imageModal.title}</div>
-                <div className={modalCaption}>description&nbsp;: {this.state.imageModal.caption}</div>
+                <div className={modalCaption}>description&nbsp;: {this.state.imageModal.description}</div>
               </div>
             </div>
 
