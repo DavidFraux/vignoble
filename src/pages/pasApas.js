@@ -214,6 +214,7 @@ class PasApas extends React.Component {
         step.color = colors[index];
         step.onClick = (e) => {//the followin manage the onClick behavious for each step of the timeLine
           e.preventDefault();
+          this.onClickStep(index);
         };
       };
       //this.setState({stepsData : apiSteps , apiFetched: true});
@@ -230,7 +231,7 @@ class PasApas extends React.Component {
   render() {
     const currentStep = 
       this.state.apiFetched? 
-      this.state.stepsData[this.state.activeStepIndex] 
+      this.state.stepsData[this.state.activeStepIndex]
       : 
       {id:null, videoLeft: null, posterLeft: null, videoRight: null, posterRight: null, color: '#ffff'};
     return (
