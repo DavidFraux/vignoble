@@ -67,8 +67,8 @@ class Film extends React.Component {
   componentDidMount() {
     this.setState({isMounted : true,});
     fetchAPI('film').then( film => {
-      film.film_chapters.sort((a, b) => a.second - b.second);// sort the array of chapters with ascending seconds
-      const subtitleList = film.film_subtitles.map(sub => {
+      film.chapitres.sort((a, b) => a.second - b.second);// sort the array of chapters with ascending seconds
+      const subtitleList = film.soustitres.map(sub => {
         let subtitle = {
           id: sub.id,
           lang: sub.langue,
@@ -79,7 +79,7 @@ class Film extends React.Component {
       });
       this.setState({
         filmURL : process.env.GATSBY_API_URL + film.video.url, 
-        chapterList: film.film_chapters,
+        chapterList: film.chapitres,
         subtitles: subtitleList,
         apiFetched: true
       });
