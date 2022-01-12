@@ -1,9 +1,7 @@
 //tag filters https://codepen.io/goldbullet/pen/bZPOAK
-import React, { Suspense } from "react"
+import React, { Suspense } from "react";
 import Header from '../components/header.js';
-import dataSavoirPlus from "../data/savoirPlus.json";
-import placeHolderPict from "../images/placeHolder.png";
-import Loading from '../components/loading.js'
+import Loading from '../components/loading.js';
 import fetchAPI from '../components/fetchREST.js';
 
 import {
