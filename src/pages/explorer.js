@@ -88,22 +88,29 @@ class Explorer extends React.Component {
     console.log("vous allez être déconnecté");
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const callback = (clickedPoiId) => {
       this.handleClickedPoi(clickedPoiId)
     };
     const sceneContainer = document.querySelector('#scene-container');
-    fetchAPI('pois').then( apiPois => {
-      let poisObj = {}
-      for (let poi of apiPois) {
-        poisObj[poi.id] = poi
-      };
-      this.world = new World(sceneContainer, poisObj, callback);
-      this.world.init().then ( this.world.start() ).catch((err) => { console.log(err); alert('ERROR : 3D model cannot load')});
-      //this.setState({poisData : poisObj, currentPoiId : Object.keys(poisObj)[0],});
-        //if too fast but flashing: bad sensation: better waiting a bit
-      setTimeout(() => this.setState({poisData : poisObj, currentPoiId : Object.keys(poisObj)[0],}), 800 )
-    }); 
+    const [ apiPois, api3dAssets ] = await Promise.all([
+      fetchAPI('pois'),
+      fetchAPI('3-d-assets'),
+    ]);
+    let 
+      poisObj = {},
+      assetsObj = {};
+    for (let poi of apiPois) {
+      poisObj[poi.id] = poi
+    };
+    for (let asset of api3dAssets) {
+      assetsObj[asset.directID] = asset
+    }
+    //if too fast but flashing: bad sensation: better waiting a bit
+    setTimeout(() => this.setState({poisData : poisObj, currentPoiId : Object.keys(poisObj)[0],}), 800 )
+    const pressURL = process.env.GATSBY_API_URL + assetsObj['long-fut'].glbfile.url;
+    this.world = new World(sceneContainer, poisObj, callback);
+    this.world.init(pressURL).then ( this.world.start() ).catch((err) => { console.log(err); alert('ERROR : 3D model cannot load')});
   }
 
   componentWillUnmount() {

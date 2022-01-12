@@ -56,14 +56,13 @@ class World {
     createRaycast(renderer, scene.children, camera, callback);
   }
 
-  async init() {
+  async init(pressURL) {
     // asynchronous setup here, load gltf model and any other loaded stuff
-    const { press, grape,} = await loadPress();
+    const press = await loadPress(pressURL);
     this.models['press'] = press;
-    this.models['grape'] = grape;
     loop.updatables.push(press,);
-    scene.add(press, grape);
-    fitCameraToSelection( camera, controls, this.models);
+    scene.add(press);
+    fitCameraToSelection( camera, controls, this.models);//this.models.filter(model => model !== press)
   }
 
 
