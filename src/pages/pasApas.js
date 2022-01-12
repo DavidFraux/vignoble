@@ -17,6 +17,7 @@ import {
   donutWrapper,
   description,
   shortDescription,
+  shortDescriptionText,
   duration,
   difficulty,
   stars,
@@ -138,6 +139,7 @@ class PasApas extends React.Component {
   handleVideoEnded(side) {
     if (this.state.paused) {return false};
     if (side === 'L') {
+      
       this.setState({Lplaying: false, Lended : true});
       if (this.state.Rended) {//means both have now ended
         this.handleBothVideoEnded();}
@@ -240,9 +242,9 @@ class PasApas extends React.Component {
         <Header />        
         <TouchSwipeEvents onSwiped = {(i) => this.handleswipes(i)}/>
         <div className={controlsWrapper}>
-          <button className = {mediaControls}             onClick={() => this.handlePrev()}>{<MdSkipPrevious size='1.5x'/>}</button>
-          <button className = {mediaControls} id={toggle} onClick={() => this.togglePlay()}>{this.state.paused ? <MdPlayArrow size='1.5x'/> : <MdPause size='1.5x'/> }</button>
-          <button className = {mediaControls}             onClick={() => this.handleNext()}>{<MdSkipNext size='1.5x'/>}</button>
+          <button className = {mediaControls} onClick={() => this.handlePrev()}>{<MdSkipPrevious size='1.5x'/>}</button>
+          <button className = {mediaControls} id={toggle} onClick={() => this.togglePlay()}>{this.state.paused ? <MdPlayArrow size='1.5x'/> : <MdPause size='1.5x'/> }</button>
+          <button className = {mediaControls} onClick={() => this.handleNext()}>{<MdSkipNext size='1.5x'/>}</button>
         </div>
         
         
@@ -292,8 +294,7 @@ class PasApas extends React.Component {
             
             <div className = {`${infoBoxes} ${this.state.showInfo? fadeIn : hidden}`} >
               <div className = {`${infoBox} ${shortDescription}`} style= {{backgroundColor: chroma(currentStep.color).alpha(0.3)}} >
-              {/* <div className = {`${infoBox} ${shortDescription}`}> */}
-                {currentStep.shortDescription}
+                <span className = {shortDescriptionText}> {currentStep.shortDescription}</span>
               </div>
               <div className = {donutWrapper} >
                 {this.state.apiFetched ? 
