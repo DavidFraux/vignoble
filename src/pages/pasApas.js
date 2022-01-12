@@ -129,9 +129,9 @@ class PasApas extends React.Component {
   }
 
   handleBothVideoEnded() {
-    this.readingTimeOut = setTimeout(() => this.navigateSteps(1), 35000 );
+    const readingDelay = this.state.stepsData[this.state.activeStepIndex].readingDelay;
+    this.readingTimeOut = setTimeout(() => this.navigateSteps(1), readingDelay );
     this.timeOuts.push(this.readingTimeOut);
-    //this.timeOuts.push(setTimeout(() => this.navigateSteps(1), 35000 )); //#TODO stop this timeOut if paused
     this.timeOuts.push(setTimeout(() => this.setState({showInfo:true}), 1000 ));
     this.timeOuts.push(setTimeout(() => this.setState({animateDonut:true}), 3000 ));
   }
