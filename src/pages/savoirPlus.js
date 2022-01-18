@@ -84,15 +84,15 @@ class savoirPlus extends React.Component {
     let targetImageIndex = this.state.imageModal.imageIndex + side;
     if (targetImageIndex > this.state.imagesData.length-1) {targetImageIndex=0}
     else if (targetImageIndex < 0 ) {targetImageIndex=this.state.imagesData.length-1};
-    let data = this.state.imagesData[targetImageIndex];
+    let photo = this.state.imagesData[targetImageIndex];
     this.setState((prevState) => ({
       imageModal: {
         ...prevState.imageModal,
         imageIndex: targetImageIndex,
-        modalSrc: data.urls.regular,
-        id: data.id,
-        title: data.description? data.description : "pas de titre pour cette image",
-        caption: data.alt_description? data.alt_description : "pas de légende pour cette image",
+        modalSrc: photo.urls.regular,
+        id: photo.id,
+        title: photo.title? photo.title : "pas de titre pour cette image",
+        description: photo.description? photo.description : "pas de légende pour cette image",
       }
     }));
   }
@@ -195,8 +195,8 @@ class savoirPlus extends React.Component {
                 alt={this.state.imageModal.title}
               />
               <div className={modalInfoBox}>
-                <div className={modalTitle}>titre&nbsp;: {this.state.imageModal.title}</div>
-                <div className={modalCaption}>description&nbsp;: {this.state.imageModal.description}</div>
+                <div className={modalTitle}>{this.state.imageModal.title}</div>
+                <div className={modalCaption}>{this.state.imageModal.description}</div>
               </div>
             </div>
 

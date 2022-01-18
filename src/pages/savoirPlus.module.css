@@ -143,11 +143,11 @@ html::-webkit-scrollbar {
 }
 
 .modalTitle{
-
+  font-weight: bold;
 }
 
 .modalCaption {
-
+  font-weight: lighter;
 }
 
 .gridCaption{
