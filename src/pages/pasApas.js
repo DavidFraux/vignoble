@@ -169,11 +169,19 @@ class PasApas extends React.Component {
     }
   }
 
-  //TODO replay button
-
+  replayBoth () {
+    if (this.state.isMounted) {//protect from state changes if the component is unmounted during the timeOut
+      this.navigateSteps(0);
+      this.videoL.current.currentTime = 0;
+      this.videoR.current.currentTime = 0;
+      this.togglePlay();
+      if (this.readingTimeOut) {clearTimeout(this.readingTimeOut)};//clears the fucking remaining timeOut created by togglePlay
+    }
+  }
+  
   togglePlay() {
     if (this.state.paused) {
-      this.playBoth()
+      this.playBoth();
       this.setState({ paused: false});
       if (this.state.Lended && this.state.Rended) {this.readingTimeOut = setTimeout(() => this.navigateSteps(1), 5000 );}//if paused while reading, then go to next step 5 sec after play
     } else {
