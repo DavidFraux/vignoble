@@ -1,6 +1,6 @@
 import React from 'react';
 import { navigate } from 'gatsby'
-import Header from '../components/header.js';
+import Header from '../components/header.js';
 import TouchSwipeEvents from '../components/TouchSwipeEvents.js';
 import {
   videosWrapper,
@@ -40,6 +40,7 @@ import crypto from 'crypto';
 import chroma from "chroma-js";
 import fetchAPI from '../components/fetchREST.js';
 import Loading from '../components/loading.js'
+import OnScreenButtons from '../components/onScreenButtons.js';
 
 const title = 'Le fonctionnement du pressoir long-fut pas à pas';
 
@@ -291,6 +292,18 @@ class PasApas extends React.Component {
                   <p>impossible de charger la video</p>
               </video>
             </div>
+            {this.state.paused && 
+              <OnScreenButtons 
+                displayPrevNext={true}
+                prevFunction = {() => this.handlePrev()}
+                nextFunction = {() => this.handleNext()}
+                playFunction = {() => this.togglePlay()}
+                pauseFunction = {() => this.togglePlay()}
+                replayFunction = {() => this.replayBoth()}
+                paused = {this.state.paused}
+                ended = {this.state.Lended && this.state.Rended}
+              />
+            }
             
             <div className = {`${infoBoxes} ${this.state.showInfo? fadeIn : hidden}`} >
               <div className = {`${infoBox} ${shortDescription}`} style= {{backgroundColor: chroma(currentStep.color).alpha(0.3)}} >
@@ -312,7 +325,6 @@ class PasApas extends React.Component {
                 <div className= {stars}>{numberToStars(currentStep.difficulty,5)}</div>
               </div>
               <div className = {`${infoBox} ${description}`}>
-                {/* <div className = {infoBoxTitle} ><MdSettings/>  À cette étape  </div> */}
                 <div>{currentStep.description}</div>
               </div>
               <div className = {saviezVous} onClick = {() => this.setState(prevState => ({ saviezVousClicked: !prevState.saviezVousClicked }))}>
