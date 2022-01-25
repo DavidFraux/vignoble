@@ -129,7 +129,7 @@ class Donut extends React.Component {
 	render() {
     const renderedStep = this.steps[this.props.activeStepIndex];
 		return (
-      <figure className={donut}>
+      <div className={donut}>
         <svg width="100%" height="100%" viewBox={circleConfig.viewBox}>
           <circle
             //className={ring}
@@ -164,7 +164,7 @@ class Donut extends React.Component {
           }
 
         </svg>
-      </figure>
+      </div>
 		)
 	}
 }
