@@ -1,0 +1,162 @@
+.video {
+  position: relative;
+  display: inline-block;
+  width: calc(50vw - (25px + (25px / 2)));
+  text-align: center;
+}
+
+.fadeOut {
+    opacity:0.25;
+    filter: contrast(1) brightness(1.25);
+    transition-property: opacity, filter;
+    transition-duration: 2s, 2s;
+    transition-delay: 0s, 1s ;
+}
+
+.videoLeft {
+  float: left;
+  margin-left: 25px;
+}
+
+.videoRight {
+  float: right;
+  margin-right: 25px;
+}
+
+.controlsWrapper {
+  position: absolute;
+  left: 6vw;
+  top: 0.3rem;
+  margin: 0.2rem auto;
+}
+
+
+
+.mediaControls  {
+  position: relative;
+  margin-right: 50px;
+  margin-left: 0px;
+  width:2rem;
+  border-radius: 2rem;
+}
+
+.mediaControls#toggle {
+  background-color: #385080;
+}
+
+.videosWrapper {
+  background-color: rgba(255, 255, 255, 0);
+  margin-top: 3vh;
+}
+
+
+.infoBoxes {
+  position: absolute;
+  bottom: 0.8em;
+  width: 100%;
+  height: 30vh;
+  padding: 0 0.5rem;
+  display: grid;
+  grid-template-columns: 1.3fr 1.3fr 4.7fr 2.8fr;
+  grid-template-rows: 2.2rem 1fr 1fr;
+  column-gap: 30px;
+  row-gap: 15px;
+}
+
+.fadeIn {
+  visibility: visible;
+  opacity:1;
+  transition: opacity 1s;
+}
+
+.hidden{
+  visibility: hidden;
+  opacity:0;
+}
+
+.infoBox{
+  border-radius: 20px;
+  background-color: rgba(88, 0, 0, 0.05);
+  overflow: hidden;
+  padding: 14px; 
+}
+
+.donutWrapper {
+  grid-column: 1  ;
+  grid-row: 2 / 4;
+  display: flex; /* centers the donut verticaly */
+}
+
+.duration {
+  grid-column: 2 ;
+  grid-row: 2;
+}
+
+.difficulty {
+  grid-column: 2 ;
+  grid-row: 3;
+}
+
+.stars {
+  padding-left: 1rem;
+}
+
+.shortDescription {
+  background-color: transparent;
+  border: 1px dotted black;
+  grid-column: 1/5 ;
+  grid-row: 1;
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+.shortDescriptionText {
+  margin-top: -0.2rem;
+  display: block;
+  text-align: center;
+}
+
+.description {
+  grid-column: 3 ;
+  grid-row: 2 / 4 ;
+}
+
+.saviezVous {
+  grid-column: 4 ;
+  grid-row: 2 / 4;
+}
+
+.saviezVousFront {
+  height:100%;
+}
+
+.saviezVousBack {
+  background-color: rgba(255, 0, 0, 0.1);
+  height:100%;
+  
+}
+
+.infoBoxTitle{
+  font-weight: 500;
+  font-size: 1.05em;
+}
+
+.saviezVous .infoBoxResponse{
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+  font-style: italic;
+  color: white;
+  border-radius: 10px;
+  background-color: rgba(88, 0, 0, 0.4);
+  padding: 6px 14px; 
+}
+
+.waiting {
+  background-color: rgb(255, 255, 255);
+  height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index:1;
+}
