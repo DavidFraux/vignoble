@@ -190,10 +190,8 @@ class PasApas extends React.Component {
     if (this.state.paused) {
       this.playBoth();
       //this.setState({ paused: false});
-      if (this.state.Lended && this.state.Rended) {
-        this.readingTimer.resume();
-        this.showInfoTimer.resume();
-        this.animateDonutTimer.resume();
+      for (let timer of this.timers) {
+        timer.resume();
       }
     } else {
       for (let timer of this.timers) {
