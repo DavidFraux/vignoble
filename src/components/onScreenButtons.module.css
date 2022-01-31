@@ -5,6 +5,12 @@
   justify-content: center;
   align-items: center;
   position: absolute;
+  opacity:0;
+}
+.fadeIn {
+    opacity:1;
+    transition-property: opacity;
+    transition-duration: 30s;
 }
 
 .boutonsBox{
@@ -18,6 +24,7 @@
   background-color: rgba(255, 255, 255, 0.6);
   position: absolute;
   margin-top: 10vh;
+  padding: 0.5rem;
 }
 
 .bouton{

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  fadeIn,
   container,
   boutonsBox,
   bouton,
@@ -32,7 +33,7 @@ const OnScreenButtons = (props) => {
 
   // pour pasApas et film trigger aussi un idleLogout
   return (
-    <div className = {container}>
+    <div className = {`${container} ${fadeIn}`}>
       <div className = {boutonsBox}>
         {props.displayPrevNext &&
           <React.Fragment>
@@ -48,23 +49,23 @@ const OnScreenButtons = (props) => {
               picture = {nextPict} />
           </React.Fragment>
         }
-        {props.ended ?//if ended offer to reload
-          <Bouton
-          altText = 'replay'
-          onclick = {() => props.replayFunction()} 
-          classe = {centralBouton}  
-          picture = {replayPict} />
-          :
-          (props.paused ? //if not ended and paused offer to play
+        {props.paused ? //if not ended and paused offer to play
             <Bouton
             altText = 'play'
             onclick = {() => props.playFunction()} 
             classe = {centralBouton}  
             picture = {playPict} />
+          :
+          (props.ended ?//if ended offer to reload
+            <Bouton
+            altText = 'replay'
+            onclick = {() => props.replayFunction()} 
+            classe = {centralBouton}  
+            picture = {replayPict} />
             ://if not ended and playing offer to pause
             <Bouton
             altText = 'pause'
-            onclick = {() => props.pauseFuntion()} 
+            onclick = {() => props.pauseFunction()} 
             classe = {centralBouton}  
             picture = {pausePict} />)
         }
