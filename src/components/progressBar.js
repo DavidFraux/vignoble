@@ -5,19 +5,19 @@ const ProgressBar = (props) => {
 
 
   const fillerStyles = {
-    height: '110%',
+    height: '100%',
     width: `${completed}%`,
     transition: 'width 1s linear',
     backgroundColor: color,
     borderRadius: 'inherit',
+    position: 'absolute',
   }
 
 
   return (
     <div className={componentClass}>
-      <div style={fillerStyles}>
-      <span className={labelClass}>{labelText}</span>
-      </div>
+      <div className={labelClass}>{labelText}</div>
+      <div style={fillerStyles}></div>
     </div>
   );
 };

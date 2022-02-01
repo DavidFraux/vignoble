@@ -138,9 +138,9 @@ class PasApas extends React.Component {
   }
 
   computeRemaining() {//this is for the progressBar
-    const readingCompleted = 100 * (this.state.stepsData[this.state.activeStepIndex].readingDelay - this.readingTimer.feedbackRemaining() ) / this.state.stepsData[this.state.activeStepIndex].readingDelay;
-    if (!this.state.paused){//
-      this.setState({readingTimeCompleted : Math.round(readingCompleted)+3 })// +3 for diplay 100% shortly before skiping the next step
+    const readingCompleted = 100 * (this.state.stepsData[this.state.activeStepIndex].readingDelay - this.readingTimer.feedbackRemaining() ) / (this.state.stepsData[this.state.activeStepIndex].readingDelay*0.95);// *0.95 for diplay 100% shortly before navigate to the next step
+    if (!this.state.paused && this.state.isMounted){
+      this.setState({readingTimeCompleted : Math.round(readingCompleted) })
     }
   }
 
