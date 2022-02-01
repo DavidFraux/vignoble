@@ -21,7 +21,7 @@ import {
   } from "./videoPlayer.module.css";
 import {MdVolumeUp, MdVolumeOff, MdPlayCircleOutline, MdPauseCircleOutline}  from 'react-icons/md';
 import Switch from "react-switch";
-
+import OnScreenButtons from '../components/onScreenButtons.js';
 
 /**
  *  function that takes in the complete duration and returns the duration in format {hours:00,minutes:00,seconds:00}
@@ -78,6 +78,7 @@ class VideoPlayer extends React.Component {
       currentDuration: { hours: "00", minutes: "00", seconds: "00" },// show the currentTimeInSeconds as {hours,minutes,seconds}
       completeDuration: { hours: "00", minutes: "00", seconds: "00" },//  show the completeDurationInSeconds as {hours,minutes,seconds}
       isPlaying: true,// determines the play state of the video
+      isEnded: false,
       progressPercentage: 0,// percentage value of the progress
       isVolumeOn: true,
       volumeValue: 1,
@@ -92,7 +93,7 @@ class VideoPlayer extends React.Component {
     let subtitleTracks = [];
     for (var subtitle of subtitles) {
       if (subtitle.default){
-        subtitleTracks.push (<track kind="subtitles" key={subtitle.id} srcLang={subtitle.lang} src={subtitle.src} default/>)
+        subtitleTracks.push (<track kind="subtitles" key={subtitle.id} srcLang={subtitle.lang} src={subtitle.src} default/>)
       } else {
         subtitleTracks.push(<track kind="subtitles" key={subtitle.id} srcLang={subtitle.lang} src={subtitle.src} />)
       }
@@ -139,6 +140,7 @@ class VideoPlayer extends React.Component {
   updateCurrentDuration = () => {
     let tempCurrentTime = this.videoRef.current.currentTime;
     let tempDur = this.state.completeDurationInSeconds;
+    //this.props.updateTime(tempCurrentTime);//callBack if needed to know the current video time in parent component
     this.setState({
       currentTimeInSeconds: tempCurrentTime,
       currentDuration: calculateDuration(tempCurrentTime),
@@ -155,9 +157,16 @@ class VideoPlayer extends React.Component {
   onEnded = () => {
     // this.setState({ isPlaying: false, isShowingControls: true });
     // this.videoRef.current.currentTime = 0;
+    this.setState({ isPlaying: false, isEnded : true});
     this.props.onEnded();
   };
 
+  handlePrev = () => {
+    this.props.onPrev(this.videoRef.current.currentTime);
+  };
+  handleNext = () => {
+    this.props.onNext(this.videoRef.current.currentTime);
+  };
   /*
     handles the play button click and set the isPlaying to TRUE
   */
@@ -203,16 +212,20 @@ class VideoPlayer extends React.Component {
       this.progressBar.current.clientWidth;
   };
 
+  togglePlay() {
+    if (this.state.isPlaying) {
+      this.handlePause();
+    } else {
+      this.handlePlay();
+      //this.setState({ isShowingControls: false });
+    }
+  }
+
   handleClick = (e) => {
     //check wether the click on video is not a click on the controls bar
     if (e.target  !==  this.controlsRef.current && !this.controlsRef.current.contains(e.target)) {
-      if (this.state.isPlaying) {
-        this.handlePause();
-      } else {
-        this.handlePlay();
-        //this.setState({ isShowingControls: false });
-      }
-    }
+      this.togglePlay();
+    };
   }
 
   handleSwitchChange = () => {
@@ -305,7 +318,7 @@ class VideoPlayer extends React.Component {
             {/* SUBTITLE TRACK */}
             {this.buildSubtitleTracks(this.props.subtitles)}
           </video>
-          {this.state.isPlaying? 
+          {/* {this.state.isPlaying? 
               <div/> : 
               <div 
                 id='videoPlayPause'
@@ -314,6 +327,18 @@ class VideoPlayer extends React.Component {
                 aria-label = 'play pause the video'
                 className = {onScreenPlayPause}
                 onClick = {() => this.handleClick}
+              />
+            } */}
+          {!this.state.isPlaying && 
+              <OnScreenButtons 
+                displayPrevNext={true}
+                prevFunction = {() => this.handlePrev()}
+                nextFunction = {() => this.handleNext()}
+                playFunction = {() => this.handlePlay()}
+                pauseFunction = {() => this.handlePause()}
+                replayFunction = {() => this.replayBoth()}
+                paused = {!this.state.isPlaying}
+                ended = {this.state.isEnded}
               />
             }
 

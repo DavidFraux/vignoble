@@ -48,11 +48,37 @@ class Film extends React.Component {
     this.setState(prevState => ({ playing: !prevState.playing }));
   }
 
+  getChapterArray() {
+    const chapterTargetArray = [];
+    for (let chapter of this.state.chapterList) {
+      chapterTargetArray.push(chapter.second);
+    }
+    return chapterTargetArray
+  }
+
+  handlePrev(currentTime) {
+    const chapterTargetArray = this.getChapterArray();
+    // behaves just like audio CD player: 
+    // one click goes to the begining of the actual chapter, 
+    // a second click within the first second at the begining of the chapter, goes to the begining of the previous chapter
+    let prevChapter = Math.max(...chapterTargetArray.filter( target => target <= currentTime - 1)); 
+    if (prevChapter < 0) {prevChapter = 1};//prevent from setting a negative target playTime
+    //problem: the state often allready has this value (set by chapter button click or next onscreen button). So the player component is not reloaded with a new play Value. 
+    this.setState({playTime: prevChapter - Math.random()});//Dirty solution is to change a little bit the value with random()
+  }
+
+  handleNext(currentTime) {
+    const chapterTargetArray = this.getChapterArray();
+    let nextChapter = Math.min(...chapterTargetArray.filter( target => target >= currentTime ));
+    if (nextChapter > Math.max(...chapterTargetArray)) {return};//prevent from setting target playTime after the last chapter
+    this.setState({playTime: nextChapter})
+  }
+
 
   renderChapters(chapterList) {
     let chaptersRendered = [];
     for (const chapter of chapterList) {
-      chaptersRendered.push(<Chapter key = {chapter.id} label= {chapter.label} target = {chapter.second} onClickChapter = {(i) => this.handleChapterClick(i)} />)
+      chaptersRendered.push(<Chapter key = {chapter.id} label= {chapter.label} target = {chapter.second} onClickChapter = {(i) => this.handleChapterClick(i)} />)
     };
     return ( chaptersRendered )
   }
@@ -61,7 +87,7 @@ class Film extends React.Component {
     this.setState({playTime: i})
   }
 
-  componentDidUpdate() {
+  componentDidUpdate() {
   }
 
   componentDidMount() {
@@ -106,6 +132,8 @@ class Film extends React.Component {
                 onPause={() => this.handlePause() }
                 onPlay={() => this.handlePlay() }
                 onEnded={() => this.handleEnd() }
+                onPrev={(currentTime) => this.handlePrev(currentTime) }
+                onNext={(currentTime) => this.handleNext(currentTime) }
                 play = {this.state.playing}
               />
               :
