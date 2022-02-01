@@ -9,10 +9,12 @@ class Timer {
     this.remaining = null;
     this.callBack = callbackfunction;
     this.originalDelay = delay;
+    this.paused = true; 
   }
 
   pause() {
     if (this.active){
+      this.paused = true; 
       clearTimeout(this.timerId);
       this.remaining -= Date.now() - this.start;
       //console.log(`${this.name} paused`);
@@ -21,6 +23,7 @@ class Timer {
 
   resume() {
     if (this.active){
+      this.paused = false; 
       this.start = Date.now();
       clearTimeout(this.timerId);
       this.timerId = setTimeout(
@@ -41,6 +44,13 @@ class Timer {
     clearTimeout(this.timerId);
     this.active = false;
     //console.log(`${this.name} cleared`);
+  }
+
+  feedbackRemaining() {
+    if (this.active){
+      const remainingInfo = this.paused ?  this.remaining : this.remaining - Date.now() + this.start;
+      return remainingInfo;
+    }
   }
 
 };

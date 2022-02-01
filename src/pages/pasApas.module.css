@@ -102,7 +102,7 @@
 }
 
 .shortDescription {
-  background-color: transparent;
+  /* background-color: managed in the jsx; */
   border: 1px dotted black;
   grid-column: 1/5 ;
   grid-row: 1;

@@ -42,6 +42,7 @@ import fetchAPI from '../components/fetchREST.js';
 import Loading from '../components/loading.js'
 import OnScreenButtons from '../components/onScreenButtons.js';
 import Timer from '../components/timer.js';
+import ProgressBar from '../components/progressBar.js';
 
 const title = 'Le fonctionnement du pressoir long-fut pas à pas';
 
@@ -79,6 +80,7 @@ class PasApas extends React.Component {
       showInfo: false,
       animateDonut: false,
       saviezVousClicked: false,
+      readingTimeCompleted : 0,
     };
     this.videoL = React.createRef();
     this.videoR = React.createRef();
@@ -101,6 +103,7 @@ class PasApas extends React.Component {
       saviezVousClicked: false,
       showInfo: false,
       animateDonut: false,
+      readingTimeCompleted : 0,
     });
     for (let timer of this.timers) {
       timer.clear();
@@ -134,14 +137,20 @@ class PasApas extends React.Component {
     }
   }
 
+  computeRemaining() {//this is for the progressBar
+    const readingCompleted = 100 * (this.state.stepsData[this.state.activeStepIndex].readingDelay - this.readingTimer.feedbackRemaining() ) / this.state.stepsData[this.state.activeStepIndex].readingDelay;
+    if (!this.state.paused){//
+      this.setState({readingTimeCompleted : Math.round(readingCompleted)+3 })// +3 for diplay 100% shortly before skiping the next step
+    }
+  }
+
   handleBothVideoEnded() {
     const readingDelay = this.state.stepsData[this.state.activeStepIndex].readingDelay;
     this.readingTimer.reset(readingDelay);
-    //TOREMOVE this.readingTimeOut = setTimeout(() => this.navigateSteps(1), readingDelay );
     this.showInfoTimer.reset();
     this.animateDonutTimer.reset();
-    //TOREMOVEthis.timeOuts.push(setTimeout(() => this.setState({showInfo:true}), 1000 ));
-    //TOREMOVEthis.timeOuts.push(setTimeout(() => this.setState({animateDonut:true}), 3000 ));
+    //this is for the progressBar
+    setInterval(() => this.computeRemaining(), 500);
   }
 
   handleVideoEnded(side) {
@@ -324,9 +333,17 @@ class PasApas extends React.Component {
             }
             
             <div className = {`${infoBoxes} ${this.state.showInfo? fadeIn : hidden}`} >
-              <div className = {`${infoBox} ${shortDescription}`} style= {{backgroundColor: chroma(currentStep.color).alpha(0.3)}} >
+              <ProgressBar 
+                componentClass = {`${infoBox} ${shortDescription}`}
+                color = {chroma(currentStep.color).alpha(0.2)}
+                labelClass = {shortDescriptionText}
+                labelText = {currentStep.shortDescription}
+                completed = {this.state.readingTimeCompleted}
+              />
+
+              {/* <div className = {`${infoBox} ${shortDescription}`} style= {{backgroundColor: chroma(currentStep.color).alpha(0.3)}} >
                 <span className = {shortDescriptionText}> {currentStep.shortDescription}</span>
-              </div>
+              </div> */}
               <div className = {donutWrapper} >
                 {this.state.apiFetched ? 
                   <Donut steps={this.state.stepsData} activeStepIndex={this.state.activeStepIndex} animate={this.state.animateDonut}/>
