@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import {labelClass, boxClass}  from './progressBar.module.css'
 
 const ProgressBar = (props) => {
-  const { componentClass, color, labelClass, labelText, completed } = props;
+  const { componentClass, color, labelText, completed } = props;
 
 
   const fillerStyles = {
@@ -15,7 +16,7 @@ const ProgressBar = (props) => {
 
 
   return (
-    <div className={componentClass}>
+    <div className={`${componentClass} ${boxClass}`}>
       <div className={labelClass}>{labelText}</div>
       <div style={fillerStyles}></div>
     </div>

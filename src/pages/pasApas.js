@@ -17,7 +17,6 @@ import {
   donutWrapper,
   description,
   shortDescription,
-  shortDescriptionText,
   duration,
   difficulty,
   stars,
@@ -336,14 +335,9 @@ class PasApas extends React.Component {
               <ProgressBar 
                 componentClass = {`${infoBox} ${shortDescription}`}
                 color = {chroma(currentStep.color).alpha(0.2)}
-                labelClass = {shortDescriptionText}
                 labelText = {currentStep.shortDescription}
                 completed = {this.state.readingTimeCompleted}
               />
-
-              {/* <div className = {`${infoBox} ${shortDescription}`} style= {{backgroundColor: chroma(currentStep.color).alpha(0.3)}} >
-                <span className = {shortDescriptionText}> {currentStep.shortDescription}</span>
-              </div> */}
               <div className = {donutWrapper} >
                 {this.state.apiFetched ? 
                   <Donut steps={this.state.stepsData} activeStepIndex={this.state.activeStepIndex} animate={this.state.animateDonut}/>

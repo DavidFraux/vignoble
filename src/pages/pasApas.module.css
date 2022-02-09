@@ -102,20 +102,9 @@
 }
 
 .shortDescription {
-  /* background-color: managed in the jsx; */
-  border: 1px dotted black;
+  /* appearance style managed in the jsx; here only position */
   grid-column: 1/5 ;
   grid-row: 1;
-  padding: 0;
-  font-size: 1.5rem;
-  position:relative
-}
-
-.shortDescriptionText {
-  margin-top: -0.2rem;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .description {
