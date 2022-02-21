@@ -137,7 +137,7 @@ class Film extends React.Component {
                 play = {this.state.playing}
               />
               :
-              <div/>
+              <Loading/>
              }
           </div>
           <div className={controlsWrapper}>

@@ -16,8 +16,10 @@ import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import IdleLogout from '../components/IdleLogout.js';
 import Warning from '../components/logoutWarning.js';
-import Loading from '../components/loading.js'
 import fetchAPI from '../components/fetchREST.js';
+import OnScreenButtons from '../components/onScreenButtons.js';
+import Loading from '../components/loading.js'
+
 
 class Explorer extends React.Component {
   constructor(props) {

@@ -38,10 +38,11 @@ import placeHolderVideo from "../video/placeHolder.webm";
 import crypto from 'crypto';
 import chroma from "chroma-js";
 import fetchAPI from '../components/fetchREST.js';
-import Loading from '../components/loading.js'
-import OnScreenButtons from '../components/onScreenButtons.js';
 import Timer from '../components/timer.js';
 import ProgressBar from '../components/progressBar.js';
+import OnScreenButtons from '../components/onScreenButtons.js';
+import Loading from '../components/loading.js'
+
 
 const title = 'Le fonctionnement du pressoir long-fut pas à pas';
 

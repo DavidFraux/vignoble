@@ -16,7 +16,6 @@ import {
   volumeControls,
   volumeProgressbar,
   volumeProgress,
-  onScreenPlayPause,
   langSwitchWrapper,
   } from "./videoPlayer.module.css";
 import {MdVolumeUp, MdVolumeOff, MdPlayCircleOutline, MdPauseCircleOutline}  from 'react-icons/md';
@@ -318,17 +317,7 @@ class VideoPlayer extends React.Component {
             {/* SUBTITLE TRACK */}
             {this.buildSubtitleTracks(this.props.subtitles)}
           </video>
-          {/* {this.state.isPlaying? 
-              <div/> : 
-              <div 
-                id='videoPlayPause'
-                role= 'button'
-                tabIndex = {0}
-                aria-label = 'play pause the video'
-                className = {onScreenPlayPause}
-                onClick = {() => this.handleClick}
-              />
-            } */}
+          {/* BIG BUTTONS on pause */}
           {!this.state.isPlaying && 
               <OnScreenButtons 
                 displayPrevNext={true}
