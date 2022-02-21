@@ -26,7 +26,8 @@ import {
   infoBoxTitle,
   infoBoxResponse,
   fadeOut,
-  waiting} from './pasApas.module.css';
+  waiting,
+  onScreenButtonClass,} from './pasApas.module.css';
 import TimeLine from "../components/timeLine";
 import Donut from "../components/donut";
 import { MdSkipPrevious, MdPause, MdPlayArrow, MdSkipNext, MdInfoOutline, MdSettings, MdStar, MdStarBorder, MdTrendingUp} from 'react-icons/md';
@@ -320,7 +321,8 @@ class PasApas extends React.Component {
               </video>
             </div>
             {(this.state.paused || this.state.showInfo) && 
-              <OnScreenButtons 
+              <OnScreenButtons
+                className = {onScreenButtonClass}
                 displayPrevNext={true}
                 prevFunction = {() => this.handlePrev()}
                 nextFunction = {() => this.handleNext()}

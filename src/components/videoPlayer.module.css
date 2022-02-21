@@ -30,12 +30,6 @@ body {
   height: 100%;
 }
 
-.onScreenPlayPause {
-  background-image: url(../images//playButton.svg);
-  position: absolute;
-  align-self: center;
-  padding: 2rem;
-}
 
 .videoControls {
   position: absolute;
@@ -167,4 +161,9 @@ body {
   padding: 0 0.5rem;
   bottom: 0.35rem;
   position: relative;
-;}
+}
+
+
+.onScreenButtonClass {
+  top:45vh;
+}

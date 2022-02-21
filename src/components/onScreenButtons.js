@@ -33,21 +33,14 @@ const OnScreenButtons = (props) => {
 
   // pour pasApas et film trigger aussi un idleLogout
   return (
-    <div className = {`${container} ${fadeIn}`}>
+    <div className = {`${container} ${fadeIn} ${props.className}`}>
       <div className = {boutonsBox}>
         {props.displayPrevNext &&
-          <React.Fragment>
             <Bouton
               altText = 'previous'
               onclick = {() => props.prevFunction()} 
               classe = {prevBouton}  
               picture = {prevPict} />
-            <Bouton
-              altText = 'next'
-              onclick = {() => props.nextFunction()} 
-              classe = {nextBouton}  
-              picture = {nextPict} />
-          </React.Fragment>
         }
         {props.paused ? //if not ended and paused offer to play
             <Bouton
@@ -69,6 +62,14 @@ const OnScreenButtons = (props) => {
             classe = {centralBouton}  
             picture = {pausePict} />)
         }
+        {props.displayPrevNext &&
+            <Bouton
+            altText = 'next'
+            onclick = {() => props.nextFunction()} 
+            classe = {nextBouton}  
+            picture = {nextPict} />
+        }
+                    
       </div>
     </div>
   )

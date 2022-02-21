@@ -6,7 +6,8 @@ import {
   container,
   videoWrapper,
   controlsWrapper,
-  togglePlayPause } from "./film.module.css";
+  togglePlayPause,
+  waiting } from "./film.module.css";
 import {  MdPause, MdPlayArrow, } from 'react-icons/md';
 import VideoPlayer from "../components/videoPlayer.js";
 import fetchAPI from '../components/fetchREST.js';
@@ -23,7 +24,7 @@ class Film extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playing: true,
+      playing: false,
       playTime: 0,
       filmURL : null, 
       chapterList: null,
@@ -103,12 +104,13 @@ class Film extends React.Component {
         }; 
         return subtitle;
       });
-      this.setState({
-        filmURL : process.env.GATSBY_API_URL + film.video.url, 
-        chapterList: film.chapitres,
-        subtitles: subtitleList,
-        apiFetched: true
-      });
+      setTimeout(() => this.setState({
+          filmURL : process.env.GATSBY_API_URL + film.video.url, 
+          chapterList: film.chapitres,
+          subtitles: subtitleList,
+          apiFetched: true,
+          playing: true,
+        }), 800 );
       //firsts renders are without this state, if too fast, it's flashing: bad sensation: better waiting a bit
       //setTimeout(() => this.setState({stepsData : apiSteps , apiFetched: true}), 800 )
     }); 
@@ -137,7 +139,9 @@ class Film extends React.Component {
                 play = {this.state.playing}
               />
               :
-              <Loading/>
+              <div className = {waiting}>
+                <Loading />
+              </div>
              }
           </div>
           <div className={controlsWrapper}>

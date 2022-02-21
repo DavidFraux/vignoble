@@ -10,7 +10,8 @@ import {
   paneTextContent,
   headerCustom,
   slidePane,
-  waitingGrey,} from "./explorer.module.css";
+  waitingGrey,
+  onScreenButtonClass} from "./explorer.module.css";
 import { MdPause, MdPlayArrow, } from 'react-icons/md';
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
@@ -33,7 +34,7 @@ class Explorer extends React.Component {
     };
   }
 
-  toogleLoop = () => {
+  toggleLoop = () => {
     this.setState((prevState) => ({isLooping: !prevState.isLooping}));
     this.state.isLooping? this.world.pausePressAnimation() : this.world.resumePressAnimation();
   };
@@ -137,10 +138,19 @@ class Explorer extends React.Component {
           {this.state.poisData ?
             <React.Fragment>
               <div className={controlsWrapper}>
-                <button className = {togglePlayPause} onClick={this.toogleLoop}>{this.state.isLooping ? <MdPause size='1.5x'/> : <MdPlayArrow size='1.5x'/>}</button>
-                <button className = {goToMarkerControl}  onClick={this.resetCam}>Vue d'ensemble</button>
+                <button className = {togglePlayPause} onClick={this.toggleLoop}>{this.state.isLooping ? <MdPause size='1.5x'/> : <MdPlayArrow size='1.5x'/>}</button>
+                <button className = {goToMarkerControl} onClick={this.resetCam}>Vue d'ensemble</button>
                 {this.renderGoToButtons()}
               </div>
+              {!this.state.isLooping && 
+              <OnScreenButtons 
+                className = {onScreenButtonClass}
+                displayPrevNext={false}
+                playFunction = {() => this.toggleLoop()}
+                pauseFunction = {() => this.toggleLoop()}
+                paused = {!this.state.isLooping}
+              />
+            }
               <SlidingPane 
                 className={slidePane}//background color not available option
                 isOpen={this.state.isPaneOpen}

@@ -17,7 +17,7 @@ import {
   volumeProgressbar,
   volumeProgress,
   langSwitchWrapper,
-  } from "./videoPlayer.module.css";
+  onScreenButtonClass,  } from "./videoPlayer.module.css";
 import {MdVolumeUp, MdVolumeOff, MdPlayCircleOutline, MdPauseCircleOutline}  from 'react-icons/md';
 import Switch from "react-switch";
 import OnScreenButtons from '../components/onScreenButtons.js';
@@ -320,6 +320,7 @@ class VideoPlayer extends React.Component {
           {/* BIG BUTTONS on pause */}
           {!this.state.isPlaying && 
               <OnScreenButtons 
+                className = {onScreenButtonClass}
                 displayPrevNext={true}
                 prevFunction = {() => this.handlePrev()}
                 nextFunction = {() => this.handleNext()}
