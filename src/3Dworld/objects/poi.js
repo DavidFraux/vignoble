@@ -53,6 +53,9 @@ function createPoi(id, poi) {
   meshObj.scale.set(initScale, initScale, initScale);
   meshObj.tick = (deltaT, elapsedT) => {//delta is time elapsed since last frame in seconds
     dynascale2(deltaT, meshObj);
+    if (meshObj.follow){
+      meshObj.position.setFromMatrixPosition( meshObj.follow.matrixWorld );
+    }
   };
   return meshObj;
 }

@@ -47,7 +47,6 @@ class World {
     loop.updatables.push(controls);
     const lights = createLights()
     scene.add(...lights);
-    //scene.add(...this.models);
     const resizer = new Resizer(container, camera, renderer);
     //hook from Resizer trigger here, useless in loop styles
     resizer.onResize = () => {
@@ -57,12 +56,23 @@ class World {
   }
 
   async init(pressURL) {
-    // asynchronous setup here, load gltf model and any other loaded stuff
+    // asynchronous setup here, it loads gltf model and any other loaded stuff
     const press = await loadPress(pressURL);
     this.models['press'] = press;
     loop.updatables.push(press,);
     scene.add(press);
     fitCameraToSelection( camera, controls, this.models);//this.models.filter(model => model !== press)
+    this.poiFollow();
+  }
+
+  poiFollow(){
+    //make a poi following an animated child part of the press  
+    let ecrou = this.models['press'].children.filter(item => 
+      item.name == 'ecrou' & 
+      item.type == 'Mesh' 
+    ).pop();
+    let ecrouPoi = this.pois[3];//defined in the API by id
+    ecrouPoi.follow = ecrou;
   }
 
 
