@@ -1,7 +1,4 @@
-.acces {
-  margin: 25px;
-  z-index: 3;
-}
+
 @import "../styles/typography.css";
 
 .pub {
@@ -25,25 +22,28 @@
   object-fit: cover;
 }
 
-.accesText, .accesSubText, .accessDuration{
-  font-size: 2vw;
+.accesText{
   text-align: center;
   color: rgb(255, 255, 255);
   position: relative;
-  font-weight: 550;
   word-wrap: break-word;
   font-kerning: normal;
   z-index: 3;
 }
 
-.accesSubText{
+.accesTitle{
+  font-size: 2vw;
+  font-weight: 550;
+}
+
+.accesSubtitle{
+  font-size: 2vw;
   font-weight: 200;
   /*white-space: pre;/*in order to have lineBreaks when \n is typed*/
 }
 
 .accessDuration {
   font-size: 1.5vw;
-  font-weight: 300;
 }
 
 .container {
@@ -54,35 +54,31 @@
   grid-template-rows: 1fr;
   grid-gap: 4vw;
   grid-template-areas:
-    "c b d";
+    "a b c";
   z-index: 3;
   height: 50vh;
   object-fit: cover;
 }
 
-.pasApas{
-  grid-area: b;
+.acces {
+  margin: 25px;
+  z-index: 3;
   align-self: center;
-  /* max-width: 55vw; */
+  text-align: center;
   height: 20vw;
   max-height: 30vh;
-  text-align: center;
 }
 
 .film {
-  grid-area: c;
-  align-self: center;
-  text-align: center;
-  height: 20vw;
-  max-height: 30vh;
+  grid-area: a;
+}
+
+.pasApas{
+  grid-area: b;
 }
 
 .explorer {
-  grid-area: d;
-  align-self: center;
-  text-align: center;
-  height: 20vw;
-  max-height: 30vh;
+  grid-area: c;
 }
 
 .logo {

@@ -5,7 +5,8 @@ import {
   acces,
   accesPict,
   accesText,
-  accesSubText,
+  accesTitle,
+  accesSubtitle,
   accessDuration,
   background,
   logo,
@@ -25,11 +26,11 @@ import {GiDuration} from 'react-icons/gi';
 import { Helmet } from "react-helmet"
 
 const Acces = props => (
-    <div role = 'button' tabIndex = {0} className = {`${props.classe} ${acces}`} onClick={() => navigate(props.to)} >
-        <img className = {accesPict} src={props.picture} alt={props.text} />
-        <div className = {accesText}> {props.text} </div>
-        <div className = {accesSubText}> {props.subtext} </div>
-        <div className = {accessDuration}> <GiDuration/> {props.duration} </div>
+    <div role = 'button' tabIndex = {0} className = {`${props.classe} ${acces}`} onClick={() => navigate(props.to)} >
+        <img className = {accesPict} src={props.picture} alt={props.title} />
+        <div className = {`${accesText} ${accesTitle}`    }> {props.title}                  </div>
+        <div className = {`${accesText} ${accesSubtitle}` }> {props.subtitle}               </div>
+        <div className = {`${accesText} ${accessDuration}`}> <GiDuration/> {props.duration} </div>
   </div>
 )
 
@@ -47,22 +48,22 @@ function Home() {
       <Acces 
         to = '/pasApas/' 
         classe = {pasApas}  
-        text = "Pas à pas" 
-        subtext = {`Le fonctionnement du long\u2011fût`}//the char \u2011 is non breaking hyphen
+        title = "Pas à pas" 
+        subtitle = {`Le fonctionnement du long\u2011fût`}//the char \u2011 is non breaking hyphen
         duration = " 12 minutes" 
         picture = {pasApasPict} />
       <Acces 
         to = '/film/' 
         classe = {film} 
-        text = "Voir le film" 
-        subtext = {`Un pressurage avec un long\u2011fût`}
+        title = "Voir le film" 
+        subtitle = {`Un pressurage avec un long\u2011fût`}
         duration = " 8 minutes"
         picture = {filmPict}/>
       <Acces 
         to = '/explorer/'
         classe ={explorer}
-        text = "Explorer en 3D"
-        subtext = {`Les anecdotes du long\u2011fût`}
+        title = "Explorer en 3D"
+        subtitle = {`Les anecdotes du long\u2011fût`}
         duration = " 5 minutes"
         picture = {explorerPict}/>
     </div>
