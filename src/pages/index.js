@@ -10,13 +10,16 @@ import {
   accessDuration,
   background,
   logo,
-  pub,
+  mainTitle,
   container,
   pasApas,
   film,
   explorer, 
   savoirPlus, 
-  marianne, } from './index.module.css'
+  credits,
+  marianePict,
+  marianeText,
+  creditText } from './index.module.css'
 import filmPict from '../images/logoFilm.svg'
 import explorerPict from '../images/logo3D.svg'
 import pasApasPict from '../images/logopasApas.svg'
@@ -43,7 +46,7 @@ function Home() {
     </Helmet>
     <div className = {background}/>
     <img  className = {logo} src={logoPict} alt='logo musée' />
-    <p className = {pub}>COMPRENDRE LES PRESSOIRS</p>
+    <p className = {mainTitle}>COMPRENDRE LES PRESSOIRS</p>
     <div className = {container}>
       <Acces 
         to = '/pasApas/' 
@@ -56,21 +59,22 @@ function Home() {
         to = '/film/' 
         classe = {film} 
         title = "Voir le film" 
-        subtitle = {`Un pressurage avec un long\u2011fût`}
+        subtitle = {`Un pressurage avec un long\u2011fût`}//the char \u2011 is non breaking hyphen
         duration = " 8 minutes"
         picture = {filmPict}/>
       <Acces 
         to = '/explorer/'
         classe ={explorer}
         title = "Explorer en 3D"
-        subtitle = {`Les anecdotes du long\u2011fût`}
+        subtitle = {`Les anecdotes du long\u2011fût`}//the char \u2011 is non breaking hyphen
         duration = " 5 minutes"
         picture = {explorerPict}/>
     </div>
     <button className = {savoirPlus}  onClick={() => navigate('/savoirPlus')}>Découvrir plus</button>
-    <div className = {marianne}>
-      <img src = {marianeMCpict} alt= 'logo ministère français de la culture' />
-      <div>
+    <div className = {credits} tabIndex = {2} onClick={() => navigate('/credits/')}>
+      <div className = {creditText}> Crédits </div>
+      <img className = {marianePict} src = {marianeMCpict} alt= 'logo ministère français de la culture' />
+      <div className = {marianeText}>
         <div> Avec le soutien de l’Etat </div>
         <div> Direction régionale des affaires culturelles des Pays de la Loire</div>
       </div>

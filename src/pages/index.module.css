@@ -1,7 +1,7 @@
 
 @import "../styles/typography.css";
 
-.pub {
+.mainTitle {
   font-size: 3vw;
   text-align: center;
   color: rgb(255, 255, 255);
@@ -115,7 +115,7 @@
   z-index: 3;
 }
 
-.marianne {
+.credits {
   font-size: 0.65em;
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -125,18 +125,24 @@
   z-index: 3;
   display: flex;
   align-items: end;
+  color:rgb(255, 255, 255);
 }
 
-.marianne > img {
+.marianePict {
   width: 3vw;
   min-width: 50px;
   margin-bottom: 0;
 }
 
-.marianne > div {
-  max-width: 25vw;
+.marianeText {
+  max-width: 30vw;
   padding-left: 0.7rem;
-  color:rgb(255, 255, 255);
 }
 
+.creditText {
+  writing-mode: vertical-lr;
+  padding: 10px 0 0 10px;
+  transform: rotate(180deg);
+
+}
 
