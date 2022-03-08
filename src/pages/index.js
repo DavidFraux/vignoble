@@ -48,21 +48,21 @@ function Home() {
         to = '/pasApas/' 
         classe = {pasApas}  
         text = "Pas à pas" 
-        subtext = 'Le fonctionnement du long-fût' 
+        subtext = {`Le fonctionnement du long\u2011fût`}//the char \u2011 is non breaking hyphen
         duration = " 12 minutes" 
         picture = {pasApasPict} />
       <Acces 
         to = '/film/' 
         classe = {film} 
         text = "Voir le film" 
-        subtext = {`Un pressurage avec un long-fût`}
+        subtext = {`Un pressurage avec un long\u2011fût`}
         duration = " 8 minutes"
         picture = {filmPict}/>
       <Acces 
         to = '/explorer/'
         classe ={explorer}
         text = "Explorer en 3D"
-        subtext = 'Les anecdotes du long-fût'
+        subtext = {`Les anecdotes du long\u2011fût`}
         duration = " 5 minutes"
         picture = {explorerPict}/>
     </div>
