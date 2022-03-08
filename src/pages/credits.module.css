@@ -26,7 +26,7 @@
   text-align: center;
   /* color: rgb(255, 255, 255); */
   position: relative;
-  top: 1em;
+  margin-top: 0.5rem;
   font-weight: normal;
   font-style: italic;
   word-wrap: break-word;
@@ -41,14 +41,33 @@
 
 .container {
   position: relative ;
-  top:0;
+  margin-top: 5rem;
   display: grid;
-  grid-template-columns: 3fr 3fr 3fr;
+  grid-template-columns: 2.5fr 1.5fr 3fr;
   grid-template-rows: 1fr;
   grid-gap: 4vw;
   grid-template-areas:
     "a b c";
   z-index: 3;
-  height: 50vh;
+  height: 60vh;
   object-fit: cover;
+}
+
+.affiliation{
+  grid-area: a;
+  text-align: right;
+}
+
+.noun {
+  grid-area: b;
+  text-align: center;
+}
+
+.task {
+  grid-area: c;
+  text-align: left;
+}
+
+ul > p {
+  margin-bottom:0.5rem;
 }
