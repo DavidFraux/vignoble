@@ -1,5 +1,5 @@
 import React from "react";
-import { infoBar, stepDescription } from './timeLine.module.css';
+import {infoBar, stepDescription } from './timeLine.module.css';
 
 
 
@@ -21,6 +21,7 @@ class TimeLine extends React.Component {
 
   render() {
     const currentStep = this.props.steps[this.props.activeStepIndex];
+    console.log(this.props.steps);
     return (
       <React.Fragment>
         <Stepper 
