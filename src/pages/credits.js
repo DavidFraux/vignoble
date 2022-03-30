@@ -7,12 +7,14 @@ import {
   container,
   noun,
   affiliation,
-  task } from './credits.module.css';
+  task,
+  logo } from './credits.module.css';
 import fetchAPI from '../components/fetchREST.js';
 
 const Contributor = props => (
   <tr>
-    <td className = {affiliation} >{props.affiliation}</td>
+    {/* <td className = {affiliation} >{props.affiliation}</td> */}
+    <td className= {logo} > <img src={process.env.GATSBY_API_URL + props.logo.url} alt={props.affiliation} /> </td>
     <td className = {noun} >{props.noun}</td>
     <td className = {task}>{props.task}</td>
   </tr>
@@ -47,7 +49,7 @@ function Credit() {
         <tbody>
           {/* ME, HARD CODED */}
           <tr key="matthieuQuantin">
-            <td className = {affiliation} >Laboratoire LS2N, Nantes Université, École Centrale Nantes</td>
+            {/* <td className = {affiliation} >Laboratoire LS2N, Nantes Université, École Centrale Nantes</td> */}
             <td className = {noun} >Matthieu Quantin</td>
             <td className = {task}>Développement de l'application et modélisation 3D</td>
           </tr>
