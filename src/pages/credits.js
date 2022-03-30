@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from "react";
 import Header from '../components/header.js';
 import {
   background,
@@ -7,11 +8,31 @@ import {
   noun,
   affiliation,
   task } from './credits.module.css';
-import logoPict from '../images/LOGO-MUSEE.png'
-import { Helmet } from "react-helmet"
+import fetchAPI from '../components/fetchREST.js';
 
+const Contributor = props => (
+  <tr>
+    <td className = {affiliation} >{props.affiliation}</td>
+    <td className = {noun} >{props.noun}</td>
+    <td className = {task}>{props.task}</td>
+  </tr>
+  )
 
-function Home() {
+function Credit() {
+  const [people, setPeople] = useState();
+  useEffect(() => {
+    fetchAPI('creditedpeople')
+    .then(data => {
+        const contributors = [];
+        data.sort((a, b) => a.appearOrder - b.appearOrder);
+        for (const contributor of data){
+          console.log(contributor);
+          contributors.push(<Contributor affiliation={contributor.affiliation} noun = {contributor.noun} task = {contributor.task}/>);
+        }
+        setPeople(contributors);
+      })
+    }, []);
+     
   return (
     <React.Fragment>
       <title>Crédits</title>
@@ -23,27 +44,22 @@ function Home() {
         <div>contributeurs et contributrices</div>
       </div>
       <div className = {container}>
-        <div className = {affiliation}> 
-          <ul>
-            <p>École Centrale de Nantes</p>
-            <p>École Centrale de Nantes</p>
-          </ul>
-        </div>
-        <div className = {noun}> 
-          <ul>
-            <p>Matthieu Quantin</p>
-            <p>Florent Laroche</p>
-          </ul>
-        </div>
-        <div className = {task}> 
-          <ul>
-            <p>Développement de l'application et modélisation 3D</p>
-            <p>Coordination de projet</p>
-          </ul>
-        </div>
+        <table>
+          {/* ME, HARD CODED */}
+          <tr>
+            <td className = {affiliation} >Laboratoire LS2N, Nantes Université, École Centrale Nantes</td>
+            <td className = {noun} >Matthieu Quantin</td>
+            <td className = {task}>Développement de l'application et modélisation 3D</td>
+          </tr>
+          {/* OTHER PEOPLE CREDITED FROM API DATA */}
+          {people}
+        </table>
       </div>
     </React.Fragment>
   )
 }
 
-export default Home
+export default Credit
+
+
+
