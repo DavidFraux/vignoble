@@ -26,8 +26,7 @@ function Credit() {
         const contributors = [];
         data.sort((a, b) => a.appearOrder - b.appearOrder);
         for (const contributor of data){
-          console.log(contributor);
-          contributors.push(<Contributor affiliation={contributor.affiliation} noun = {contributor.noun} task = {contributor.task}/>);
+          contributors.push(<Contributor key={contributor.id} {...contributor}/>);
         }
         setPeople(contributors);
       })
@@ -45,14 +44,16 @@ function Credit() {
       </div>
       <div className = {container}>
         <table>
+        <tbody>
           {/* ME, HARD CODED */}
-          <tr>
+          <tr key="matthieuQuantin">
             <td className = {affiliation} >Laboratoire LS2N, Nantes Université, École Centrale Nantes</td>
             <td className = {noun} >Matthieu Quantin</td>
             <td className = {task}>Développement de l'application et modélisation 3D</td>
           </tr>
           {/* OTHER PEOPLE CREDITED FROM API DATA */}
           {people}
+          </tbody>
         </table>
       </div>
     </React.Fragment>
