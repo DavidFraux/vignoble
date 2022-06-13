@@ -20,7 +20,6 @@ img{
   position: relative;
   margin-top: 0.5rem;
   font-weight: normal;
-  font-style: italic;
   word-wrap: break-word;
   font-kerning: normal;
   z-index: 3;
@@ -41,16 +40,19 @@ img{
 }
 
 .noun {
-  text-align: center;
+  text-align: right;
+  padding-right: 0;
 }
 
 .task {
   text-align: left;
 }
-
 .logo {
-  width: 30px;
-  height: 20px;
+  width: 5rem;
+}
+
+.logo > img {
+  height: 30px;
 }
 
 table {
