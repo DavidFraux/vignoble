@@ -25,7 +25,7 @@ import explorerPict from '../images/logo3D.svg'
 import pasApasPict from '../images/logopasApas.svg'
 import marianeMCpict from '../images/marianneMC.jpg'
 import logoPict from '../images/LOGO-MUSEE.png'
-import {GiDuration} from 'react-icons/gi';
+import {GiDuration} from 'react-icons/gi'
 import { Helmet } from "react-helmet"
 
 const Acces = props => (

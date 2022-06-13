@@ -57,7 +57,7 @@ class Explorer extends React.Component {
         <button 
           key={id} 
           id={poiData.targetName} 
-          className = {goToMarkerControl}  
+          className = {goToMarkerControl} 
           onClick={() => this.goTo(id)}>
           {poiData.buttonName ? poiData.buttonName : poiData.targetName}
         </button>
@@ -134,7 +134,7 @@ class Explorer extends React.Component {
           activateFunction = {() => this.handleActivate()}
           />
         <div className={sceneContainer} id='scene-container'>
-          {this.state.logoutWarning? <Warning /> : <div/>}
+          {this.state.logoutWarning && <Warning />}
           {this.state.poisData ?
             <React.Fragment>
               <div className={controlsWrapper}>
